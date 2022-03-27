@@ -14,9 +14,92 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <title>Women's Football Team</title>
+
+    <style>
+      .container {
+        position: relative;
+      }
+
+      .image {
+        display: block;
+        margin: auto;
+        width: 160px;
+        height: 220px;
+      }
+
+      .overlay {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        background-color: #9e2f4b;
+        overflow: hidden;
+        width: 100%;
+        height: 0;
+        transition: 0.5s ease;
+      }
+
+      .container:hover .overlay {
+        bottom: 0;
+        height: 100%;
+      }
+
+      .text {
+        white-space: nowrap;
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        overflow: hidden;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+      }
+
+      body {
+        background-image: url("images/bgimage.jpeg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+
+      html,
+      body {
+        width: auto;
+        height: 100%;
+      }
+
+      h2 {
+        position: relative;
+        left: 8%;
+        color: white;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+
+      }
+
+      .group{
+
+        padding: 0 0 2em 0;
+      }
+
+      .footer {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 10%;
+        background-color: #9e2f4b00;
+        color: white;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <nav class="navbar navbar-inverse ">
+    <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="test.html">TeamName</a>
@@ -28,10 +111,10 @@
               >Teams <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Women Football</a></li>
-              <li><a href="#">Men Football</a></li>
-              <li><a href="#">Women Basketball</a></li>
-              <li><a href="#">Men Basketball</a></li>
+              <li><a href="womenfb.html">Women Football</a></li>
+              <li><a href="menfb.html">Men Football</a></li>
+              <li><a href="womenbb.html">Women Basketball</a></li>
+              <li><a href="menbb.html">Men Basketball</a></li>
             </ul>
           </li>
           <li><a href="#">Fixtures</a></li>
@@ -56,6 +139,112 @@
         </ul>
       </div>
     </nav>
+
+    <!-- HEADER DONE -->
+
+    <h1> <strong>WOMEN'S FOOTBALL TEAM</strong></h1>
+
+    <hr class="featurette-divider" />
+
+    <img
+      src="images/imgWomensFB.jpg"
+      alt="Women's BasketBall Team"
+      width="1520"
+      height="550"
+      class="img-fluid"
+    />
+
+    <div class="group">
+      <h2>GOALKEEPERS</h2>
+
+      <hr class="featurette-divider" style="opacity: 0%" />
+
+      <!--GOALKEEPERS IMAGES-->
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 container">
+          <img
+            class="featurette-image img-fluid mx-auto image"
+            alt="Player 1"
+            src="images/leftBBPlayer.jpeg"
+            data-holder-rendered="true"
+          />
+          <div class="overlay">
+            <div class="text">Get stats</div>
+          </div>
+        </div>
+        
+      </div>
+  </div>
+
+  <div class="group">
+    <h2>DEFENDERS</h2>
+
+    <hr class="featurette-divider" style="opacity: 0%" />
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2 container">
+        <img
+          class="featurette-image img-fluid mx-auto image"
+          alt="Player 1"
+          src="images/leftBBPlayer.jpeg"
+          data-holder-rendered="true"
+        />
+        <div class="overlay">
+          <div class="text">Get stats</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>MIDFIELDERS</h2>
+
+    <hr class="featurette-divider" style="opacity: 0%" />
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2 container">
+        <img
+          class="featurette-image img-fluid mx-auto image"
+          alt="Player 1"
+          src="images/leftBBPlayer.jpeg"
+          data-holder-rendered="true"
+        />
+        <div class="overlay">
+          <div class="text">Get stats</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>FORWARDS</h2>
+
+    <hr class="featurette-divider" style="opacity: 0%" />
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2 container">
+        <img
+          class="featurette-image img-fluid mx-auto image"
+          alt="Player 1"
+          src="images/leftBBPlayer.jpeg"
+          data-holder-rendered="true"
+        />
+        <div class="overlay">
+          <div class="text">Get stats</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <hr class="featurette-divider" />
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>copyright information</p>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
