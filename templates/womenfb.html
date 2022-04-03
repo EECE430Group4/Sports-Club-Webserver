@@ -111,14 +111,14 @@
               >Teams <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a href="womenfb.html">Women Football</a></li>
-              <li><a href="menfb.html">Men Football</a></li>
-              <li><a href="womenbb.html">Women Basketball</a></li>
-              <li><a href="menbb.html">Men Basketball</a></li>
+              <li><a href="/teams/womenfb">Women Football</a></li>
+              <li><a href="/teams/menfb">Men Football</a></li>
+              <li><a href="/teams/womenbb">Women Basketball</a></li>
+              <li><a href="/teams/menbb">Men Basketball</a></li>
             </ul>
           </li>
-          <li><a href="#">Fixtures</a></li>
-          <li><a href="#">News</a></li>
+          <li><a href="/fixtures">Fixtures</a></li>
+          <li><a href="/news">News</a></li>
           <li><a href="#">Tickets</a></li>
           <li><a href="#">Shop</a></li>
           <li><a href="#">Community</a></li>
@@ -132,9 +132,15 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#"
-              ><span class="glyphicon glyphicon-user"></span> Profile</a
+            {%if user is none%}
+            <a href="/login">
+              <span class="glyphicon glyphicon-user"></span> Profile</a
             >
+            {%else%}
+            <a href="/">
+              <span class="glyphicon glyphicon-user"></span> {{user}}</a
+            >
+            {%endif%}
           </li>
         </ul>
       </div>
