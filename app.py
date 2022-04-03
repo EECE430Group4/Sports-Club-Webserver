@@ -34,14 +34,21 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/signup', methods=['GET'])
-def getSignup():
-    return render_template('signup.html')
-
-
-@app.route('/signup', methods=['GET'])
-def postSignup():
-    # signing up code goes here
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if 'user' in session:
+        return redirect(url_for('main'))
+    elif request.method == 'POST':
+        name = request.form["Name"]
+        user = request.form["userName"]
+        password = request.form["password"]
+        ret = register(name, user, password)
+        if ret == 1:
+            return render_template('signup.html', error="Username already exists!")
+        elif ret == 0:
+            session['user'] = user
+            session['role'] = 'FAN'
+            return redirect(url_for('main'))
     return render_template('signup.html')
 
 

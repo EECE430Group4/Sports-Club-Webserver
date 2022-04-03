@@ -21,7 +21,7 @@
       type="text/css"
     />
 
-    <title>Hello, world!</title>
+    <title>Register | Sports Club</title>
   </head>
   <body>
     <div class="wrapper">
@@ -32,7 +32,13 @@
         />
       </div>
       <div class="text-center mt-4 name">~Sports Club~</div>
-      <form class="p-3 mt-3">
+      <div class="text-center mt-4 name text-danger">{{error}}</div>
+      <form
+        class="p-3 mt-3"
+        action="/signup"
+        method="POST"
+        onsubmit="return verifyPassword()"
+      >
         <div class="form-field d-flex align-items-center">
           <span class="far fa-user"></span>
           <input
@@ -76,7 +82,11 @@
           />
         </div>
         <button class="btn mt-3">Register</button>
+        <br />
       </form>
+      <div class="text-center fs-6">
+        <a href="/" class="button">BACK TO HOME</a>
+      </div>
     </div>
 
     <script
@@ -94,5 +104,16 @@
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"
     ></script>
+    <script>
+      function verifyPassword() {
+        var pw1 = document.getElementById("pwd");
+        var pw2 = document.getElementById("confpwd");
+        if (pw1.value != pw2.value) {
+          alert("Passwords do not match.");
+          return false;
+        }
+        return true;
+      }
+    </script>
   </body>
 </html>
