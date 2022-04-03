@@ -15,88 +15,11 @@
 
     <title>Men's Basketball Team</title>
 
-    <style>
-      .container {
-        position: relative;
-      }
-
-      .image {
-        display: block;
-        margin: auto;
-        width: 160px;
-        height: 220px;
-      }
-
-      .overlay {
-        position: absolute;
-        bottom: 100%;
-        left: 0;
-        right: 0;
-        background-color: #9e2f4b;
-        overflow: hidden;
-        width: 100%;
-        height: 0;
-        transition: 0.5s ease;
-      }
-
-      .container:hover .overlay {
-        bottom: 0;
-        height: 100%;
-      }
-
-      .text {
-        white-space: nowrap;
-        color: white;
-        font-size: 20px;
-        position: absolute;
-        overflow: hidden;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-      }
-
-      body {
-        background-image: url("images/bgimage.jpeg");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-      }
-
-      html,
-      body {
-        width: auto;
-        height: 100%;
-      }
-
-      h2 {
-        position: relative;
-        left: 8%;
-        color: white;
-      }
-
-      h1 {
-        text-align: center;
-        color: white;
-
-      }
-
-      .group{
-
-        padding: 0 0 2em 0;
-      }
-
-      .footer {
-        position: relative;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 10%;
-        background-color: #9e2f4b00;
-        color: white;
-        text-align: center;
-      }
-    </style>
+    <link
+      href="{{ url_for('static', filename='css/teams.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
 
   </head>
   <body>
@@ -147,14 +70,14 @@
       </div>
     </nav>
 
-       <!-- HEADER DONE -->
+      
 
        <h1> <strong>MEN'S BASKETBALL TEAM</strong></h1>
 
        <hr class="featurette-divider" />
    
        <img
-         src="images/imgMensBB.jpg"
+         src="{{url_for('static', filename='css/images/teams/imgMensBB.jpg')}}"
          alt="Women's BasketBall Team"
          width="100%"
          height="100%"
@@ -172,7 +95,7 @@
            <img
              class="featurette-image img-fluid mx-auto image"
              alt="Player 1"
-             src="images/leftBBPlayer.jpeg"
+             src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
              data-holder-rendered="true"
            />
            <div class="overlay">
@@ -185,7 +108,7 @@
            <img
              class="featurette-image img-fluid mx-auto image"
              alt="Player 1"
-             src="images/leftBBPlayer.jpeg"
+             src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
              data-holder-rendered="true"
            />
            <div class="overlay">
@@ -198,7 +121,7 @@
            <img
              class="featurette-image img-fluid mx-auto image"
              alt="Player 1"
-             src="images/leftBBPlayer.jpeg"
+             src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
              data-holder-rendered="true"
            />
            <div class="overlay">
@@ -211,7 +134,7 @@
            <img
              class="featurette-image img-fluid mx-auto image"
              alt="Player 1"
-             src="images/leftBBPlayer.jpeg"
+             src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
              data-holder-rendered="true"
            />
            <div class="overlay">
@@ -222,25 +145,19 @@
    
        <hr class="featurette-divider" />
    
-       <!-- FOOTER -->
+      
        <div class="footer">
          <p>copyright information</p>
        </div>
    
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
+    
   </body>
 </html>

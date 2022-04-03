@@ -85,6 +85,6 @@ def getFixtures():
         user = session['user']
     else:
         user = None
-    return render_template('Fixtures.html', user=user)
+    return render_template('fixtures.html', user=user)
 if __name__ == "__main__":
     app.run(debug=True)
