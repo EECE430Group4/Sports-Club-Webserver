@@ -1,0 +1,12 @@
+body {
+    background-image: url('images/bg.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-x: hidden; 
+  }
+
+.product img{
+    height: 200px;
+    width: 200px;
+}

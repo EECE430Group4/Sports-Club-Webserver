@@ -86,5 +86,14 @@ def getFixtures():
     else:
         user = None
     return render_template('fixtures.html', user=user)
+
+@app.route('/shop')
+def getShop():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('shop.html', user=user)
+    
 if __name__ == "__main__":
     app.run(debug=True)
