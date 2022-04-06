@@ -1,11 +1,12 @@
+from turtle import update
 from flask import Flask, render_template, redirect, url_for, session, request, abort
-from functions import *
+import functions
 
 
 app = Flask(__name__)
 app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
 
-
+#--------------------------- HOMEPAGE ---------------------------
 @app.route('/')
 def main():
     if 'user' in session:
@@ -14,7 +15,7 @@ def main():
         user = None
     return render_template('HomePage.html', user=user)
 
-
+#--------------------------- LOGIN + SIGNUP ---------------------------
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user' in session:
@@ -22,7 +23,7 @@ def login():
     elif request.method == 'POST':
         user = request.form["userName"]
         password = request.form["password"]
-        ret = authenticate(user, password)
+        ret = functions.authenticate(user, password)
         if ret == 1:
             return render_template('login.html', error="Username does not exist!")
         elif ret == 2:
@@ -38,11 +39,11 @@ def login():
 def signup():
     if 'user' in session:
         return redirect(url_for('main'))
-    elif request.method == 'POST':
+    if request.method == 'POST':
         name = request.form["Name"]
         user = request.form["userName"]
         password = request.form["password"]
-        ret = register(name, user, password)
+        ret = functions.register(name, user, password)
         if ret == 1:
             return render_template('signup.html', error="Username already exists!")
         elif ret == 0:
@@ -51,15 +52,76 @@ def signup():
             return redirect(url_for('main'))
     return render_template('signup.html')
 
-
-@app.route('/news', methods=['GET'])
+#--------------------------- NEWS ---------------------------
+@app.route('/news', methods=['GET','POST'])
 def getNews():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-    return render_template('news.html', user=user)
+        role = ""
 
+    articles = []
+    for i in range(1,6):
+        articles.append(functions.getArticle(i))
+
+    if request.method == 'POST':
+        if 'readbut' in request.form:
+            if request.form["readbut"] == "1":
+                return redirect(url_for('getArticle', anum=1))
+            elif request.form["readbut"] == "2":
+                return redirect(url_for('getArticle', anum=2))
+            elif request.form["readbut"] == "3":
+                return redirect(url_for('getArticle', anum=3))
+            elif request.form["readbut"] == "4":
+                return redirect(url_for('getArticle', anum=4))
+            elif request.form["readbut"] == "5":
+                return redirect(url_for('getArticle', anum=5))
+        elif 'editbut' in request.form:
+            if request.form["editbut"] == "1":
+                return redirect(url_for('editArticle', anum=1))
+            elif request.form["editbut"] == "2":
+                return redirect(url_for('editArticle', anum=2))
+            elif request.form["editbut"] == "3":
+                return redirect(url_for('editArticle', anum=3))
+            elif request.form["editbut"] == "4":
+                return redirect(url_for('editArticle', anum=4))
+            elif request.form["editbut"] == "5":
+                return redirect(url_for('editArticle', anum=5))
+
+    return render_template('news.html', user=user, role=role,articles=articles)
+
+@app.route('/news/article/<anum>', methods=['GET'])
+def getArticle(anum):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    article = functions.getArticle(anum)
+    return render_template('article.html', user=user, role=role,article=article)
+
+@app.route('/news/article/edit/<anum>', methods=['GET', 'POST'])
+def editArticle(anum):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+        if role != 'ADMIN':
+            return redirect(url_for('main'))
+        if request.method == 'POST':
+            title = request.form['title']
+            headline = request.form['headline']
+            body = request.form['body']
+            functions.updateArticle(anum,title,headline,body)
+            return redirect(url_for('getNews'),code=303)
+        article = functions.getArticle(anum)
+        return render_template('editarticle.html', user=user, role=role,article=article,anum=anum)
+    else:
+        return redirect(url_for('main'))
+    
+#--------------------------- TEAMS ---------------------------
 
 @app.route('/teams/<team>')
 def getTeam(team):

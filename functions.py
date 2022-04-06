@@ -39,3 +39,24 @@ def register(name, username, password):
     cursor.execute(SQL)
     conn.commit()
     return 0
+
+
+def getArticle(aid):
+    conn = mysql.connector.connect(host='35.246.1.16',
+                                   database='430Group4',
+                                   user='root',
+                                   password='root430group4root')
+    cursor = conn.cursor()
+    cursor.execute("select articletitle, articleheadline, articlebody from article WHERE articleid='"+str(aid)+"'")
+    res = cursor.fetchall()
+    return (res[0][0],res[0][1],res[0][2])
+
+def updateArticle(aid,title,hd,body):
+    conn = mysql.connector.connect(host='35.246.1.16',
+                                   database='430Group4',
+                                   user='root',
+                                   password='root430group4root')
+    cursor = conn.cursor()
+    SQL = "UPDATE article SET articletitle ='" +title+"', articleheadline ='" +hd+"', articlebody ='"+body+"' WHERE articleid='"+str(aid)+"'"
+    cursor.execute(SQL)
+    conn.commit()
