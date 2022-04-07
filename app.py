@@ -133,7 +133,8 @@ def getTeam(team):
     if team == "womenfb":
         return(render_template('womenfb.html', user=user))
     elif team == "womenbb":
-        return(render_template('womenbb.html', user=user))
+        players= functions.getPlayers(team)
+        return(render_template('womenbb.html', user=user, players=players))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":

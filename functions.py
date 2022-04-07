@@ -60,3 +60,20 @@ def updateArticle(aid,title,hd,body):
     SQL = "UPDATE article SET articletitle ='" +title+"', articleheadline ='" +hd+"', articlebody ='"+body+"' WHERE articleid='"+str(aid)+"'"
     cursor.execute(SQL)
     conn.commit()
+
+def getPlayers(team):
+    conn = mysql.connector.connect(host='35.246.1.16',
+                                   database='430Group4',
+                                   user='root',
+                                   password='root430group4root')
+    cursor = conn.cursor()
+    cursor.execute("select * from players WHERE team='"+team+"'")
+    res = cursor.fetchall()
+    players = []
+    for row in res:
+        players.append(row)
+    return players
+
+print(getPlayers('womenbb'))
+    
+
