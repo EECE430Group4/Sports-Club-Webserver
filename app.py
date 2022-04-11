@@ -156,6 +156,7 @@ def getShop():
     else:
         user = None
     return render_template('shop.html', user=user)
+
     
 if __name__ == "__main__":
     app.run(debug=True)
