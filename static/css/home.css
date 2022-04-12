@@ -140,16 +140,18 @@ div.content article{
 .featuredArticles{
     display:flex;
     text-align: center;
-    background-color:grey;
+    /*background-color:grey;*/
     justify-content: space-between;
     padding-right:5rem;
     padding-left:5rem;
+    column-gap:3rem;
+    padding: 5rem;
 }
 .articles{
     width:100%;
     height:100%;
     border-radius: 4%;
-    background-color:grey; /*REMOVE LATER*/
+    
 }
 .articles img{
     width:100%;
@@ -159,6 +161,7 @@ div.content article{
     overflow: hidden;
    
 }
+
 .games{
     height:20rem; 
     /*margin:5rem;*/
@@ -170,3 +173,21 @@ div.content article{
 .item.games{
     background: rgba(219, 223, 230, 0.2);
 }
+.video-grid{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2rem;
+    padding: 5rem;
+}
+.video-row{
+    display:flex;
+    flex-direction: row;
+    column-gap:5rem;
+}
+.video-row iframe{
+    height:250px;
+    width:500px;
+}
+

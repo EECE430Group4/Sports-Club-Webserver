@@ -60,7 +60,7 @@ html {
               </ul>
             </li>
             <li><a href="/fixtures">Fixtures</a></li>
-            <li class="active"><a href="/news">News</a></li>
+            <li><a href="/news">News</a></li>
             <li><a href="#">Tickets</a></li>
             <li><a href="/shop">Shop</a></li>
             <li><a href="#">Community</a></li>
@@ -95,22 +95,22 @@ html {
                 </div>
                 <div class="col-xs-9">
                     <div class="card" style="border-style: solid; border-color: rgb(255, 255, 255); color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0.3);">
-                        <h3 style="color:black; margin-left: 2%;">Email:</h3>
-                        <h style="color:black; margin-left: 2%;">jane_doe@email.com</h>
                         <h3 style="color:black; margin-left: 2%;">Change password:</h3>
+                        <form method = "POST" onsubmit="return verifyPassword()">
                         <h style="color:black; margin-left: 2%;">Current password:</h>
                         <br>
-                        <input style="margin-left: 2%; color:black">
+                        <input type = "password" style="margin-left: 2%; color:black" required>
                         <br><br>
                         <h style="color:black; margin-left: 2%;">New password:</h>
                         <br>
-                        <input style="margin-left: 2%; color:black;">
+                        <input id = "pwd" type = "password" style="margin-left: 2%; color:black;" required>
                         <br><br>
                         <h style="color:black; margin-left: 2%;">Confirm new password:</h>
                         <br>
-                        <input style="margin-left: 2%;  color:black;">
+                        <input id = "confpwd" type = "password" style="margin-left: 2%;  color:black;" required>
                         <br><br>
                         <button style="color:blueviolet; margin-left:2%;">Confirm</button>
+                      </form>
                     </div>
                 </div>
             </div>
@@ -141,6 +141,18 @@ html {
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
   ></script>
+
+  <script>
+    function verifyPassword() {
+      var pw1 = document.getElementById("pwd");
+      var pw2 = document.getElementById("confpwd");
+      if (pw1.value != pw2.value) {
+        alert("Passwords do not match.");
+        return false;
+      }
+      return true;
+    }
+  </script>
 
  
 </html>

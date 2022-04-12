@@ -25,10 +25,10 @@
     <nav class="navbar navbar-inverse bringToFrontDiv">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">TeamName</a>
+          <a class="navbar-brand" href="/">TeamName</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="/home">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"
               >Teams <span class="caret"></span
@@ -45,7 +45,7 @@
           <li class="active"><a href=#>Tickets</a></li>
           <li><a href="/shop">Shop</a></li>
           <li><a href="#">Community</a></li>
-          <li><a href="#">Honors</a></li>
+          <li><a href="/honorsfb">Honors</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="/action_page.php">
           <div class="form-group">
@@ -107,7 +107,8 @@
                           <h4>TIME</h4>
                           <h4>ARENA</h4>    <!--THEY CAN EDIT THESE-->
                           <h4>DATE</h4>
-                          <button>BUY NOW STARTING AT $100</button>
+                          <h4>PRICE</h4>
+                          <button>ADD TO CART</button>
                       </div>
                   </div>
             </div>
@@ -122,7 +123,8 @@
                           <h4>TIME</h4>
                           <h4>ARENA</h4>    <!--THEY CAN EDIT THESE-->
                           <h4>DATE</h4>
-                          <button>BUY NOW STARTING AT $100</button>
+                          <h4>PRICE</h4>
+                          <button>ADD TO CART</button>
                       </div>
                   </div>
             </div>
@@ -137,24 +139,42 @@
                           <h4>TIME</h4>
                           <h4>ARENA</h4>    <!--THEY CAN EDIT THESE-->
                           <h4>DATE</h4>
-                          <button>BUY NOW STARTING AT $100</button>
+                          <h4>PRICE</h4>
+                          <button>ADD TO CART</button>
                       </div>
                   </div>
             </div>
             <div class="gameRow">
-          <div class="bringToFrontDiv descriptiveImage">
-              <img src="{{url_for('static', filename='css/images/tickets/game.png')}}" alt="">     <!--THEY CAN EDIT THESE-->
-          </div>
-              <div class="bringToFrontDiv descriptive">
-
-                  <div class="description">
-                      <h4>Home VS Away 1</h4>             <!--THEY CAN EDIT THESE-->
-                      <h4>TIME</h4>
-                      <h4>ARENA</h4>    <!--THEY CAN EDIT THESE-->
-                      <h4>DATE</h4>
-                      <button>BUY NOW STARTING AT $100</button>
-                  </div>
+              <div class="bringToFrontDiv descriptiveImage">
+                  <img src="{{url_for('static', filename='css/images/tickets/game.png')}}" alt="">     <!--THEY CAN EDIT THESE-->
               </div>
+                  <div class="bringToFrontDiv descriptive">
+    
+                      <div class="description">
+                          <h4>Home VS Away 1</h4>             <!--THEY CAN EDIT THESE-->
+                          <h4>TIME</h4>
+                          <h4>ARENA</h4>    <!--THEY CAN EDIT THESE-->
+                          <h4>DATE</h4>
+                          <h4>PRICE</h4>
+                          <button>ADD TO CART</button>
+                      </div>
+                  </div>
+            </div>
+            <div class="gameRow">
+              <div class="bringToFrontDiv descriptiveImage">
+                  <img src="{{url_for('static', filename='css/images/tickets/game.png')}}" alt="">     <!--THEY CAN EDIT THESE-->
+              </div>
+                  <div class="bringToFrontDiv descriptive">
+    
+                      <div class="description">
+                          <h4>Home VS Away 1</h4>             <!--THEY CAN EDIT THESE-->
+                          <h4>TIME</h4>
+                          <h4>ARENA</h4>    <!--THEY CAN EDIT THESE-->
+                          <h4>DATE</h4>
+                          <h4>PRICE</h4>
+                          <button>ADD TO CART</button>
+                      </div>
+                  </div>
             </div>
            
         </div>
