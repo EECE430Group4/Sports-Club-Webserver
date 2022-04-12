@@ -142,6 +142,8 @@ def getTeam(team):
     
     return(redirect(url_for('main')))
 
+#--------------------------- FIXTURES ---------------------------
+
 @app.route('/fixtures')
 def getFixtures():
     if 'user' in session:
@@ -150,6 +152,8 @@ def getFixtures():
         user = None
     return render_template('fixtures.html', user=user)
 
+#--------------------------- SHOP ---------------------------
+
 @app.route('/shop')
 def getShop():
     if 'user' in session:
@@ -157,6 +161,8 @@ def getShop():
     else:
         user = None
     return render_template('shop.html', user=user)
+
+#--------------------------- PROFILE ---------------------------
 
 @app.route('/profile')
 def getProfile():
@@ -174,6 +180,8 @@ def getprofileSetting():
         user = None
     return render_template('profile_account_settings.html', user=user)
 
+#--------------------------- TICKETS ---------------------------
+
 @app.route('/tickets')
 def getTickets():
     if 'user' in session:
@@ -182,7 +190,7 @@ def getTickets():
         user = None
     return render_template('tickets.html', user=user)
 
-
+#--------------------------- HONORS FOOTBALL---------------------------
 @app.route('/honorsfb')
 def getHonors():
     if 'user' in session:
@@ -190,6 +198,17 @@ def getHonors():
     else:
         user = None
     return render_template('honorsfb.html', user=user)
+
+#--------------------------- HONORS BASKETBALL ---------------------------
+@app.route('/honorsbb')
+def getHonorsB():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('honorsbb.html', user=user)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
