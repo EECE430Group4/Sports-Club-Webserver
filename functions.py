@@ -74,6 +74,5 @@ def getPlayers(team):
         players.append(row)
     return players
 
-print(getPlayers('womenbb'))
     
 
