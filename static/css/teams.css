@@ -28,6 +28,16 @@
     font-size: 18px;
   }
 
+  .addPlayer label, .deletePlayer label{
+    margin-top: 1%;
+    color: white;
+    font-size: 18px;
+  }
+  .addPlayer, .deletePlayer{
+    position: relative;
+    left: 8%;
+  }
+
   .container:hover .overlay {
     bottom: 0;
     height: 100%;
