@@ -158,7 +158,6 @@ def getShop():
         user = None
     return render_template('shop.html', user=user)
 
-<<<<<<< HEAD
 @app.route('/profile')
 def getProfile():
     if 'user' in session:
@@ -175,8 +174,22 @@ def getprofileSetting():
         user = None
     return render_template('profile_account_settings.html', user=user)
 
-=======
-    
->>>>>>> f41f987b8b367a62327c253ed43bdb3d7b80b360
+@app.route('/tickets')
+def getTickets():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('tickets.html', user=user)
+
+
+@app.route('/honorsfb')
+def getHonors():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('honorsfb.html', user=user)
+
 if __name__ == "__main__":
     app.run(debug=True)
