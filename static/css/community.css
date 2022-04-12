@@ -1,0 +1,66 @@
+header{
+    background-color: #1f3554; 
+    
+
+}
+
+.fan, .vote{
+    color: white;
+}
+
+
+
+body{
+    background-image: url("images/bg.jpeg");
+    background-size: cover ;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+#community{
+    color: #f86566;
+}
+.square {
+    height: 200px;
+    width: 800px;
+    background-color: #d3d3d378;
+    margin: 0%;
+    opacity: 100%;
+    color: white;
+    fill-opacity:initial;
+    border-radius: 5px;
+   margin-bottom: 50px;
+}
+
+.rectangle{
+    height: 500px;
+    width: 400px;
+    background-color: #D3D3D3;
+    opacity: 60%;
+    margin: 0%;
+    margin-left: 10%;
+    border-radius: 10px;
+    
+    
+}
+
+
+#Post, #Post2, #Post3{
+    color: black;
+    width: 70%;
+    height: 50px;
+    margin-top: 7%;
+    border-radius: 5px;
+}
+
+.button{
+    margin-top: 10px;
+}
+
+.container{
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+

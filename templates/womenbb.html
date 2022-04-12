@@ -20,7 +20,6 @@
       rel="stylesheet"
       type="text/css"
     />
-    
   </head>
   <body>
     <nav class="navbar navbar-inverse">
@@ -72,7 +71,7 @@
 
     <!-- HEADER DONE -->
 
-    <h1> <strong>WOMEN'S BASKETBALL TEAM</strong></h1>
+    <h1><strong>WOMEN'S BASKETBALL TEAM</strong></h1>
 
     <hr class="featurette-divider" />
 
@@ -83,6 +82,36 @@
       height="100%"
       class="img-fluid"
     />
+    <h2>ADD NEW PLAYER</h2>
+  <form action="/womenbb/addPlayer" method="POST">
+    <div class="addPlayer">
+      
+        <label>Name:</label>
+        <input type="text" name="playerNameAdd" id="playerNameAdd" />
+        <label>Age:</label>
+        <input type="text" name="playerAgeAdd" id="playerAgeAdd" />
+        <label>Position:</label>
+        <input type="text" name="playerPositionAdd" id="playerPositionAdd" />
+        <label>Points:</label>
+        <input type="text" name="playerPointsAdd" id="playerPointsAdd" />
+        <label>Assists:</label>
+        <input type="text" name="playerAssistsAdd" id="playerAssistsAdd" />
+        <br />
+        
+        <button>ADD</button>
+    
+    </div>
+   </form>
+
+    <h2>DELETE PLAYER</h2>
+  <form action="/womenbb/deletePlayer" method="POST">
+    <div class="deletePlayer">
+      <label for="playerid">Player ID:</label>
+      <input type="text" name="playerIdDelete" id="playerIdDelete" />
+      <br />
+      <button>DELETE</button>
+    </div>
+  </form>
 
     <h2>FULL ROSTER</h2>
 
@@ -99,15 +128,14 @@
           data-holder-rendered="true"
         />
         <div class="overlay">
-          
-          <label>{{players[0][1]}}</label><br>
-          <label>Age: {{players[0][2]}}</label><br>
-          <label>Position: {{players[0][4]}}</label><br>
-          <label>Points: {{players[0][5]}}</label><br>
+          <label>{{players[0][1]}}</label>
+          <label id="playerid">{{players[0][0]}}</label><br />
+          <label>Age: {{players[0][2]}}</label><br />
+          <label>Position: {{players[0][4]}}</label><br />
+          <label>Points: {{players[0][5]}}</label><br />
           <label>Assists: {{players[0][6]}}</label>
-            
+          <button id="editPlayer">edit</button>
         </div>
-      
       </div>
 
       <div class="col-md-1"></div>
@@ -119,13 +147,12 @@
           data-holder-rendered="true"
         />
         <div class="overlay">
-           
-          <label>{{players[1][1]}}</label><br>
-          <label>Age: {{players[1][2]}}</label><br>
-          <label>Position: {{players[1][4]}}</label><br>
-          <label>Points: {{players[1][5]}}</label><br>
+          <label>{{players[1][1]}}</label>
+          <label id="playerid">{{players[1][0]}}</label><br />
+          <label>Age: {{players[1][2]}}</label><br />
+          <label>Position: {{players[1][4]}}</label><br />
+          <label>Points: {{players[1][5]}}</label><br />
           <label>Assists: {{players[1][6]}}</label>
-            
         </div>
       </div>
 
@@ -138,13 +165,12 @@
           data-holder-rendered="true"
         />
         <div class="overlay">
-           
-          <label>{{players[2][1]}}</label><br>
-          <label>Age: {{players[2][2]}}</label><br>
-          <label>Position: {{players[2][4]}}</label><br>
-          <label>Points: {{players[2][5]}}</label><br>
+          <label>{{players[2][1]}}</label>
+          <label id="playerid">{{players[2][0]}}</label><br />
+          <label>Age: {{players[2][2]}}</label><br />
+          <label>Position: {{players[2][4]}}</label><br />
+          <label>Points: {{players[2][5]}}</label><br />
           <label>Assists: {{players[2][6]}}</label>
-            
         </div>
       </div>
 
@@ -157,13 +183,12 @@
           data-holder-rendered="true"
         />
         <div class="overlay">
-           
-          <label>{{players[3][1]}}</label><br>
-          <label>Age: {{players[3][2]}}</label><br>
-          <label>Position: {{players[3][4]}}</label><br>
-          <label>Points: {{players[3][5]}}</label><br>
+          <label>{{players[3][1]}}</label>
+          <label id="playerid">{{players[3][0]}}</label><br />
+          <label>Age: {{players[3][2]}}</label><br />
+          <label>Position: {{players[3][4]}}</label><br />
+          <label>Points: {{players[3][5]}}</label><br />
           <label>Assists: {{players[3][6]}}</label>
-            
         </div>
       </div>
     </div>

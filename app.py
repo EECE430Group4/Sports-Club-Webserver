@@ -144,6 +144,58 @@ def getTeam(team):
     
     return(redirect(url_for('main')))
 
+@app.route('/<team>/addPlayer', methods=['POST'])
+def addPlayer(team):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+
+    name= request.form["playerNameAdd"]
+    age= request.form["playerAgeAdd"]
+    position= request.form["playerPositionAdd"]
+    points= request.form["playerPointsAdd"]
+    assists= request.form["playerAssistsAdd"]
+
+    if team == "womenfb":
+        return(render_template('womenfb.html', user=user))
+    elif team == "womenbb":
+        players= functions.getPlayers(team)
+        functions.addPlayerWomenbb(name,age,position,points,assists)
+        return(render_template('womenbb.html', user=user, players=players))
+    elif team == "menfb":
+        return(render_template('menfb.html', user=user))
+    elif team == "menbb":
+        return(render_template('menbb.html', user=user))
+    
+    return(redirect(url_for('main')))
+
+@app.route('/<team>/deletePlayer', methods=['POST'])
+def deletePlayer(team):
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    playerid= request.form["playerIdDelete"]
+    
+
+    if team == "womenfb":
+        return(render_template('womenfb.html', user=user))
+    elif team == "womenbb":
+        players= functions.getPlayers(team)
+        functions.deletePlayerWomenbb(playerid)
+        return(render_template('womenbb.html', user=user, players=players))
+    elif team == "menfb":
+        return(render_template('menfb.html', user=user))
+    elif team == "menbb":
+        return(render_template('menbb.html', user=user))
+    
+    return(redirect(url_for('main')))
+
+#--------------------------- FIXTURES ---------------------------
+
 @app.route('/fixtures')
 def getFixtures():
     if 'user' in session:
@@ -153,6 +205,8 @@ def getFixtures():
         user = None
         role = ''
     return render_template('fixtures.html', user=user, role=role)
+
+#--------------------------- SHOP ---------------------------
 
 
 #--------------------------- SHOP ---------------------------
@@ -170,11 +224,8 @@ def getShop():
     for i in range(1,9):
         items.append(functions.getItem(i))
 
-    
-
     if request.method == 'POST':
         if 'addcartbut' in request.form:
-            print("hello")
             return redirect(url_for('addItem', itemid=request.form["itemid"]))
 
     return render_template('shop.html', user=user, role=role,items=items)
@@ -191,6 +242,59 @@ def addItem(itemid):
 
     return(redirect(url_for('getShop')))
 
-    
+#--------------------------- PROFILE ---------------------------
+
+@app.route('/profile')
+def getProfile():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    return render_template('profile_edit_prof.html ', user=user, role=role)
+
+@app.route('/profileSetting')
+def getprofileSetting():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    return render_template('profile_account_settings.html', user=user, role=role)
+
+#--------------------------- TICKETS ---------------------------
+
+@app.route('/tickets')
+def getTickets():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('tickets.html', user=user)
+
+#--------------------------- HONORS FOOTBALL---------------------------
+@app.route('/honorsfb')
+def getHonors():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('honorsfb.html', user=user)
+
+#--------------------------- HONORS BASKETBALL ---------------------------
+@app.route('/honorsbb')
+def getHonorsB():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('honorsbb.html', user=user)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+

@@ -271,6 +271,10 @@
                 <th scope="col">Score</th>
                 <th scope="col">Club2</th>
                 <th scope="col">Date</th>
+                {% if 'ADMIN' in role%}
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+                {% endif %}
               </tr>
             </thead>
             <tbody>
@@ -280,6 +284,16 @@
                 <td>2-0</td>
                 <td>Team2</td>
                 <td>22/03/2022</td>
+                {%if 'ADMIN' in role%}
+                <td><form action="/" method="POST" autocomplete="off">
+                  <input type="hidden" name="fixture" value="1">
+                  <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT</button>
+                </form></td>
+                <td><form action="/" method="POST" autocomplete="off">
+                  <input type="hidden" name="fixture" value="1">
+                  <button id="edit-button" class="btn btn-xs" type="submit" style="color:black">DELETE</button>
+                </form></td>
+                {%endif%}
               </tr>
               <tr>
                 <td>Women's Football</td>
@@ -339,6 +353,12 @@
               </tr>
             </tbody>
           </table>
+          {%if 'ADMIN' in role%}
+          <form action="/" method="POST" autocomplete="off">
+            <input type="hidden" name="fixture" value="1">
+            <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD GAME</button>
+          </form>
+          {%endif%}
         </div>
         <div class="col-lg-4 mb-4">
           <h2 class="dropdown" style="color:azure; text-align:center;">
@@ -414,5 +434,64 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Edit Game</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <h>Sport:</h>
+                <p><input type="text" id="sport"></p>
+                <h>Club1:</h>
+                <p><input type="text" id="club1"></p>
+                <h>Club2:</h>
+                <p><input type="text" id="club2"></p>
+                <h>Score:</h>
+                <p><input type="text" id="score"></p>
+                <h>Date:</h>
+                <p><input type="date" id="date"></p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="editModalLabel">Add Game</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <h>Sport:</h>
+              <p><input type="text" id="sport"></p>
+              <h>Club1:</h>
+              <p><input type="text" id="club1"></p>
+              <h>Club2:</h>
+              <p><input type="text" id="club2"></p>
+              <h>Score:</h>
+              <p><input type="text" id="score"></p>
+              <h>Date:</h>
+              <p><input type="date" id="date"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
   </body>
 </html>
