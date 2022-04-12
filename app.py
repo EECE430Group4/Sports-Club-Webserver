@@ -146,9 +146,11 @@ def getTeam(team):
 def getFixtures():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-    return render_template('fixtures.html', user=user)
+        role = ''
+    return render_template('fixtures.html', user=user, role=role)
 
 @app.route('/shop')
 def getShop():
