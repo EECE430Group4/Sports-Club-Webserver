@@ -28,7 +28,26 @@ CREATE TABLE article (
   
   
   
-  
+create table posts (
+  username TEXT NOT NULL,
+  dateposted DATE NOT NULL,
+  body TEXT NOT NULL,
+  FOREIGN KEY (username)
+  REFERENCES users (username),
+  PRIMARY KEY(username,dateposted)
+);
+
+
+CREATE TABLE games (
+  sport TEXT not null,
+  club1 text not null,
+  score text not null,
+  club2 text not null,
+  gamedate date not null,
+  PRIMARY KEY (sport,club1,club2,gamedate)
+)
+
+
 
 
 
