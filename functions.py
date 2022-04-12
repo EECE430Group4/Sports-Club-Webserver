@@ -115,9 +115,51 @@ def deletePost(username,dateposted):
     conn.commit()
     cursor.close()
     conn.close()
-   
 
 
+def addPlayerWomenbb(name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select playerid from players ORDER BY playerid DESC LIMIT 1")
+    res= cursor.fetchall()
+    lastId=res[0][0]
+    newId= str(int(lastId)+1)
+    
+    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('"+newId+"', '"+name+"', '"+age+"', 'womenbb', '"+position+"', '"+points+"', '"+assists+"')")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def deletePlayerWomenbb(playerid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM players WHERE playerid= '"+playerid+"'")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def getTrophyB(aid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select trophy, year from honorsBB WHERE trophy_id='"+str(aid)+"'")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return (res[0][0], res[0][1], res[0][2])
+
+
+def updateTrophyB(aid, title, year):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE honorsBB SET trophy ='" + title+"', year ='" + \
+        year+"' WHERE trophy_id='"+str(aid)+"'"
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 

@@ -210,13 +210,10 @@ def getHonors():
 def getHonorsB():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
-        user = None
-    return render_template('honorsbb.html', user=user)
-
-
-
-
+         user = None
+    return render_template('honorsbb.html', user=user, role=role)
 
 if __name__ == "__main__":
     app.run(debug=True)
