@@ -156,6 +156,22 @@ def getShop():
     else:
         user = None
     return render_template('shop.html', user=user)
-    
+
+@app.route('/profile')
+def getProfile():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('profile_edit_prof.html ', user=user)
+
+@app.route('/profileSetting')
+def getprofileSetting():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+    return render_template('profile_account_settings.html', user=user)
+
 if __name__ == "__main__":
     app.run(debug=True)
