@@ -111,8 +111,11 @@ def addPost(username,dateposted,body):
 def deletePost(username,dateposted):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    return players
-
+    cursor.execute("delete from posts where username='"+username+"' and dateposted='"+dateposted+"'")
+    conn.commit()
+    cursor.close()
+    conn.close()
+   
 
 
 
