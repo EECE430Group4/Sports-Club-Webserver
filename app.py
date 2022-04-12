@@ -133,7 +133,8 @@ def getTeam(team):
     if team == "womenfb":
         return(render_template('womenfb.html', user=user))
     elif team == "womenbb":
-        return(render_template('womenbb.html', user=user))
+        players= functions.getPlayers(team)
+        return(render_template('womenbb.html', user=user, players=players))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":
@@ -157,6 +158,7 @@ def getShop():
         user = None
     return render_template('shop.html', user=user)
 
+<<<<<<< HEAD
 @app.route('/profile')
 def getProfile():
     if 'user' in session:
@@ -173,5 +175,8 @@ def getprofileSetting():
         user = None
     return render_template('profile_account_settings.html', user=user)
 
+=======
+    
+>>>>>>> f41f987b8b367a62327c253ed43bdb3d7b80b360
 if __name__ == "__main__":
     app.run(debug=True)

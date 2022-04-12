@@ -1,0 +1,38 @@
+drop table if exists users;
+drop table if exists players;
+drop table if exists article;
+CREATE TABLE users (
+  name TEXT NOT NULL,
+  username TEXT PRIMARY KEY,
+  password TEXT NOT NULL,
+  role TEXT NOT NULL
+  );
+  
+  CREATE TABLE players (
+  playerid INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  age INTEGER NOT NULL,
+  team TEXT NOT NULL,
+  position TEXT NOT NULL,
+  points INTEGER,
+  assists INTEGER
+);
+
+
+CREATE TABLE article (
+  articleid int PRIMARY KEY,
+  articletitle text NOT NULL,
+  articleheadline text NOT NULL,
+  articlebody text NOT NULL
+);
+  
+  
+  
+  
+
+
+
+
+
+
+INSERT INTO users VALUES (1,'Fan ElFan','fan1','123','FAN'),(2,'Player ElPlayer','player1','123','PLAYER'),(3,'Admin ElAdmin','admin1','123','ADMIN'),(4,'hassan khatib','ekha','123','FAN');
