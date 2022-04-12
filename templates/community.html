@@ -12,8 +12,9 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="../static/css/community.css" rel="stylesheet" type="text/css"/>
 
-    <title>Team name</title>
+    <title>Community</title>
   </head>
   <body>
     <nav class="navbar navbar-inverse">
@@ -22,7 +23,7 @@
           <a class="navbar-brand" href="#">TeamName</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li ><a href="#">Home</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"
               >Teams <span class="caret"></span
@@ -36,9 +37,9 @@
           </li>
           <li><a href="/fixtures">Fixtures</a></li>
           <li><a href="/news">News</a></li>
-          <li><a href="">Tickets</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="#">Community</a></li>
+          <li><a href="#">Tickets</a></li>
+          <li><a href="#">Shop</a></li>
+          <li class="active"><a href="#">Community</a></li>
           <li><a href="#">Honors</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="/action_page.php">
@@ -49,19 +50,86 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            {%if user is none%}
-            <a href="/login">
-              <span class="glyphicon glyphicon-user"></span> Profile</a
+            <a href="/">
+              <span class="glyphicon glyphicon-user"></span>Profile</a
             >
-            {%else%}
-            <a href="/profile">
-              <span class="glyphicon glyphicon-user"></span> {{user}}</a
-            >
-            {%endif%}
+       
           </li>
         </ul>
       </div>
     </nav>
+    <!-- end of nav -->
+    <h2 class="text-center fw-bolder fan" >
+        FAN CLUB
+     <h4 class="">
+        <img class="center-block" src="../static/css/images/field.jpeg" width="1000px" height="250px"> 
+        <hr size="5px" class="link-light" width="80%"> 
+      </h2>
+      <div class="container">
+        <div class="row">
+          
+          
+          <div class="col-md-8">
+            <h2 class="fw-bolder square text-center ">
+              <</span>Discussion post<span>>
+              <div class="form-field d-flex align-items-center h5 width=100px">
+                <span class="far fa-user"></span>
+                <input
+                type="text"
+                name="Post"
+                id="Post"
+                placeholder="Comment..."
+                autocomplete="off"
+                required
+              /><br>
+              <button type="submit" class="btn btn-default ">Submit</button>
+                
+              </div>
+            
+            </h2>
+            <h2 class="fw-bolder square text-center ">
+            <</span>Discussion post 2<span>>
+            <div class="form-field d-flex align-items-center h5 width=100px">
+              <span class="far fa-user"></span>
+              <input
+                type="text"
+                name="Post"
+                id="Post2"
+                placeholder="Comment..."
+                autocomplete="off"
+                required
+              /><br>
+              <button type="submit" class="btn btn-default ">Submit</button>
+            </div>
+            </h2>
+            <h2 class="fw-bolder square text-center ">
+              <</span>Discussion post 3<span>>
+              <div class="form-field d-flex align-items-center h5 width=100px">
+                <span class="far fa-user"></span>
+                <input
+                  type="text"
+                  name="Post"
+                  id="Post3"
+                  placeholder="Comment..."
+                  autocomplete="off"
+                  required
+                /><br>
+                <button type="submit" class="btn btn-default ">Submit</button>
+              </div>
+            </h2>
+          </div>
+          <div class="col-md-4">
+            <h2 class="vote text-right"> Click to vote for MVP</h2>
+            <div class="rectangle"></div>
+          </div>
+        
+          </div>
+        </div>
+      
+    
+        
+        
+
 
     <!-- Footer -->
     <footer class="page-footer font-small blue">
