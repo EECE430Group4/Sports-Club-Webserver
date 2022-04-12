@@ -71,6 +71,6 @@ def getPlayers(team):
     players = []
     for row in res:
         players.append(row)
-    conn = sqlite3.connect('database/430Group4.db')
-    cursor = conn.cursor()
+    cursor.close()
+    conn.close()
     return players

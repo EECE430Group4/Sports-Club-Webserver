@@ -162,17 +162,21 @@ def getShop():
 def getProfile():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-    return render_template('profile_edit_prof.html ', user=user)
+        role = ""
+    return render_template('profile_edit_prof.html ', user=user, role=role)
 
 @app.route('/profileSetting')
 def getprofileSetting():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-    return render_template('profile_account_settings.html', user=user)
+        role = ""
+    return render_template('profile_account_settings.html', user=user, role=role)
 
 @app.route('/tickets')
 def getTickets():
@@ -193,3 +197,5 @@ def getHonors():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
