@@ -31,6 +31,7 @@ def login():
         elif ret == 'FAN' or ret == 'PLAYER' or ret == 'ADMIN':
             session['user'] = user
             session['role'] = ret
+            session['cart'] = []
         return redirect(url_for('main'))
     return render_template('login.html')
 
@@ -49,6 +50,7 @@ def signup():
         elif ret == 0:
             session['user'] = user
             session['role'] = 'FAN'
+            session['cart'] = []
             return redirect(url_for('main'))
     return render_template('signup.html')
 
@@ -146,17 +148,48 @@ def getTeam(team):
 def getFixtures():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-    return render_template('fixtures.html', user=user)
+        role = ''
+    return render_template('fixtures.html', user=user, role=role)
 
-@app.route('/shop')
+
+#--------------------------- SHOP ---------------------------
+
+@app.route('/shop', methods=['GET','POST'])
 def getShop():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-    return render_template('shop.html', user=user)
+        role = ""
+
+    items = []
+    for i in range(1,9):
+        items.append(functions.getItem(i))
+
+    
+
+    if request.method == 'POST':
+        if 'addcartbut' in request.form:
+            print("hello")
+            return redirect(url_for('addItem', itemid=request.form["itemid"]))
+
+    return render_template('shop.html', user=user, role=role,items=items)
+
+@app.route('/shop/additem/<itemid>')
+def addItem(itemid):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    session['cart'].append(itemid)
+
+    return(redirect(url_for('getShop')))
 
     
 if __name__ == "__main__":

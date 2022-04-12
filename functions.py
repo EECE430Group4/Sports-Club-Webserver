@@ -74,3 +74,13 @@ def getPlayers(team):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     return players
+
+def getItem(row):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE rownum="+str(row)+"")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return (res[0][0], res[0][1], res[0][2], res[0][3], res[0][4], res[0][5])
