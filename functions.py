@@ -1,4 +1,3 @@
-import mysql.connector
 import sqlite3
 
 
@@ -74,3 +73,25 @@ def getPlayers(team):
     cursor.close()
     conn.close()
     return players
+
+def deletePost(username,dateposted):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("delete from posts WHERE username='" + username+ "' and dateposted = '"+dateposted+"'")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def addPost(username,dateposted,body):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("insert into posts VALUES('{}','{}','{}')".format(username,dateposted,body))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+
+
+
+
