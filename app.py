@@ -31,6 +31,7 @@ def login():
         elif ret == 'FAN' or ret == 'PLAYER' or ret == 'ADMIN':
             session['user'] = user
             session['role'] = ret
+            session['cart'] = []
         return redirect(url_for('main'))
     return render_template('login.html')
 
@@ -49,6 +50,7 @@ def signup():
         elif ret == 0:
             session['user'] = user
             session['role'] = 'FAN'
+            session['cart'] = []
             return redirect(url_for('main'))
     return render_template('signup.html')
 
@@ -142,6 +144,56 @@ def getTeam(team):
     
     return(redirect(url_for('main')))
 
+@app.route('/<team>/addPlayer', methods=['POST'])
+def addPlayer(team):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+
+    name= request.form["playerNameAdd"]
+    age= request.form["playerAgeAdd"]
+    position= request.form["playerPositionAdd"]
+    points= request.form["playerPointsAdd"]
+    assists= request.form["playerAssistsAdd"]
+
+    if team == "womenfb":
+        return(render_template('womenfb.html', user=user))
+    elif team == "womenbb":
+        players= functions.getPlayers(team)
+        functions.addPlayerWomenbb(name,age,position,points,assists)
+        return(render_template('womenbb.html', user=user, players=players))
+    elif team == "menfb":
+        return(render_template('menfb.html', user=user))
+    elif team == "menbb":
+        return(render_template('menbb.html', user=user))
+    
+    return(redirect(url_for('main')))
+
+@app.route('/<team>/deletePlayer', methods=['POST'])
+def deletePlayer(team):
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    playerid= request.form["playerIdDelete"]
+    
+
+    if team == "womenfb":
+        return(render_template('womenfb.html', user=user))
+    elif team == "womenbb":
+        players= functions.getPlayers(team)
+        functions.deletePlayerWomenbb(playerid)
+        return(render_template('womenbb.html', user=user, players=players))
+    elif team == "menfb":
+        return(render_template('menfb.html', user=user))
+    elif team == "menbb":
+        return(render_template('menbb.html', user=user))
+    
+    return(redirect(url_for('main')))
+
 #--------------------------- FIXTURES ---------------------------
 
 @app.route('/fixtures')
@@ -156,13 +208,39 @@ def getFixtures():
 
 #--------------------------- SHOP ---------------------------
 
-@app.route('/shop')
+
+#--------------------------- SHOP ---------------------------
+
+@app.route('/shop', methods=['GET','POST'])
 def getShop():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-    return render_template('shop.html', user=user)
+        role = ""
+
+    items = []
+    for i in range(1,9):
+        items.append(functions.getItem(i))
+
+    if request.method == 'POST':
+        if 'addcartbut' in request.form:
+            return redirect(url_for('addItem', itemid=request.form["itemid"]))
+
+    return render_template('shop.html', user=user, role=role,items=items)
+
+@app.route('/shop/additem/<itemid>')
+def addItem(itemid):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    session['cart'].append(itemid)
+
+    return(redirect(url_for('getShop')))
 
 #--------------------------- PROFILE ---------------------------
 
