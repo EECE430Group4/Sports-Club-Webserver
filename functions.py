@@ -74,41 +74,23 @@ def getPlayers(team):
     conn.close()
     return players
 
-def deletePost(username,dateposted):
-    conn = sqlite3.connect('database/430Group4.db')
-    cursor = conn.cursor()
-<<<<<<< HEAD
-    return players
 
 def addGames(sport,club1,score,club2,date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     SQL = '''insert into games (sport,club1,score,club2,date) values ('{}','{}','{}','{}','{}')'''.format (sport,club1,score,club2,date)
     cursor.execute(SQL)
-=======
-    cursor.execute("delete from posts WHERE username='" + username+ "' and dateposted = '"+dateposted+"'")
->>>>>>> e80e677aad0cd4a9b1729af64246643643378cfc
     conn.commit()
     cursor.close()
     conn.close()
 
-<<<<<<< HEAD
 def editGames(sport,club1,club2,date,score):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     SQL = "UPDATE games set sport='"+sport+"',club1='"+club1+"', club2='"+club2+"',date='"+date+"',score='"+score+"'"
     cursor.execute(SQL)
-=======
-def addPost(username,dateposted,body):
-    conn = sqlite3.connect('database/430Group4.db')
-    cursor = conn.cursor()
-    cursor.execute("insert into posts VALUES('{}','{}','{}')".format(username,dateposted,body))
->>>>>>> e80e677aad0cd4a9b1729af64246643643378cfc
-    conn.commit()
-    cursor.close()
-    conn.close()
 
-<<<<<<< HEAD
+
 def deleteGames(sport,club1,club2,date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -117,10 +99,22 @@ def deleteGames(sport,club1,club2,date):
     conn.commit()
     cursor.close()
     conn.close()
-=======
+
+def addPost(username,dateposted,body):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("insert into posts VALUES('{}','{}','{}')".format(username,dateposted,body))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def deletePost(username,dateposted):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    return players
 
 
 
 
 
->>>>>>> e80e677aad0cd4a9b1729af64246643643378cfc
+
