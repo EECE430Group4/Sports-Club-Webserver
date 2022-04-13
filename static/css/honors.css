@@ -105,3 +105,12 @@ div.descriptiveImage img {
     height: 50%;
 
  }
+
+ .delete-row,.add-row{
+     display:flex;
+     justify-content: flex-start;
+ }
+
+ .delete-row,.add-row h3{
+    justify-content: flex-start;}
+

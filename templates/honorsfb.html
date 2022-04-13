@@ -82,7 +82,37 @@
 
     <!--START HONORS' ROWS-->
     <div class="honorsAll">
-  
+      {% if 'ADMIN' in role%}
+      <div class="honorRow">
+        <h3> ADD NEW TROPHY</h3>
+        <form action="/honorsfb/addTrophyF" method="POST">
+          
+          <div class="add-row">
+    
+            <label>Trophy:</label>
+            <input type="text" name="title_add" id="title_add" />
+            <label>Year:</label>
+            <input type="text" name="year_add" id="year_add" />
+            <br />
+            
+            <button>ADD TROPHY</button>
+          </div>
+        </form>
+      </div>
+        <div class="honorRow">
+
+        <h3>DELETE TROPHY</h3>
+        <form action="/honorsfb/deleteTrophyF" method="POST">
+          <div class="delete-row">
+            <label for="trophyid">Trophy ID</label>
+            <input type="text" name="trophy_id_delete" id="trophy_id_delete" />
+            <br />
+            <button>DELETE TROPHY</button>
+          </div>
+        </form>
+
+      </div>
+      {% endif %}
       <!-- HONOR ROW  VERSION 1-->
       <div class="honorRow">
         <div class="bringToFrontDiv descriptiveImage">
@@ -94,8 +124,8 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-           <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[0][0]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[0][1]}}</h4>   <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -110,8 +140,8 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-           <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[1][0]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[1][1]}}</h4>   <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -126,8 +156,8 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-           <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[2][0]}}</h3>             <!--THEY CAN EDIT THESE-->
+             <h4>{{trophies[2][1]}}</h4>   <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -142,8 +172,8 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-           <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[3][0]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[3][1]}}</h4>   <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -158,8 +188,8 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-           <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[4][0]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[4][1]}}</h4>   <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>

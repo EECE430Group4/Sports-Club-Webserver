@@ -1,3 +1,4 @@
+from asyncio import trsock
 from turtle import update
 from flask import Flask, render_template, redirect, url_for, session, request, abort
 import functions
@@ -275,23 +276,99 @@ def getTickets():
     return render_template('tickets.html', user=user)
 
 #--------------------------- HONORS FOOTBALL---------------------------
-@app.route('/honorsfb')
-def getHonors():
-    if 'user' in session:
-        user = session['user']
-    else:
-        user = None
-    return render_template('honorsfb.html', user=user)
-
-#--------------------------- HONORS BASKETBALL ---------------------------
-@app.route('/honorsbb')
-def getHonorsB():
+@app.route('/honorsfb', methods=['GET','POST'])
+def getHonorsFB():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
          user = None
-    return render_template('honorsbb.html', user=user, role=role)
+         role = ""
+    trophies = []
+    for i in range(1,6):
+        trophies.append(functions.getTrophyB(i,"football"))
+
+    return render_template('honorsfb.html', user=user, role=role,trophies=trophies)
+
+@app.route('/honorsfb/addTrophyF', methods=['POST'])
+def addTrophyF():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    if role != 'ADMIN':
+        return redirect(url_for('main'))
+    title= request.form["title_add"]
+    year= request.form["year_add"]
+    trophyF=[]
+    for i in range(1,6):
+        trophyF.append(functions.getTrophyB(i,"football")) 
+    functions.addTrophiesB(title,year,"football")
+    return(redirect(url_for('getHonorsFB')))
+
+@app.route('/honorsfb/deleteTrophyF', methods=['POST'])
+def deleteTrophyF():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    trophy_id= request.form["trophy_id_delete"]
+    trophyF=[]
+    for i in range(1,6):
+        trophyF.append(functions.getTrophyB(i,"football")) 
+    functions.deleteTrophyB(trophy_id,"football")
+    return(redirect(url_for('getHonorsFB')))
+
+#--------------------------- HONORS BASKETBALL ---------------------------
+@app.route('/honorsbb', methods=['GET','POST'])
+def getHonorsBB():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+         user = None
+         role = ""
+    trophies = []
+    for i in range(1,6):
+        trophies.append(functions.getTrophyB(i,"basketball"))
+
+    return render_template('honorsbb.html', user=user, role=role,trophies=trophies)
+
+@app.route('/honorsbb/addTrophyB', methods=['POST'])
+def addTrophyB():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    if role != 'ADMIN':
+        return redirect(url_for('main'))
+    title= request.form["title_add"]
+    year= request.form["year_add"]
+    trophyB=[]
+    for i in range(1,6):
+        trophyB.append(functions.getTrophyB(i,"basketball")) 
+    functions.addTrophiesB(title,year,"basketball")
+    return(redirect(url_for('getHonorsBB')))
+
+@app.route('/honorsbb/deleteTrophyB', methods=['POST'])
+def deleteTrophyB():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    trophy_id= request.form["trophy_id_delete"]
+    trophyB=[]
+    for i in range(1,6):
+        trophyB.append(functions.getTrophyB(i,"basketball")) 
+    functions.deleteTrophyB(trophy_id,"basketball")
+    return(redirect(url_for('getHonorsFB')))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
