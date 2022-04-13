@@ -291,9 +291,24 @@ def getHonorsB():
         role = session['role']
     else:
          user = None
+         role = ""
     return render_template('honorsbb.html', user=user, role=role)
+
+#-------------------------- COMMUNITY -------------------------------
+
+@app.route('/community')
+def getCommunity():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+         user = None
+         role = ""
+    return render_template('community.html', user=user, role=role)
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 
 
