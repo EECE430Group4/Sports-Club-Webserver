@@ -292,6 +292,19 @@ def getGames():
     return games
 
 
+def getGames():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from games")
+    res = cursor.fetchall()
+    games = []
+    for row in res:
+        games.append(row)
+    cursor.close()
+    conn.close()
+    return games
+
+
 def getTrophyBS(sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()

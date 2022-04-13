@@ -93,7 +93,7 @@
             <label>Trophy:</label>
             <input type="text" name="title_add" id="title_add" />
             <label>Year:</label>
-            <input type="number" name="year_add" id="year_add" max="2022"/>
+            <input type="number" name="year_add" id="year_add" max="2022" min="0"/>
             <br />
             
             <button>ADD TROPHY</button>
@@ -126,8 +126,10 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>{{trophies[0][0]}}</h3>             <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[0][1]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[0][1]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[0][2]}}</h4> 
+            <h4>Trophy Id {{trophies[0][0]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -142,8 +144,10 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>{{trophies[1][0]}}</h3>             <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[1][1]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[1][1]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[1][2]}}</h4>
+            <h4>Trophy Id {{trophies[1][0]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -158,8 +162,10 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>{{trophies[2][0]}}</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>{{trophies[2][1]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[2][1]}}</h3>             <!--THEY CAN EDIT THESE-->
+             <h4>{{trophies[2][2]}}</h4> 
+             <h4>Trophy Id {{trophies[2][0]}}</h4>   <!--THEY CAN EDIT THESE-->
+             <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -174,8 +180,10 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>{{trophies[3][0]}}</h3>             <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[3][1]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[3][1]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[3][2]}}</h4> 
+            <h4>Trophy Id {{trophies[3][0]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
@@ -190,8 +198,10 @@
             <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
           </div>
           <div class="description">
-            <h3>{{trophies[4][0]}}</h3>             <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[4][1]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <h3>{{trophies[4][1]}}</h3>             <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[4][2]}}</h4>
+            <h4>Trophy Id {{trophies[4][0]}}</h4>   <!--THEY CAN EDIT THESE-->
+            <!--THEY CAN EDIT THESE-->
           </div>
           
         </div>
