@@ -70,16 +70,17 @@ def getPlayers(team):
     players = []
     for row in res:
         players.append(row)
-    length= len(players)
-    remaining= 50-length
-    i=0
-    for i in range(0,remaining):
+    length = len(players)
+    remaining = 50-length
+    i = 0
+    for i in range(0, remaining):
         players.append([None])
-        i=i+1
+        i = i+1
 
     cursor.close()
     conn.close()
     return players
+
 
 def getItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
@@ -91,18 +92,22 @@ def getItem(itemid):
     conn.close()
     return res
 
+
 def addItem(name, Sstock, Mstock, Lstock, price):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("select shopitemid from shop ORDER BY shopitemid DESC LIMIT 1")
-    res= cursor.fetchall()
-    lastId=res[0][0]
-    newId= str(int(lastId)+1)
-    
-    cursor.execute("INSERT INTO shop (shopitemid, sizeSstock, sizeMstock, sizeLstock, itemprice, itemName) VALUES ('"+newId+"', '"+Sstock+"', '"+Mstock+"','"+Lstock+"', '"+price+"', '"+name+"')")
+    cursor.execute(
+        "select shopitemid from shop ORDER BY shopitemid DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO shop (shopitemid, sizeSstock, sizeMstock, sizeLstock, itemprice, itemName) VALUES ('" +
+                   newId+"', '"+Sstock+"', '"+Mstock+"','"+Lstock+"', '"+price+"', '"+name+"')")
     conn.commit()
     cursor.close()
     conn.close()
+
 
 def deleteItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
@@ -161,6 +166,7 @@ def deletePosts():
     cursor.close()
     conn.close()
 
+
 def getPosts():
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -196,34 +202,76 @@ def deletePlayerWomenbb(playerid):
     cursor.close()
     conn.close()
 
-#TROPHY FUNCTIONS BASKETBALL
+# TROPHY FUNCTIONS BASKETBALL
 
-def getTrophyB(aid,sport):
+
+def getTrophyB(aid, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("select trophy, year from honors WHERE trophy_id='"+str(aid)+"' AND sport='"+sport+"'")
+    cursor.execute("select trophy, year from honors WHERE trophy_id='" +
+                   str(aid)+"' AND sport='"+sport+"'")
     res = cursor.fetchall()
     cursor.close()
     conn.close()
     return res
 
-def addTrophiesB(title, year,sport):
+
+def addTrophiesB(title, year, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("select trophy_id from honors ORDER BY trophy_id DESC LIMIT 1")
-    res= cursor.fetchall()
-    lastId=res[0][0]
-    newId= str(int(lastId)+1)
-    
-    cursor.execute("INSERT INTO honors (trophy_id, trophy, year, sport) VALUES ('"+newId+"', '"+title+"', '"+year+"', '"+sport+"')")
+    cursor.execute(
+        "select trophy_id from honors ORDER BY trophy_id DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO honors (trophy_id, trophy, year, sport) VALUES ('" +
+                   newId+"', '"+title+"', '"+year+"', '"+sport+"')")
     conn.commit()
     cursor.close()
     conn.close()
 
-def deleteTrophyB(trophy_id,sport):
+
+def deleteTrophyB(trophy_id, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM honors WHERE trophy_id= '"+trophy_id+"' AND sport='"+sport+"'")
+    cursor.execute("DELETE FROM honors WHERE trophy_id= '" +
+                   trophy_id+"' AND sport='"+sport+"'")
     conn.commit()
     cursor.close()
     conn.close()
+
+
+def changeUser(user, username):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE users SET username ='" + username+"' WHERE username='"+user+"'"
+    try:
+        cursor.execute(SQL)
+        conn.commit()
+    except Exception as e:
+        print(e)
+        cursor.close()
+        conn.close()
+        return "err"
+    cursor.close()
+    conn.close()
+    return 0
+
+
+def changePassword(user,  password):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE users SET password ='" + password + \
+        "' WHERE username='"+user+"'"
+    try:
+        cursor.execute(SQL)
+        conn.commit()
+    except Exception as e:
+        print(e)
+        cursor.close()
+        conn.close()
+        return "err"
+    cursor.close()
+    conn.close()
+    return 0
