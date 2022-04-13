@@ -2,6 +2,8 @@ from turtle import update
 from flask import Flask, render_template, redirect, url_for, session, request, abort
 import functions
 
+import datetime
+
 
 app = Flask(__name__)
 app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
@@ -206,8 +208,6 @@ def getFixtures():
         role = ''
     return render_template('fixtures.html', user=user, role=role)
 
-#--------------------------- SHOP ---------------------------
-
 
 #--------------------------- SHOP ---------------------------
 
@@ -296,7 +296,7 @@ def getHonorsB():
 
 #-------------------------- COMMUNITY -------------------------------
 
-@app.route('/community')
+@app.route('/community', methods = ['GET','POST'])
 def getCommunity():
     if 'user' in session:
         user = session['user']
@@ -304,7 +304,35 @@ def getCommunity():
     else:
          user = None
          role = ""
-    return render_template('community.html', user=user, role=role)
+
+    
+    if user is not None:
+        if request.method == 'POST':
+            dateposted = datetime.datetime.now().date()
+            body = request.form['body']
+            functions.addPost(user,dateposted,body)
+
+    posts = functions.getPosts()
+    return render_template('community.html', user=user, role=role,posts=posts)
+
+
+@app.route('/community/addPost', methods = ['POST'])
+def postCommunity():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+         user = None
+         role = ""
+
+    
+    if user is not None:
+        dateposted = datetime.datetime.now().date()
+        body = request.form['body']
+        functions.addPost(user,dateposted,body)
+
+    return(redirect(url_for('getCommunity')))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

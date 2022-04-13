@@ -127,6 +127,16 @@ def deletePost(username,dateposted):
     cursor.close()
     conn.close()
 
+def getPosts():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * from posts")
+    res = cursor.fetchall()
+    posts = []
+    for row in res:
+        posts.append(row)
+    return posts
+
 
 def addPlayerWomenbb(name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
