@@ -15,6 +15,8 @@ def main():
         user = session['user']
     else:
         user = None
+    if 'cart' not in session:
+        session['cart'] = []
     return render_template('HomePage.html', user=user)
 
 # --------------------------- LOGIN + SIGNUP + LOGOUT ---------------------------
@@ -54,7 +56,7 @@ def signup():
         elif ret == 0:
             session['user'] = user
             session['role'] = 'FAN'
-            session['cart'] = []
+            
             return redirect(url_for('main'))
     return render_template('signup.html')
 
@@ -242,13 +244,13 @@ def getShop():
 
     if request.method == 'POST':
         if 'addcartbut' in request.form:
-            return redirect(url_for('addItem', itemid=request.form["itemid"]))
+            return redirect(url_for('addItemCart', itemid=request.form["itemid"]))
 
     return render_template('shop.html', user=user, role=role, items=items)
 
 
-@app.route('/shop/additem/<itemid>')
-def addItem(itemid):
+@app.route('/shop/additemcart/<itemid>')
+def addItemCart(itemid):
     if 'user' in session:
         user = session['user']
         role = session['role']
@@ -259,8 +261,38 @@ def addItem(itemid):
 
     return(redirect(url_for('getShop')))
 
-# --------------------------- PROFILE ---------------------------
+@app.route('/shop/additem', methods=['POST'])
+def addItem():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
 
+    name= request.form["itemNameAdd"]
+    price= request.form["itemPriceAdd"]
+    Sstock= request.form["itemsizeSAdd"]
+    Mstock= request.form["itemsizeMAdd"]
+    Lstock= request.form["itemsizeLAdd"]
+
+    functions.addItem(name,Sstock, Mstock, Lstock, price)
+
+    return(redirect(url_for('getShop')))
+
+@app.route('/shop/deleteItem', methods=['POST'])
+def deleteItem():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    itemid= request.form["itemidRemove"]
+
+    functions.deleteItem(itemid)
+
+    return(redirect(url_for('getShop')))
+
+#--------------------------- PROFILE ---------------------------
 
 @app.route('/profile')
 def getProfile():
