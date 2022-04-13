@@ -74,13 +74,13 @@
           <label>Name:</label>
           <input type="text" name="itemNameAdd" id="itemNameAdd" />
           <label>Price:</label>
-          <input type="text" name="itemPriceAdd" id="itemPriceAdd" />
+          <input type="number" name="itemPriceAdd" id="itemPriceAdd" min="0" />
           <label>Number of size S in Stock:</label>
-          <input type="text" name="itemsizeSAdd" id="itemsizeSAdd" />
+          <input type="number" name="itemsizeSAdd" id="itemsizeSAdd" min="0"/>
           <label>Number of size M in Stock:</label>
-          <input type="text" name="itemsizeMAdd" id="itemsizeMAdd" />
+          <input type="number" name="itemsizeMAdd" id="itemsizeMAdd" min="0"/>
           <label>Number of size L in Stock:</label>
-          <input type="text" name="itemsizeLAdd" id="itemsizeLAdd" />
+          <input type="number" name="itemsizeLAdd" id="itemsizeLAdd" min="0"/>
           <input type="hidden" name="additembut" value=1>
           <button id="addItem-button" type="submit">Add Item</button>
         </form>
@@ -89,7 +89,7 @@
         <h3 style="color: white">Remove Item</h3>
         <form action="/shop/deleteItem" method="POST" autocomplete="off">
           <label>Item ID:</label>
-          <input type="text" name="itemidRemove" id="itemidRemove" />
+          <input type="number" name="itemidRemove" id="itemidRemove" min="1"/>
           <input type="hidden" name="removeitembut" value=1>
           <button id="removeItem-button" type="submit">Remove Item</button>
         </form>

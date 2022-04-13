@@ -485,7 +485,7 @@ def deleteTrophyB():
     for i in range(1,6):
         trophyB.append(functions.getTrophyB(i,"basketball")) 
     functions.deleteTrophyB(trophy_id,"basketball")
-    return(redirect(url_for('getHonorsFB')))
+    return(redirect(url_for('getHonorsBB')))
 
 
 # -------------------------- COMMUNITY -------------------------------

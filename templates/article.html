@@ -8,7 +8,7 @@
     />
 
     <link
-      href="{{ url_for('static', filename='css/news.css') }}"
+      href="{{ url_for('static', filename='css/article.css') }}"
       rel="stylesheet"
       type="text/css"
     />
@@ -67,9 +67,29 @@
           </ul>
         </div>
       </nav>
-      <h1>{{article[0]}}</h1>
+      <!--<h1>{{article[0]}}</h1>
       <h3>{{article[1]}}</h3>
-      <p>{{article[2]}}</p>
+      <p>{{article[2]}}</p>-->
+
+      <!--ARTICLE CONTENT-->
+
+    <div class="article-content">
+      <img src="{{url_for('static', filename='css/images/home/football_win.jpeg')}}" alt="win1">      
+      <div class="content">
+          <h2>{{article[0]}}</h2>
+          <h4>{{article[0]}}</h4>
+          <div class="article-space">
+              <div class="text"> 
+                  <article>{{article[2]}}</article>
+              </div>
+              <div class="image-inline-text"> 
+                <img src="{{url_for('static', filename='css/images/home/football_win.jpeg')}}" alt="win1">              </div>
+          </div>
+         
+      </div>
+  </div>
+
+
   </body>
 
   
