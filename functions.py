@@ -70,6 +70,13 @@ def getPlayers(team):
     players = []
     for row in res:
         players.append(row)
+    length= len(players)
+    remaining= 50-length
+    i=0
+    for i in range(0,remaining):
+        players.append([None])
+        i=i+1
+
     cursor.close()
     conn.close()
     return players
@@ -88,7 +95,6 @@ def getItem(row):
 def addGames(sport,club1,score,club2,date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    return players
     SQL = '''insert into games (sport,club1,score,club2,date) values ('{}','{}','{}','{}','{}')'''.format (sport,club1,score,club2,date)
     cursor.execute(SQL)
     conn.commit()
