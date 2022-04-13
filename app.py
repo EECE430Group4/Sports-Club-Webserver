@@ -449,21 +449,6 @@ def getHonorsFB():
     return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
 
 
-@app.route('/honorsfb/addTrophyF', methods=['POST'])
-def addTrophyF():
-
-    if 'user' in session:
-        user = session['user']
-        role = session['role']
-    else:
-        user = None
-        role = ""
-    trophies = []
-    for i in range(1, 6):
-        trophies.append(functions.getTrophyB(i, "football"))
-
-    return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
-
 
 @app.route('/honorsfb/addTrophyF', methods=['POST'])
 def addTrophyF():
