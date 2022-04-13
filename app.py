@@ -6,6 +6,8 @@ import sqlite3
 
 import datetime
 
+import datetime
+
 
 app = Flask(__name__)
 app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
@@ -60,7 +62,6 @@ def signup():
         elif ret == 0:
             session['user'] = user
             session['role'] = 'FAN'
-
             return redirect(url_for('main'))
     return render_template('signup.html')
 
@@ -298,6 +299,72 @@ def deleteItem():
 
     return(redirect(url_for('getShop')))
 
+
+# --------------------------- TICKETS ---------------------------
+'''
+@app.route('/tickets', methods=['GET', 'POST'])
+def getTicket():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+
+    tickets = []
+    for i in range(-1, -7, -1):
+        tickets.append(functions.getTicket(i))
+
+    print("-----------")
+    print(tickets)
+
+    return render_template('tickets.html', user=user, role=role, tickets=tickets)
+
+
+@app.route('/shop/additemcart/<itemid>')
+def addItemCart(itemid):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    session['cart'].append(itemid)
+
+    return(redirect(url_for('getShop')))
+
+@app.route('/shop/additem', methods=['POST'])
+def addItem():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+
+    name= request.form["itemNameAdd"]
+    price= request.form["itemPriceAdd"]
+    Sstock= request.form["itemsizeSAdd"]
+    Mstock= request.form["itemsizeMAdd"]
+    Lstock= request.form["itemsizeLAdd"]
+
+    functions.addItem(name,Sstock, Mstock, Lstock, price)
+
+    return(redirect(url_for('getShop')))
+
+@app.route('/shop/deleteItem', methods=['POST'])
+def deleteItem():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    itemid= request.form["itemidRemove"]
+
+    functions.deleteItem(itemid)
+
+    return(redirect(url_for('getShop')))
+'''
+
 # --------------------------- PROFILE ---------------------------
 
 
@@ -365,11 +432,26 @@ def getTickets():
         user = None
     return render_template('tickets.html', user=user)
 
+
 # --------------------------- HONORS FOOTBALL---------------------------
 
 
 @app.route('/honorsfb', methods=['GET', 'POST'])
 def getHonorsFB():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    trophies = []
+    trophies = functions.getTrophyBS("football")
+    return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
+
+
+@app.route('/honorsfb/addTrophyF', methods=['POST'])
+def addTrophyF():
+
     if 'user' in session:
         user = session['user']
         role = session['role']
@@ -416,6 +498,7 @@ def deleteTrophyF():
     functions.deleteTrophyB(trophy_id, "football")
     return(redirect(url_for('getHonorsFB')))
 
+
 # --------------------------- HONORS BASKETBALL ---------------------------
 
 
@@ -428,9 +511,7 @@ def getHonorsBB():
         user = None
         role = ""
     trophies = []
-    for i in range(1, 6):
-        trophies.append(functions.getTrophyB(i, "basketball"))
-
+    trophies = functions.getTrophyBS("basketball")
     return render_template('honorsbb.html', user=user, role=role, trophies=trophies)
 
 

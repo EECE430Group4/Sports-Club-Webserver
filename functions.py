@@ -109,6 +109,17 @@ def addItem(name, Sstock, Mstock, Lstock, price):
     conn.close()
 
 
+def getItem(itemid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
+
 def deleteItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -116,6 +127,18 @@ def deleteItem(itemid):
     conn.commit()
     cursor.close()
     conn.close()
+
+
+def getTicket(ticketid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select ticketid, oppteam, tickettime, arena, ticketprice from tickets WHERE ticketid="+str(ticketid)+"")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    print(res)
+    return res
 
 
 def addGames(sport, club1, score, club2, date):
@@ -178,6 +201,17 @@ def getPosts():
     return posts
 
 
+def getPosts():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * from posts")
+    res = cursor.fetchall()
+    posts = []
+    for row in res:
+        posts.append(row)
+    return posts
+
+
 def addPlayerWomenbb(name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -202,14 +236,13 @@ def deletePlayerWomenbb(playerid):
     cursor.close()
     conn.close()
 
-# TROPHY FUNCTIONS BASKETBALL
-
 
 def getTrophyB(aid, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute("select trophy, year from honors WHERE trophy_id='" +
                    str(aid)+"' AND sport='"+sport+"'")
+
     res = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -227,6 +260,7 @@ def addTrophiesB(title, year, sport):
 
     cursor.execute("INSERT INTO honors (trophy_id, trophy, year, sport) VALUES ('" +
                    newId+"', '"+title+"', '"+year+"', '"+sport+"')")
+
     conn.commit()
     cursor.close()
     conn.close()
@@ -237,9 +271,30 @@ def deleteTrophyB(trophy_id, sport):
     cursor = conn.cursor()
     cursor.execute("DELETE FROM honors WHERE trophy_id= '" +
                    trophy_id+"' AND sport='"+sport+"'")
+
     conn.commit()
     cursor.close()
     conn.close()
+
+
+def getTrophyBS(sport):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from honors WHERE sport='"+sport+"'")
+    res = cursor.fetchall()
+    trophies = []
+    for row in res:
+        trophies.append(row)
+    length = len(trophies)
+    remaining = 50-length
+    i = 0
+    for i in range(0, remaining):
+        trophies.append([None])
+        i = i+1
+
+    cursor.close()
+    conn.close()
+    return trophies
 
 
 def changeUser(user, username):

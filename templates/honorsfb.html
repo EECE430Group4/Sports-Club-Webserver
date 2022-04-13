@@ -25,7 +25,7 @@
             <a class="navbar-brand" href="#">TeamName</a>
           </div>
           <ul class="nav navbar-nav">
-            <li ><a href="#">Home</a></li>
+            <li ><a href="/">Home</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#"
                 >Teams <span class="caret"></span
@@ -39,7 +39,7 @@
             </li>
             <li><a href="/fixtures">Fixtures</a></li>
             <li><a href="/news">News</a></li>
-            <li><a href=#>Tickets</a></li>
+            <li><a href=/tickets>Tickets</a></li>
             <li><a href="/shop">Shop</a></li>
             <li><a href="/community">Community</a></li>
             <li class="active"><a href="#">Honors</a></li>
@@ -92,7 +92,7 @@
             <label>Trophy:</label>
             <input type="text" name="title_add" id="title_add" />
             <label>Year:</label>
-            <input type="text" name="year_add" id="year_add" />
+            <input type="number" name="year_add" id="year_add" max="2022"/>
             <br />
             
             <button>ADD TROPHY</button>
@@ -105,7 +105,7 @@
         <form action="/honorsfb/deleteTrophyF" method="POST">
           <div class="delete-row">
             <label for="trophyid">Trophy ID</label>
-            <input type="text" name="trophy_id_delete" id="trophy_id_delete" />
+            <input type="number" name="trophy_id_delete" id="trophy_id_delete"  min="1"/>
             <br />
             <button>DELETE TROPHY</button>
           </div>
