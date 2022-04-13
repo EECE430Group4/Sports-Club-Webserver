@@ -151,20 +151,20 @@ def addGames(sport, club1, score, club2, date):
     cursor.close()
     conn.close()
 
-
-def editGames(sport, club1, club2, date, score):
+def editGames(ID,sport,club1,score,club2,date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "UPDATE games set sport='"+sport+"',club1='"+club1 + \
-        "', club2='"+club2+"',date='"+date+"',score='"+score+"'"
+    SQL = "UPDATE games set sport='"+sport+"',club1='"+club1+"', club2='"+club2+"',gamedate='"+date+"',score='"+score+"' WHERE ID="+ID
     cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
-def deleteGames(sport, club1, club2, date):
+def deleteGames(ID):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "DELETE from games where sport='"+sport + \
-        "',club1='"+club1+"', club2='"+club2+"',date='"+date+"'"
+    SQL = "DELETE from games where ID="+ID
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
@@ -276,6 +276,17 @@ def deleteTrophyB(trophy_id, sport):
     cursor.close()
     conn.close()
 
+def getGames():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from games")
+    res = cursor.fetchall()
+    games = []
+    for row in res:
+        games.append(row)
+    cursor.close()
+    conn.close()
+    return games
 
 def getTrophyBS(sport):
     conn = sqlite3.connect('database/430Group4.db')

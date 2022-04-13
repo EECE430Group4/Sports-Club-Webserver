@@ -95,8 +95,3 @@ CREATE TABLE honors (
   
 INSERT INTO honors VALUES (1,'League 1',2020,'football'), (2,'League 2', 2019,'basketball'), (3,'League 3',2018,'football'), (4,'League 4',2018,'football'), (5,'League 5',2001,'football'), (6,'League 6', 1990,'football');
   
-
-
-
-
-

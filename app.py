@@ -229,9 +229,54 @@ def getFixtures():
     else:
         user = None
         role = ''
-    return render_template('fixtures.html', user=user, role=role)
+    games = functions.getGames()
+    return render_template('fixtures.html', user=user, role=role, games=games)
 
-# --------------------------- SHOP ---------------------------
+@app.route('/addGame', methods=['POST'])
+def addGames():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+
+    sport= request.form["sportAdd"]
+    club1= request.form["club1Add"]
+    score= request.form["scoreAdd"]
+    club2= request.form["club2Add"]
+    date= request.form["dateAdd"]
+
+    functions.addGames(sport, club1, score, club2, date)
+    return(redirect(url_for('getFixtures')))
+
+@app.route('/editGames', methods=['POST'])
+def editGames():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+    ID=request.form["gameid"]
+    sport= request.form["sportEdit"]
+    club1= request.form["club1Edit"]
+    score= request.form["scoreEdit"]
+    club2= request.form["club2Edit"]
+    date= request.form["dateEdit"]
+    functions.editGames(ID, sport, club1, score, club2, date)
+    return(redirect(url_for('getFixtures')))
+
+@app.route('/deleteGames', methods=['POST'])
+def deleteGames():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+    ID=request.form["deleteid"]
+    functions.deleteGames(ID)
+    return(redirect(url_for('getFixtures')))
+#--------------------------- SHOP ---------------------------
+
 
 
 @app.route('/shop', methods=['GET', 'POST'])
