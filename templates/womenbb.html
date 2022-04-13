@@ -95,20 +95,35 @@
         }
       }
     </script>
-
+    {%if 'ADMIN' in role%}
     <h2>ADD NEW PLAYER</h2>
     <form name="addPlayerForm" action="/womenbb/addPlayer" method="POST">
       <div class="addPlayer">
         <label>Name:</label>
-        <input type="text" name="playerNameAdd" id="playerNameAdd" />
+        <input type="text" name="playerNameAdd" id="playerNameAdd" required />
         <label>Age:</label>
-        <input type="number" name="playerAgeAdd" id="playerAgeAdd" />
+        <input type="number" name="playerAgeAdd" id="playerAgeAdd" required />
         <label>Position:</label>
-        <input type="text" name="playerPositionAdd" id="playerPositionAdd" />
+        <input
+          type="text"
+          name="playerPositionAdd"
+          id="playerPositionAdd"
+          required
+        />
         <label>Points:</label>
-        <input type="number" name="playerPointsAdd" id="playerPointsAdd" />
+        <input
+          type="number"
+          name="playerPointsAdd"
+          id="playerPointsAdd"
+          required
+        />
         <label>Assists:</label>
-        <input type="number" name="playerAssistsAdd" id="playerAssistsAdd" />
+        <input
+          type="number"
+          name="playerAssistsAdd"
+          id="playerAssistsAdd"
+          required
+        />
         <br />
 
         <button
@@ -128,7 +143,7 @@
         <button>DELETE</button>
       </div>
     </form>
-
+    {%endif%}
     <h2>FULL ROSTER</h2>
 
     <hr class="featurette-divider" style="opacity: 0%" />
@@ -150,7 +165,6 @@
           <label>Position: {{players[0][4]}}</label><br />
           <label>Points: {{players[0][5]}}</label><br />
           <label>Assists: {{players[0][6]}}</label>
-          <button id="editPlayer">edit</button>
         </div>
       </div>
 

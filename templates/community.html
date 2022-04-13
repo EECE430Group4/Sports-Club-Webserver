@@ -55,7 +55,7 @@
                 <span class="glyphicon glyphicon-user"></span> Profile</a
               >
               {%else%}
-              <a href="/">
+              <a href="/profile">
                 <span class="glyphicon glyphicon-user"></span> {{user}}</a
               >
               {%endif%}
@@ -82,7 +82,7 @@
                 <span class="far fa-user"></span>
                 {%for post in posts%}
                 <h5>
-                  <span>{{post[0]}}: {{post[2]}} ON {{post[1]}} </span>
+                  <span>{{post[0]}}: {{post[2]}} | ON {{post[1]}} </span>
                 </h5>
                 
                 {%endfor%}

@@ -93,6 +93,26 @@ def getItem(itemid):
     return res
 
 
+def getItem2():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from shop")
+    res = cursor.fetchall()
+    tickets = []
+    for row in res:
+        tickets.append(row)
+    length = len(tickets)
+    remaining = 50-length
+    i = 0
+    for i in range(0, remaining):
+        tickets.append([None])
+        i = i+1
+
+    cursor.close()
+    conn.close()
+    return tickets
+
+
 def addItem(name, Sstock, Mstock, Lstock, price):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()

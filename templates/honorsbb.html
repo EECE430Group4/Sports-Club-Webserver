@@ -6,7 +6,10 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/honors.css') }}"/>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/honors.css') }}"
+    />
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -20,120 +23,133 @@
     <!--HEADER-->
     <!--START OF HEADER-->
     <nav class="navbar navbar-inverse bringToFrontDiv">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">TeamName</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li ><a href="/">Home</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"
-            >Teams <span class="caret"></span
-          ></a>
-          <ul class="dropdown-menu">
-            <li><a href="/teams/womenfb">Women Football</a></li>
-            <li><a href="/teams/menfb">Men Football</a></li>
-            <li><a href="/teams/womenbb">Women Basketball</a></li>
-            <li><a href="/teams/menbb">Men Basketball</a></li>
-          </ul>
-        </li>
-        <li><a href="/fixtures">Fixtures</a></li>
-        <li><a href="/news">News</a></li>
-        <li><a href="/tickets">Tickets</a></li>
-        <li><a href="/shop">Shop</a></li>
-        <li><a href="/community">Community</a></li>
-        <li class="active"><a href="#">Honors</a></li>
-      </ul>
-      <form class="navbar-form navbar-right" action="/action_page.php">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" />
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">TeamName</a>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          {%if user is none%}
-          <a href="/login">
-            <span class="glyphicon glyphicon-user"></span> Profile</a
-          >
-          {%else%}
-          <a href="/">
-            <span class="glyphicon glyphicon-user"></span> {{user}}</a
-          >
-          {%endif%}
-        </li>
-      </ul>
-    </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+              >Teams <span class="caret"></span
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="/teams/womenfb">Women Football</a></li>
+              <li><a href="/teams/menfb">Men Football</a></li>
+              <li><a href="/teams/womenbb">Women Basketball</a></li>
+              <li><a href="/teams/menbb">Men Basketball</a></li>
+            </ul>
+          </li>
+          <li><a href="/fixtures">Fixtures</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/tickets">Tickets</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/community">Community</a></li>
+          <li class="active"><a href="#">Honors</a></li>
+        </ul>
+        <form class="navbar-form navbar-right" action="/action_page.php">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" />
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            {%if user is none%}
+            <a href="/login">
+              <span class="glyphicon glyphicon-user"></span> Profile</a
+            >
+            {%else%}
+            <a href="/profile">
+              <span class="glyphicon glyphicon-user"></span> {{user}}</a
+            >
+            {%endif%}
+          </li>
+        </ul>
+      </div>
     </nav>
     <!--END OF HEADER-->
     <!--HONOR'S CHOICE NAV BAR-->
     <nav class="navbar navbar-inverse bringToFrontDiv">
-          <div class="bringToFrontDiv">
-            <ul class="nav navbar-nav">
-              <li><a href="/honorsfb">Football Honors</a></li>
-              <li class="active"><a href="#">Basketball Honors</a></li>
-            </ul> 
-          </div>
-        <!--  </nav>-->
-       <!--END OF HONOR'S CHOICE NAV BAR -->
-
+      <div class="bringToFrontDiv">
+        <ul class="nav navbar-nav">
+          <li><a href="/honorsfb">Football Honors</a></li>
+          <li class="active"><a href="#">Basketball Honors</a></li>
+        </ul>
+      </div>
+      <!--  </nav>-->
+      <!--END OF HONOR'S CHOICE NAV BAR -->
     </nav>
     <!--END OF HEADER-->
 
-
     <!--START HONORS' ROWS-->
     <div class="honorsAll">
-        {% if 'ADMIN' in role%}
-        <div class="adminContents">
+      {% if 'ADMIN' in role%}
+      <div class="adminContents">
         <div class="honorRow adminButtons">
-          <h3> ADD NEW TROPHY</h3>
+          <h3>ADD NEW TROPHY</h3>
           <form action="/honorsbb/addTrophyB" method="POST">
-            
             <div class="add-row">
-      
               <label>Trophy:</label>
-              <input type="text" name="title_add" id="title_add" />
+              <input type="text" name="title_add" id="title_add" required />
               <label>Year:</label>
-              <input type="number" name="year_add" id="year_add" max="2022" min="1"/>
+              <input
+                type="number"
+                name="year_add"
+                id="year_add"
+                max="2022"
+                min="1"
+                required
+              />
               <br />
-              
+
               <button>ADD TROPHY</button>
             </div>
           </form>
         </div>
-          <div class="honorRow adminButtons">
-
+        <div class="honorRow adminButtons">
           <h3>DELETE TROPHY</h3>
           <form action="/honorsbb/deleteTrophyB" method="POST">
             <div class="delete-row">
               <label for="trophyid">Trophy ID</label>
-              <input type="number" name="trophy_id_delete" id="trophy_id_delete" min="1" />
+              <input
+                type="number"
+                name="trophy_id_delete"
+                id="trophy_id_delete"
+                min="1"
+                required
+              />
               <br />
               <button>DELETE TROPHY</button>
             </div>
           </form>
-
         </div>
       </div>
-        {% endif %}
-        <!-- HONOR ROW  VERSION 1-->
-        <div class="honorRow">
-          <div class="bringToFrontDiv descriptiveImage">
-            <img src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}" alt="">     <!--THEY CAN EDIT THESE-->
+      {% endif %}
+      <!-- HONOR ROW  VERSION 1-->
+      <div class="honorRow">
+        <div class="bringToFrontDiv descriptiveImage">
+          <img
+            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
+            alt=""
+          />
+          <!--THEY CAN EDIT THESE-->
+        </div>
+        <div class="bringToFrontDiv descriptive">
+          <div class="descriptionRibbon">
+            <img
+              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
+              alt=""
+            />
           </div>
-          <div class="bringToFrontDiv descriptive">
-  
-            <div class="descriptionRibbon">
-              <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
-            </div>
-            <div class="description">
-
-            
-              <h3>{{trophies[0][1]}}</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>{{trophies[0][2]}}</h4> 
-             <h4>Trophy Id {{trophies[0][0]}}</h4>   <!--THEY CAN EDIT THESE-->
-            </div>
-            <!--
+          <div class="description">
+            <h3>{{trophies[0][1]}}</h3>
+            <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[0][2]}}</h4>
+            <h4>Trophy Id {{trophies[0][0]}}</h4>
+            <!--THEY CAN EDIT THESE-->
+          </div>
+          <!--
             {% if 'ADMIN' in role%}
             <form action="/honorsBB" method="POST" autocomplete="off">
               <input type="hidden" name="editbut" value="1">
@@ -141,24 +157,32 @@
             </form> 
             {% endif %}
             -->
-          </div>
         </div>
-        <div class="honorRow">
-          <div class="bringToFrontDiv descriptiveImage">
-            <img src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}" alt="">     <!--THEY CAN EDIT THESE-->
+      </div>
+      <div class="honorRow">
+        <div class="bringToFrontDiv descriptiveImage">
+          <img
+            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
+            alt=""
+          />
+          <!--THEY CAN EDIT THESE-->
+        </div>
+        <div class="bringToFrontDiv descriptive">
+          <div class="descriptionRibbon">
+            <img
+              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
+              alt=""
+            />
           </div>
-          <div class="bringToFrontDiv descriptive">
-  
-            <div class="descriptionRibbon">
-              <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
-            </div>
-            <div class="description">
-              <h3>{{trophies[1][1]}}</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>{{trophies[1][2]}}</h4> 
-             <h4>Trophy Id {{trophies[1][0]}}</h4>   <!--THEY CAN EDIT THESE-->
-             <!--THEY CAN EDIT THESE-->
-            </div>
-             <!--
+          <div class="description">
+            <h3>{{trophies[1][1]}}</h3>
+            <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[1][2]}}</h4>
+            <h4>Trophy Id {{trophies[1][0]}}</h4>
+            <!--THEY CAN EDIT THESE-->
+            <!--THEY CAN EDIT THESE-->
+          </div>
+          <!--
             {% if 'ADMIN' in role%}
             <form action="/honorsBB" method="POST" autocomplete="off">
               <input type="hidden" name="editbut" value="1">
@@ -166,25 +190,32 @@
             </form> 
             {% endif %}
             -->
-
-          </div>
         </div>
-        <div class="honorRow">
-          <div class="bringToFrontDiv descriptiveImage">
-            <img src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}" alt="">     <!--THEY CAN EDIT THESE-->
+      </div>
+      <div class="honorRow">
+        <div class="bringToFrontDiv descriptiveImage">
+          <img
+            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
+            alt=""
+          />
+          <!--THEY CAN EDIT THESE-->
+        </div>
+        <div class="bringToFrontDiv descriptive">
+          <div class="descriptionRibbon">
+            <img
+              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
+              alt=""
+            />
           </div>
-          <div class="bringToFrontDiv descriptive">
-  
-            <div class="descriptionRibbon">
-              <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
-            </div>
-            <div class="description">
-              <h3>{{trophies[2][1]}}</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>{{trophies[2][2]}}</h4>  
-             <h4>Trophy Id {{trophies[2][0]}}</h4>   <!--THEY CAN EDIT THESE-->
-             <!--THEY CAN EDIT THESE-->
-            </div>
-            <!--
+          <div class="description">
+            <h3>{{trophies[2][1]}}</h3>
+            <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[2][2]}}</h4>
+            <h4>Trophy Id {{trophies[2][0]}}</h4>
+            <!--THEY CAN EDIT THESE-->
+            <!--THEY CAN EDIT THESE-->
+          </div>
+          <!--
             {% if 'ADMIN' in role%}
             <form action="/honorsBB" method="POST" autocomplete="off">
               <input type="hidden" name="editbut" value="1">
@@ -192,25 +223,32 @@
             </form> 
             {% endif %}
             -->
-
-          </div>
         </div>
-        <div class="honorRow">
-          <div class="bringToFrontDiv descriptiveImage">
-            <img src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}" alt="">     <!--THEY CAN EDIT THESE-->
+      </div>
+      <div class="honorRow">
+        <div class="bringToFrontDiv descriptiveImage">
+          <img
+            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
+            alt=""
+          />
+          <!--THEY CAN EDIT THESE-->
+        </div>
+        <div class="bringToFrontDiv descriptive">
+          <div class="descriptionRibbon">
+            <img
+              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
+              alt=""
+            />
           </div>
-          <div class="bringToFrontDiv descriptive">
-  
-            <div class="descriptionRibbon">
-              <img src="{{url_for('static', filename='css/images/honors/ribbon.png')}}" alt="">
-            </div>
-            <div class="description">
-              <h3>{{trophies[3][1]}}</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>{{trophies[3][2]}}</h4> 
-             <h4>Trophy Id {{trophies[3][0]}}</h4>   <!--THEY CAN EDIT THESE-->
-             <!--THEY CAN EDIT THESE-->
-            </div>
-             <!--
+          <div class="description">
+            <h3>{{trophies[3][1]}}</h3>
+            <!--THEY CAN EDIT THESE-->
+            <h4>{{trophies[3][2]}}</h4>
+            <h4>Trophy Id {{trophies[3][0]}}</h4>
+            <!--THEY CAN EDIT THESE-->
+            <!--THEY CAN EDIT THESE-->
+          </div>
+          <!--
             {% if 'ADMIN' in role%}
             <form action="/honorsBB" method="POST" autocomplete="off">
               <input type="hidden" name="editbut" value="1">
@@ -218,36 +256,26 @@
             </form> 
             {% endif %}
             -->
-          </div>
         </div>
+      </div>
     </div>
-        
+
     <!--END HONORS' ROWS-->
 
-
-
-
-
     <!-- Footer -->
-<footer class="page-footer " class="navbar-fixed-footer">
-  <!-- Copyright -->
-  <div
-    class="footer-copyright text-center py-3"
-    class="navbar-fixed-bottom"
-    style="background-color: black; color: white;"
-  >
-    © 2020 Copyright:
-    <a> WebsiteName</a>
-  </div>
-  <!-- Copyright -->
-</footer>
-<!-- Footer -->
-
-
-
-
-
-
+    <footer class="page-footer" class="navbar-fixed-footer">
+      <!-- Copyright -->
+      <div
+        class="footer-copyright text-center py-3"
+        class="navbar-fixed-bottom"
+        style="background-color: black; color: white"
+      >
+        © 2020 Copyright:
+        <a> WebsiteName</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -263,6 +291,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-
   </body>
 </html>

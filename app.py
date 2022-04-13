@@ -152,14 +152,15 @@ def editArticle(anum):
 def getTeam(team):
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-
+        role = ""
     if team == "womenfb":
         return(render_template('womenfb.html', user=user))
     elif team == "womenbb":
         players = functions.getPlayers(team)
-        return(render_template('womenbb.html', user=user, players=players))
+        return(render_template('womenbb.html', user=user, role=role, players=players))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":
@@ -187,7 +188,7 @@ def addPlayer(team):
     elif team == "womenbb":
         players = functions.getPlayers(team)
         functions.addPlayerWomenbb(name, age, position, points, assists)
-        return(render_template('womenbb.html', user=user, players=players))
+        return(redirect(url_for('getTeam', team=team)))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":
@@ -210,7 +211,7 @@ def deletePlayer(team):
     elif team == "womenbb":
         players = functions.getPlayers(team)
         functions.deletePlayerWomenbb(playerid)
-        return(render_template('womenbb.html', user=user, players=players))
+        return(redirect(url_for('getTeam', team=team)))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":
@@ -290,10 +291,8 @@ def getShop():
         user = None
         role = ""
 
-    items = []
-    for i in range(1, 9):
-        items.append(functions.getItem(i))
-
+    items = functions.getItem2()
+    print(items)
     if request.method == 'POST':
         if 'addcartbut' in request.form:
             return redirect(url_for('addItemCart', itemid=request.form["itemid"]))

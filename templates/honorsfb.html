@@ -57,7 +57,7 @@
                 <span class="glyphicon glyphicon-user"></span> Profile</a
               >
               {%else%}
-              <a href="/">
+              <a href="/profile">
                 <span class="glyphicon glyphicon-user"></span> {{user}}</a
               >
               {%endif%}
@@ -91,9 +91,9 @@
           <div class="add-row">
     
             <label>Trophy:</label>
-            <input type="text" name="title_add" id="title_add" />
+            <input type="text" name="title_add" id="title_add" required/>
             <label>Year:</label>
-            <input type="number" name="year_add" id="year_add" max="2022" min="0"/>
+            <input type="number" name="year_add" id="year_add" max="2022" min="0" required/>
             <br />
             
             <button>ADD TROPHY</button>
@@ -106,7 +106,7 @@
         <form action="/honorsfb/deleteTrophyF" method="POST">
           <div class="delete-row">
             <label for="trophyid">Trophy ID</label>
-            <input type="number" name="trophy_id_delete" id="trophy_id_delete"  min="1"/>
+            <input type="number" name="trophy_id_delete" id="trophy_id_delete"  min="1" required/>
             <br />
             <button>DELETE TROPHY</button>
           </div>
