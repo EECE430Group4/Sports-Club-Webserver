@@ -28,7 +28,7 @@
           <a class="navbar-brand" href="test.html">TeamName</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="HomePage.html">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li class="dropdown" class="active">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"
               >Teams <span class="caret"></span
@@ -42,10 +42,10 @@
           </li>
           <li><a href="/fixtures">Fixtures</a></li>
           <li><a href="/news">News</a></li>
-          <li><a href="#">Tickets</a></li>
-          <li><a href="#">Shop</a></li>
-          <li><a href="#">Community</a></li>
-          <li><a href="#">Honors</a></li>
+          <li><a href="/tickets">Tickets</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/community">Community</a></li>
+          <li><a href="/honorsfb">Honors</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="/action_page.php">
           <div class="form-group">
@@ -82,10 +82,23 @@
       height="100%"
       class="img-fluid"
     />
+
+    <script>
+      function allLetter(inputtxt1, inputtxt2) {
+        var letters = /^[A-Za-z]+$/;
+        if (inputtxt1.value.match(letters) && inputtxt2.value.match(letters)) {
+          return true;
+        } else {
+          alert("player name and position cannot contain numbers");
+          event.returnValue = false;
+          return false;
+        }
+      }
+    </script>
+
     <h2>ADD NEW PLAYER</h2>
-  <form action="/womenbb/addPlayer" method="POST">
-    <div class="addPlayer">
-      
+    <form name="addPlayerForm" action="/womenbb/addPlayer" method="POST">
+      <div class="addPlayer">
         <label>Name:</label>
         <input type="text" name="playerNameAdd" id="playerNameAdd" />
         <label>Age:</label>
@@ -97,21 +110,20 @@
         <label>Assists:</label>
         <input type="number" name="playerAssistsAdd" id="playerAssistsAdd" />
         <br />
-        
-        <button>ADD</button>
-    
-    </div>
-   </form>
+
+        <button onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)">ADD</button>
+      </div>
+    </form>
 
     <h2>DELETE PLAYER</h2>
-  <form action="/womenbb/deletePlayer" method="POST">
-    <div class="deletePlayer">
-      <label for="playerid">Player ID:</label>
-      <input type="text" name="playerIdDelete" id="playerIdDelete" />
-      <br />
-      <button>DELETE</button>
-    </div>
-  </form>
+    <form action="/womenbb/deletePlayer" method="POST">
+      <div class="deletePlayer">
+        <label for="playerid">Player ID:</label>
+        <input type="number" name="playerIdDelete" id="playerIdDelete" />
+        <br />
+        <button>DELETE</button>
+      </div>
+    </form>
 
     <h2>FULL ROSTER</h2>
 

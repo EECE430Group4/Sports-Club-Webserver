@@ -70,25 +70,82 @@ def getPlayers(team):
     players = []
     for row in res:
         players.append(row)
+    length = len(players)
+    remaining = 50-length
+    i = 0
+    for i in range(0, remaining):
+        players.append([None])
+        i = i+1
+
     cursor.close()
     conn.close()
     return players
 
-def getItem(row):
+
+def getItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute(
-        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE rownum="+str(row)+"")
+        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
     res = cursor.fetchall()
     cursor.close()
     conn.close()
-    return (res[0][0], res[0][1], res[0][2], res[0][3], res[0][4], res[0][5])
+    return res
 
 
-def addGames(sport,club1,score,club2,date):
+def addItem(name, Sstock, Mstock, Lstock, price):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = '''insert into games (sport,club1,score,club2,gamedate) values ('{}','{}','{}','{}','{}')'''.format (sport,club1,score,club2,date)
+    cursor.execute(
+        "select shopitemid from shop ORDER BY shopitemid DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO shop (shopitemid, sizeSstock, sizeMstock, sizeLstock, itemprice, itemName) VALUES ('" +
+                   newId+"', '"+Sstock+"', '"+Mstock+"','"+Lstock+"', '"+price+"', '"+name+"')")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def getItem(itemid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
+
+def deleteItem(itemid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM shop WHERE shopitemid= '"+itemid+"'")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def getTicket(ticketid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select ticketid, oppteam, tickettime, arena, ticketprice from tickets WHERE ticketid="+str(ticketid)+"")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    print(res)
+    return res
+
+
+def addGames(sport, club1, score, club2, date):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = '''insert into games (sport,club1,score,club2,date) values ('{}','{}','{}','{}','{}')'''.format(
+        sport, club1, score, club2, date)
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
@@ -113,32 +170,59 @@ def deleteGames(ID):
     cursor.close()
     conn.close()
 
-def addPost(username,dateposted,body):
+
+def addPost(username, dateposted, body):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("insert into posts VALUES('{}','{}','{}')".format(username,dateposted,body))
+    cursor.execute("insert into posts VALUES('{}','{}','{}')".format(
+        username, dateposted, body))
     conn.commit()
     cursor.close()
     conn.close()
 
-def deletePost(username,dateposted):
+
+def deletePosts():
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("delete from posts where username='"+username+"' and dateposted='"+dateposted+"'")
+    cursor.execute("delete from posts")
     conn.commit()
     cursor.close()
     conn.close()
+
+
+def getPosts():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * from posts")
+    res = cursor.fetchall()
+    posts = []
+    for row in res:
+        posts.append(row)
+    return posts
+
+
+def getPosts():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * from posts")
+    res = cursor.fetchall()
+    posts = []
+    for row in res:
+        posts.append(row)
+    return posts
 
 
 def addPlayerWomenbb(name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("select playerid from players ORDER BY playerid DESC LIMIT 1")
-    res= cursor.fetchall()
-    lastId=res[0][0]
-    newId= str(int(lastId)+1)
-    
-    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('"+newId+"', '"+name+"', '"+age+"', 'womenbb', '"+position+"', '"+points+"', '"+assists+"')")
+    cursor.execute(
+        "select playerid from players ORDER BY playerid DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('" +
+                   newId+"', '"+name+"', '"+age+"', 'womenbb', '"+position+"', '"+points+"', '"+assists+"')")
     conn.commit()
     cursor.close()
     conn.close()
@@ -153,23 +237,41 @@ def deletePlayerWomenbb(playerid):
     conn.close()
 
 
-def getTrophyB(aid):
+def getTrophyB(aid, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute(
-        "select trophy, year from honorsBB WHERE trophy_id='"+str(aid)+"'")
+    cursor.execute("select trophy, year from honors WHERE trophy_id='" +
+                   str(aid)+"' AND sport='"+sport+"'")
+
     res = cursor.fetchall()
     cursor.close()
     conn.close()
-    return (res[0][0], res[0][1], res[0][2])
+    return res
 
 
-def updateTrophyB(aid, title, year):
+def addTrophiesB(title, year, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "UPDATE honorsBB SET trophy ='" + title+"', year ='" + \
-        year+"' WHERE trophy_id='"+str(aid)+"'"
-    cursor.execute(SQL)
+    cursor.execute(
+        "select trophy_id from honors ORDER BY trophy_id DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO honors (trophy_id, trophy, year, sport) VALUES ('" +
+                   newId+"', '"+title+"', '"+year+"', '"+sport+"')")
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def deleteTrophyB(trophy_id, sport):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM honors WHERE trophy_id= '" +
+                   trophy_id+"' AND sport='"+sport+"'")
+
     conn.commit()
     cursor.close()
     conn.close()
@@ -185,3 +287,57 @@ def getGames():
     cursor.close()
     conn.close()
     return games
+
+def getTrophyBS(sport):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from honors WHERE sport='"+sport+"'")
+    res = cursor.fetchall()
+    trophies = []
+    for row in res:
+        trophies.append(row)
+    length = len(trophies)
+    remaining = 50-length
+    i = 0
+    for i in range(0, remaining):
+        trophies.append([None])
+        i = i+1
+
+    cursor.close()
+    conn.close()
+    return trophies
+
+
+def changeUser(user, username):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE users SET username ='" + username+"' WHERE username='"+user+"'"
+    try:
+        cursor.execute(SQL)
+        conn.commit()
+    except Exception as e:
+        print(e)
+        cursor.close()
+        conn.close()
+        return "err"
+    cursor.close()
+    conn.close()
+    return 0
+
+
+def changePassword(user,  password):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE users SET password ='" + password + \
+        "' WHERE username='"+user+"'"
+    try:
+        cursor.execute(SQL)
+        conn.commit()
+    except Exception as e:
+        print(e)
+        cursor.close()
+        conn.close()
+        return "err"
+    cursor.close()
+    conn.close()
+    return 0

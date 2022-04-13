@@ -106,24 +106,74 @@ div.descriptiveImage img {
 
  }
 
- .delete-row,.add-row{
-     display:flex;
-     justify-content: flex-start;
- }
+ .article-content{
+     background-color: rgb(55, 73, 105);
+     margin-right: 5%;
+     margin-left:5%;
+}
 
- .delete-row,.add-row h3{
-    justify-content: flex-start;}
-
-.adminContents{
-    display:flex;
+.article-content img{
+   width:100%;
+   height:50%;
+}
+.content{
+    margin-right:5%;
+    margin-left:5%;
+    display: flex;
     flex-direction: column;
-    row-gap:0rem;
+}
+.content h2{
+    font-weight: bold;
+}
+.article-space{
+    display: flex;
+    flex-direction: row;
+}
+.text{
+    text-align: left;
+    text-align:justify;
+}
+.article-space{
+    display:flex;
+    flex-direction: row;
+    column-gap:5rem;
+}
+div.content article{
+    color: white;
+}
+.image-inline-text{
+}
+
+.featuredArticles{
+    display:flex;
+    text-align: center;
+    background-color:grey;
+    justify-content: space-between;
+    padding-right:5rem;
+    padding-left:5rem;
+}
+.articles{
+    width:100%;
+    height:100%;
+    border-radius: 4%;
+    background-color:grey; /*REMOVE LATER*/
+}
+.articles img{
+    width:100%;
+    height:100%;
+    border-radius: 4%;
+    justify-content: stretch;
+    overflow: hidden;
+   
+}
+.games{
+    height:20rem; 
+    /*margin:5rem;*/
 
 }
-.adminButtons{
-    padding:2rem;
-    height:20%;
+.myCarousel.games{
+    margin-top:5rem;
 }
-.adminButtons label{
-    color:white;
+.item.games{
+    background: rgba(219, 223, 230, 0.2);
 }
