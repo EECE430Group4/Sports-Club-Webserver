@@ -248,3 +248,23 @@ def deleteTrophyB(trophy_id,sport):
     conn.commit()
     cursor.close()
     conn.close()
+
+def getTrophyBS(sport):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from honors WHERE sport='"+sport+"'")
+    res = cursor.fetchall()
+    trophies = []
+    for row in res:
+        trophies.append(row)
+    length= len(trophies)
+    remaining= 50-length
+    i=0
+    for i in range(0,remaining):
+        trophies.append([None])
+        i=i+1
+
+    cursor.close()
+    conn.close()
+    return trophies
+

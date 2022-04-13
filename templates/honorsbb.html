@@ -93,7 +93,7 @@
               <label>Trophy:</label>
               <input type="text" name="title_add" id="title_add" />
               <label>Year:</label>
-              <input type="text" name="year_add" id="year_add" />
+              <input type="number" name="year_add" id="year_add" max="2022"/>
               <br />
               
               <button>ADD TROPHY</button>
@@ -106,7 +106,7 @@
           <form action="/honorsbb/deleteTrophyB" method="POST">
             <div class="delete-row">
               <label for="trophyid">Trophy ID</label>
-              <input type="text" name="trophy_id_delete" id="trophy_id_delete" />
+              <input type="number" name="trophy_id_delete" id="trophy_id_delete" min="1" />
               <br />
               <button>DELETE TROPHY</button>
             </div>
