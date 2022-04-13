@@ -2,6 +2,9 @@ from asyncio import trsock
 from turtle import update
 from flask import Flask, render_template, redirect, url_for, session, request, abort
 import functions
+import sqlite3
+
+import datetime
 
 import datetime
 
@@ -59,7 +62,6 @@ def signup():
         elif ret == 0:
             session['user'] = user
             session['role'] = 'FAN'
-            
             return redirect(url_for('main'))
     return render_template('signup.html')
 
@@ -264,6 +266,7 @@ def addItemCart(itemid):
 
     return(redirect(url_for('getShop')))
 
+
 @app.route('/shop/additem', methods=['POST'])
 def addItem():
     if 'user' in session:
@@ -272,15 +275,16 @@ def addItem():
     else:
         user = None
 
-    name= request.form["itemNameAdd"]
-    price= request.form["itemPriceAdd"]
-    Sstock= request.form["itemsizeSAdd"]
-    Mstock= request.form["itemsizeMAdd"]
-    Lstock= request.form["itemsizeLAdd"]
+    name = request.form["itemNameAdd"]
+    price = request.form["itemPriceAdd"]
+    Sstock = request.form["itemsizeSAdd"]
+    Mstock = request.form["itemsizeMAdd"]
+    Lstock = request.form["itemsizeLAdd"]
 
-    functions.addItem(name,Sstock, Mstock, Lstock, price)
+    functions.addItem(name, Sstock, Mstock, Lstock, price)
 
     return(redirect(url_for('getShop')))
+
 
 @app.route('/shop/deleteItem', methods=['POST'])
 def deleteItem():
@@ -289,13 +293,14 @@ def deleteItem():
     else:
         user = None
 
-    itemid= request.form["itemidRemove"]
+    itemid = request.form["itemidRemove"]
 
     functions.deleteItem(itemid)
 
     return(redirect(url_for('getShop')))
 
-#--------------------------- TICKETS ---------------------------
+
+# --------------------------- TICKETS ---------------------------
 '''
 @app.route('/tickets', methods=['GET', 'POST'])
 def getTicket():
@@ -309,7 +314,7 @@ def getTicket():
     tickets = []
     for i in range(-1, -7, -1):
         tickets.append(functions.getTicket(i))
-    
+
     print("-----------")
     print(tickets)
 
@@ -360,7 +365,8 @@ def deleteItem():
     return(redirect(url_for('getShop')))
 '''
 
-#--------------------------- PROFILE ---------------------------
+# --------------------------- PROFILE ---------------------------
+
 
 @app.route('/profile')
 def getProfile():
@@ -373,15 +379,47 @@ def getProfile():
     return render_template('profile_edit_prof.html', user=user, role=role)
 
 
-@app.route('/profileSetting')
-def getprofileSetting():
+@app.route('/profile/settings')
+def getProfileSetting():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
         user = None
         role = ""
-    return render_template('profile_account_settings.html', user=user, role=role)
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select password from users WHERE username='" + user+"'")
+    res = cursor.fetchall()[0][0]
+    return render_template('profile_account_settings.html', user=user, role=role, oldpass=res)
+
+
+@app.route('/profile/change', methods=['POST'])
+def changeProfile():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        return redirect(url_for('main'))
+
+    username = request.form['newuser']
+    functions.changeUser(user, username)
+    session['user'] = username
+    return redirect(url_for('getProfile'))
+
+
+@app.route('/profile/settings/change', methods=['POST'])
+def changeProfileSetting():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        return redirect(url_for('main'))
+
+    oldpassword = request.form['oldpwd']
+    password = request.form['password']
+    functions.changePassword(user, password)
+    return redirect(url_for('getProfileSetting'))
 
 # --------------------------- TICKETS ---------------------------
 
@@ -393,20 +431,39 @@ def getTickets():
     else:
         user = None
     return render_template('tickets.html', user=user)
-    
 
-#--------------------------- HONORS FOOTBALL---------------------------
-@app.route('/honorsfb', methods=['GET','POST'])
+
+# --------------------------- HONORS FOOTBALL---------------------------
+
+
+@app.route('/honorsfb', methods=['GET', 'POST'])
 def getHonorsFB():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-         user = None
-         role = ""
+        user = None
+        role = ""
     trophies = []
-    trophies=functions.getTrophyBS("football")
-    return render_template('honorsfb.html', user=user, role=role,trophies=trophies)
+    trophies = functions.getTrophyBS("football")
+    return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
+
+
+@app.route('/honorsfb/addTrophyF', methods=['POST'])
+def addTrophyF():
+
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    trophies = []
+    for i in range(1, 6):
+        trophies.append(functions.getTrophyB(i, "football"))
+
+    return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
+
 
 @app.route('/honorsfb/addTrophyF', methods=['POST'])
 def addTrophyF():
@@ -418,13 +475,14 @@ def addTrophyF():
         role = ""
     if role != 'ADMIN':
         return redirect(url_for('main'))
-    title= request.form["title_add"]
-    year= request.form["year_add"]
-    trophyF=[]
-    for i in range(1,6):
-        trophyF.append(functions.getTrophyB(i,"football")) 
-    functions.addTrophiesB(title,year,"football")
+    title = request.form["title_add"]
+    year = request.form["year_add"]
+    trophyF = []
+    for i in range(1, 6):
+        trophyF.append(functions.getTrophyB(i, "football"))
+    functions.addTrophiesB(title, year, "football")
     return(redirect(url_for('getHonorsFB')))
+
 
 @app.route('/honorsfb/deleteTrophyF', methods=['POST'])
 def deleteTrophyF():
@@ -433,27 +491,29 @@ def deleteTrophyF():
     else:
         user = None
 
-    trophy_id= request.form["trophy_id_delete"]
-    trophyF=[]
-    for i in range(1,6):
-        trophyF.append(functions.getTrophyB(i,"football")) 
-    functions.deleteTrophyB(trophy_id,"football")
+    trophy_id = request.form["trophy_id_delete"]
+    trophyF = []
+    for i in range(1, 6):
+        trophyF.append(functions.getTrophyB(i, "football"))
+    functions.deleteTrophyB(trophy_id, "football")
     return(redirect(url_for('getHonorsFB')))
 
-#--------------------------- HONORS BASKETBALL ---------------------------
-@app.route('/honorsbb', methods=['GET','POST'])
+
+# --------------------------- HONORS BASKETBALL ---------------------------
+
+
+@app.route('/honorsbb', methods=['GET', 'POST'])
 def getHonorsBB():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-         user = None
-         role = ""
+        user = None
+        role = ""
     trophies = []
-    #for i in range(1,6):
-       # trophies.append(functions.getTrophyB(i,"basketball"))
-    trophies=functions.getTrophyBS("basketball")
-    return render_template('honorsbb.html', user=user, role=role,trophies=trophies)
+    trophies = functions.getTrophyBS("basketball")
+    return render_template('honorsbb.html', user=user, role=role, trophies=trophies)
+
 
 @app.route('/honorsbb/addTrophyB', methods=['POST'])
 def addTrophyB():
@@ -465,13 +525,14 @@ def addTrophyB():
         role = ""
     if role != 'ADMIN':
         return redirect(url_for('main'))
-    title= request.form["title_add"]
-    year= request.form["year_add"]
-    trophyB=[]
-    for i in range(1,6):
-        trophyB.append(functions.getTrophyB(i,"basketball")) 
-    functions.addTrophiesB(title,year,"basketball")
+    title = request.form["title_add"]
+    year = request.form["year_add"]
+    trophyB = []
+    for i in range(1, 6):
+        trophyB.append(functions.getTrophyB(i, "basketball"))
+    functions.addTrophiesB(title, year, "basketball")
     return(redirect(url_for('getHonorsBB')))
+
 
 @app.route('/honorsbb/deleteTrophyB', methods=['POST'])
 def deleteTrophyB():
@@ -491,38 +552,37 @@ def deleteTrophyB():
 # -------------------------- COMMUNITY -------------------------------
 
 
-@app.route('/community', methods = ['GET','POST'])
+@app.route('/community', methods=['GET', 'POST'])
 def getCommunity():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-         user = None
-         role = ""
+        user = None
+        role = ""
 
     posts = functions.getPosts()
-    return render_template('community.html', user=user, role=role,posts=posts)
+    return render_template('community.html', user=user, role=role, posts=posts)
 
 
-@app.route('/community/addPost', methods = ['POST'])
+@app.route('/community/addPost', methods=['POST'])
 def postCommunity():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-         user = None
-         role = ""
+        user = None
+        role = ""
 
-    
     if user is not None:
         dateposted = datetime.datetime.now().date()
         body = request.form['body']
-        functions.addPost(user,dateposted,body)
+        functions.addPost(user, dateposted, body)
 
     return(redirect(url_for('getCommunity')))
 
 
-@app.route('/community/clearPosts', methods = ['GET','POST'])
+@app.route('/community/clearPosts', methods=['GET', 'POST'])
 def delCommunity():
     if 'user' in session:
         user = session['user']
@@ -534,7 +594,6 @@ def delCommunity():
 
     functions.deletePosts()
     return(redirect(url_for('getCommunity')))
-
 
 
 if __name__ == "__main__":

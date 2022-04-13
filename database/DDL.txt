@@ -8,6 +8,8 @@ CREATE TABLE users (
   role TEXT NOT NULL
   );
   
+  INSERT INTO users VALUES ('Fan ElFan','fan1','123','FAN'),('Player ElPlayer','player1','123','PLAYER'),('Admin ElAdmin','admin1','123','ADMIN'),('hassan khatib','ekha','123','FAN');
+
   CREATE TABLE players (
   playerid INTEGER PRIMARY KEY,
   name TEXT NOT NULL,
@@ -17,6 +19,9 @@ CREATE TABLE users (
   points INTEGER,
   assists INTEGER
 );
+
+INSERT INTO players values (1, 'Razan', 20, 'womenbb', 'center', 1400, 200), (2, 'Milia', 20, 'womenbb', 'forward', 1400, 200), (3, 'Layan', 20, 'womenbb', 'center', 1400, 200), (4, 'Melissa A', 20, 'womenbb', 'center', 1400, 200), (5, 'Melissa B', 20, 'womenbb', 'center', 1400, 200);
+
 
 
 CREATE TABLE article (
@@ -56,15 +61,29 @@ create table posts (
   PRIMARY KEY(username,dateposted)
 );
 
+doesnt need an insert query
 
 CREATE TABLE games (
+  ID INTEGER primary key AUTOINCREMENT,
   sport TEXT not null,
   club1 text not null,
   score text not null,
   club2 text not null,
-  gamedate date not null,
-  PRIMARY KEY (sport,club1,club2,gamedate)
-)
+  gamedate date not null
+);
+
+insert into games (sport,club1,score,club2,gamedate) values ('Womens Football','Team1','2-0','Team2','2022-03-14')
+
+CREATE TABLE honors (
+	trophy_id	int PRIMARY KEY,
+	trophy	text NOT NULL,
+	year	int NOT NULL,
+	sport text NOT NULL
+	
+);
+  
+INSERT INTO honors VALUES (1,'League 1',2020,'football'), (2,'League 2', 2019,'basketball'), (3,'League 3',2018,'football'), (4,'League 4',2018,'football'), (5,'League 5',2001,'football'), (6,'League 6', 1990,'football');
+  
 
 CREATE TABLE honors (
 	trophy_id	int PRIMARY KEY,
@@ -81,5 +100,3 @@ INSERT INTO honors VALUES (1,'League 1',2020,'football'), (2,'League 2', 2019,'b
 
 
 
-
-INSERT INTO users VALUES (1,'Fan ElFan','fan1','123','FAN'),(2,'Player ElPlayer','player1','123','PLAYER'),(3,'Admin ElAdmin','admin1','123','ADMIN'),(4,'hassan khatib','ekha','123','FAN');

@@ -96,15 +96,15 @@ html {
                         <img class="img" src="{{url_for('static', filename='css/images/profile/profile.PNG')}}" alt="[sample image here]" style="margin-left: auto; margin-right: auto; display: block;">
                         <ul class="nav" style="list-style-position: inside; background-color: rgba(255, 255, 255, 0.1);">
                             <li><a href="/profile" style="color:blue">Edit Profile</a></li>
-                            <li><a href="/profileSetting" style="color:blue">Account Setting</a></li>
+                            <li><a href="/profile/settings" style="color:blue">Account Setting</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xs-9">
                     <div class="card" style="border-style: solid; border-color: rgb(255, 255, 255); color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0.3);">
                         <h3 style="color:black; margin-left: 2%;">Display Name:</h3>
-                        <form method="POST" autocomplete="off">
-                          <input style="color: black; margin-left: 2%;" value="{{user}}" required>
+                        <form method="POST" autocomplete="off" action="/profile/change">
+                          <input name = "newuser" style="color: black; margin-left: 2%;" value="{{user}}" required>
                           <button id="save-button" class="button" type="submit" style="color:black;">SAVE</button>
                         </form>
                         <h3 style="color:black; margin-left: 2%;">Role:</h3>

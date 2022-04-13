@@ -96,14 +96,14 @@ html {
                 <div class="col-xs-9">
                     <div class="card" style="border-style: solid; border-color: rgb(255, 255, 255); color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0.3);">
                         <h3 style="color:black; margin-left: 2%;">Change password:</h3>
-                        <form method = "POST" onsubmit="return verifyPassword()">
+                        <form method = "POST" onsubmit="return verifyPassword()" action="/profile/settings/change">
                         <h style="color:black; margin-left: 2%;">Current password:</h>
                         <br>
-                        <input type = "password" style="margin-left: 2%; color:black" required>
+                        <input name ='oldpwd' id= 'oldpwd' type = "password" style="margin-left: 2%; color:black" required>
                         <br><br>
                         <h style="color:black; margin-left: 2%;">New password:</h>
                         <br>
-                        <input id = "pwd" type = "password" style="margin-left: 2%; color:black;" required>
+                        <input name = 'password' id = "pwd" type = "password" style="margin-left: 2%; color:black;" required>
                         <br><br>
                         <h style="color:black; margin-left: 2%;">Confirm new password:</h>
                         <br>
@@ -116,6 +116,7 @@ html {
             </div>
         </div>
     </div>
+    <label hidden id="mylabel">{{oldpass}}</label>
   </body>
 
   
@@ -144,14 +145,26 @@ html {
 
   <script>
     function verifyPassword() {
+
       var pw1 = document.getElementById("pwd");
       var pw2 = document.getElementById("confpwd");
       if (pw1.value != pw2.value) {
         alert("Passwords do not match.");
         return false;
       }
+
+      var pw1 = document.getElementById("oldpwd").value;
+      console.log(document.getElementById("mylabel").innerHTML)
+      var pw2 = document.getElementById("mylabel").innerHTML;
+      
+      if (pw1 != pw2) {
+        alert("Incorrect current password.");
+        return false;
+      }
       return true;
+      
     }
+
   </script>
 
  
