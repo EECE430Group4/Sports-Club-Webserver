@@ -228,10 +228,7 @@ def getFixtures():
         role = ''
     return render_template('fixtures.html', user=user, role=role)
 
-<<<<<<< HEAD
-=======
 # --------------------------- SHOP ---------------------------
->>>>>>> dc1b78309cb1d88ff3028c69b3a99ae1ab010e5b
 
 
 @app.route('/shop', methods=['GET', 'POST'])
@@ -307,7 +304,7 @@ def getProfile():
     else:
         user = None
         role = ""
-    return render_template('profile_edit_prof.html ', user=user, role=role)
+    return render_template('profile_edit_prof.html', user=user, role=role)
 
 
 @app.route('/profileSetting')
@@ -388,6 +385,19 @@ def postCommunity():
 
     return(redirect(url_for('getCommunity')))
 
+
+@app.route('/community/clearPosts', methods = ['GET','POST'])
+def delCommunity():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+        if role != 'ADMIN':
+            return(redirect(url_for('getCommunity')))
+    else:
+        return(redirect(url_for('getCommunity')))
+
+    functions.deletePosts()
+    return(redirect(url_for('getCommunity')))
 
 
 

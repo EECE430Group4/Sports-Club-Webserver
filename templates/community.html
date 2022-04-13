@@ -71,16 +71,17 @@
           
           <div class="col-md-8">
             <h2 class="fw-bolder square text-center ">
-              <</span>Discussion post<span>>
+              </span>Discussion post<span>
               <div class="form-field d-flex align-items-center h5 width=100px">
                 <span class="far fa-user"></span>
                 {%for post in posts%}
                 <h5>
                   <span>{{post[0]}}: {{post[2]}} ON {{post[1]}} </span>
                 </h5>
+                
                 {%endfor%}
                 <br>
-              <form action="/community" method="POST" autocomplete="off">
+              <form action="/community/addPost" method="POST" autocomplete="off">
                 <input
                 type="text"
                 name="body"
@@ -93,7 +94,11 @@
               </form>
                 
               </div>
-            
+              {% if 'ADMIN' in role%}
+            <form action="community/clearPosts">
+            <button type="submit">Clear Forum</button>
+          </form>
+          {%endif%}
             </h2>
            
           <div class="col-md-4">
