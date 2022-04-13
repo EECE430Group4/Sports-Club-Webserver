@@ -83,7 +83,8 @@
     <!--START HONORS' ROWS-->
     <div class="honorsAll">
       {% if 'ADMIN' in role%}
-      <div class="honorRow">
+      <div class="adminContents">
+      <div class="honorRow adminButtons">
         <h3> ADD NEW TROPHY</h3>
         <form action="/honorsfb/addTrophyF" method="POST">
           
@@ -99,7 +100,7 @@
           </div>
         </form>
       </div>
-        <div class="honorRow">
+        <div class="honorRow adminButtons">
 
         <h3>DELETE TROPHY</h3>
         <form action="/honorsfb/deleteTrophyF" method="POST">
@@ -111,6 +112,7 @@
           </div>
         </form>
 
+      </div>
       </div>
       {% endif %}
       <!-- HONOR ROW  VERSION 1-->

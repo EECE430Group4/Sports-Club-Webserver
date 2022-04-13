@@ -50,9 +50,15 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="/">
-              <span class="glyphicon glyphicon-user"></span>Profile</a
-            >
+            {%if user is none%}
+              <a href="/login">
+                <span class="glyphicon glyphicon-user"></span> Profile</a
+              >
+              {%else%}
+              <a href="/">
+                <span class="glyphicon glyphicon-user"></span> {{user}}</a
+              >
+              {%endif%}
        
           </li>
         </ul>
