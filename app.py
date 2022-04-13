@@ -393,6 +393,7 @@ def getTickets():
     else:
         user = None
     return render_template('tickets.html', user=user)
+    
 
 #--------------------------- HONORS FOOTBALL---------------------------
 @app.route('/honorsfb', methods=['GET','POST'])
@@ -404,9 +405,7 @@ def getHonorsFB():
          user = None
          role = ""
     trophies = []
-    for i in range(1,6):
-        trophies.append(functions.getTrophyB(i,"football"))
-
+    trophies=functions.getTrophyBS("football")
     return render_template('honorsfb.html', user=user, role=role,trophies=trophies)
 
 @app.route('/honorsfb/addTrophyF', methods=['POST'])
@@ -451,9 +450,9 @@ def getHonorsBB():
          user = None
          role = ""
     trophies = []
-    for i in range(1,6):
-        trophies.append(functions.getTrophyB(i,"basketball"))
-
+    #for i in range(1,6):
+       # trophies.append(functions.getTrophyB(i,"basketball"))
+    trophies=functions.getTrophyBS("basketball")
     return render_template('honorsbb.html', user=user, role=role,trophies=trophies)
 
 @app.route('/honorsbb/addTrophyB', methods=['POST'])
