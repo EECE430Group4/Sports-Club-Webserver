@@ -65,7 +65,9 @@
               </ul>
             </div>
           </nav>
+
     <div class="container-fluid">
+      {% if 'ADMIN' in role%}
       <div class="addItem">
         <h3 style="color: white">Add Item</h3>
         <form action="/shop/additem" method="POST" autocomplete="off">
@@ -92,6 +94,7 @@
           <button id="removeItem-button" type="submit">Remove Item</button>
         </form>
       </div>
+      {%endif%}
       <div class="row">
         <button class="cart_button">
           <img class="cart_img" src="{{url_for('static', filename='css/images/shop/shopping-cart.png')}}"/>

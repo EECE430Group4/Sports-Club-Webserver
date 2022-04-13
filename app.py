@@ -3,6 +3,8 @@ from turtle import update
 from flask import Flask, render_template, redirect, url_for, session, request, abort
 import functions
 
+import datetime
+
 
 app = Flask(__name__)
 app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
@@ -293,6 +295,71 @@ def deleteItem():
 
     return(redirect(url_for('getShop')))
 
+#--------------------------- TICKETS ---------------------------
+'''
+@app.route('/tickets', methods=['GET', 'POST'])
+def getTicket():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+
+    tickets = []
+    for i in range(-1, -7, -1):
+        tickets.append(functions.getTicket(i))
+    
+    print("-----------")
+    print(tickets)
+
+    return render_template('tickets.html', user=user, role=role, tickets=tickets)
+
+
+@app.route('/shop/additemcart/<itemid>')
+def addItemCart(itemid):
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    session['cart'].append(itemid)
+
+    return(redirect(url_for('getShop')))
+
+@app.route('/shop/additem', methods=['POST'])
+def addItem():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+
+    name= request.form["itemNameAdd"]
+    price= request.form["itemPriceAdd"]
+    Sstock= request.form["itemsizeSAdd"]
+    Mstock= request.form["itemsizeMAdd"]
+    Lstock= request.form["itemsizeLAdd"]
+
+    functions.addItem(name,Sstock, Mstock, Lstock, price)
+
+    return(redirect(url_for('getShop')))
+
+@app.route('/shop/deleteItem', methods=['POST'])
+def deleteItem():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    itemid= request.form["itemidRemove"]
+
+    functions.deleteItem(itemid)
+
+    return(redirect(url_for('getShop')))
+'''
+
 #--------------------------- PROFILE ---------------------------
 
 @app.route('/profile')
@@ -303,7 +370,7 @@ def getProfile():
     else:
         user = None
         role = ""
-    return render_template('profile_edit_prof.html ', user=user, role=role)
+    return render_template('profile_edit_prof.html', user=user, role=role)
 
 
 @app.route('/profileSetting')
@@ -424,15 +491,50 @@ def deleteTrophyB():
 # -------------------------- COMMUNITY -------------------------------
 
 
-@app.route('/community')
+@app.route('/community', methods = ['GET','POST'])
 def getCommunity():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-        user = None
-        role = ""
-    return render_template('community.html', user=user, role=role)
+         user = None
+         role = ""
+
+    posts = functions.getPosts()
+    return render_template('community.html', user=user, role=role,posts=posts)
+
+
+@app.route('/community/addPost', methods = ['POST'])
+def postCommunity():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+         user = None
+         role = ""
+
+    
+    if user is not None:
+        dateposted = datetime.datetime.now().date()
+        body = request.form['body']
+        functions.addPost(user,dateposted,body)
+
+    return(redirect(url_for('getCommunity')))
+
+
+@app.route('/community/clearPosts', methods = ['GET','POST'])
+def delCommunity():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+        if role != 'ADMIN':
+            return(redirect(url_for('getCommunity')))
+    else:
+        return(redirect(url_for('getCommunity')))
+
+    functions.deletePosts()
+    return(redirect(url_for('getCommunity')))
+
 
 
 if __name__ == "__main__":

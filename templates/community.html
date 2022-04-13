@@ -71,62 +71,36 @@
           
           <div class="col-md-8">
             <h2 class="fw-bolder square text-center ">
-              <</span>Discussion post<span>>
+              </span>Discussion post<span>
               <div class="form-field d-flex align-items-center h5 width=100px">
                 <span class="far fa-user"></span>
+                {%for post in posts%}
+                <h5>
+                  <span>{{post[0]}}: {{post[2]}} ON {{post[1]}} </span>
+                </h5>
+                
+                {%endfor%}
+                <br>
+              <form action="/community/addPost" method="POST" autocomplete="off">
                 <input
                 type="text"
-                name="Post"
+                name="body"
                 id="Post"
                 placeholder="Comment..."
                 autocomplete="off"
                 required
-              /><br>
-              <form action="/" method="POST" autocomplete="off">
-                <input type="hidden" name="fixture" value="1">
+              />
                 <button id="submit-button" class="button btn btn-default" type="submit">submit</button>
               </form>
                 
               </div>
-            
+              {% if 'ADMIN' in role%}
+            <form action="community/clearPosts">
+            <button type="submit">Clear Forum</button>
+          </form>
+          {%endif%}
             </h2>
-            <h2 class="fw-bolder square text-center ">
-            <</span>Discussion post 2<span>>
-            <div class="form-field d-flex align-items-center h5 width=100px">
-              <span class="far fa-user"></span>
-              <input
-                type="text"
-                name="Post"
-                id="Post2"
-                placeholder="Comment..."
-                autocomplete="off"
-                required
-              /><br>
-              <form action="/" method="POST" autocomplete="off">
-                <input type="hidden" name="fixture" value="1">
-                <button id="submit-button" class="button btn btn-default" type="submit">submit</button>
-              </form>
-            </div>
-            </h2>
-            <h2 class="fw-bolder square text-center ">
-              <</span>Discussion post 3<span>>
-              <div class="form-field d-flex align-items-center h5 width=100px">
-                <span class="far fa-user"></span>
-                <input
-                  type="text"
-                  name="Post"
-                  id="Post3"
-                  placeholder="Comment..."
-                  autocomplete="off"
-                  required
-                /><br>
-                <form action="/" method="POST" autocomplete="off">
-                  <input type="hidden" name="fixture" value="1">
-                  <button id="submit-button" class="button btn btn-default" type="submit">submit</button>
-                </form>
-              </div>
-            </h2>
-          </div>
+           
           <div class="col-md-4">
             <h2 class="vote text-right"> Click to vote for MVP</h2>
             <div class="rectangle"></div>
