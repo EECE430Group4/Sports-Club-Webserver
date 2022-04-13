@@ -8,16 +8,22 @@ import datetime
 app = Flask(__name__)
 app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
 
-#--------------------------- HOMEPAGE ---------------------------
+# --------------------------- HOMEPAGE ---------------------------
+
+
 @app.route('/')
 def main():
     if 'user' in session:
         user = session['user']
     else:
         user = None
+    if 'cart' not in session:
+        session['cart'] = []
     return render_template('HomePage.html', user=user)
 
-#--------------------------- LOGIN + SIGNUP ---------------------------
+# --------------------------- LOGIN + SIGNUP + LOGOUT ---------------------------
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user' in session:
@@ -52,12 +58,21 @@ def signup():
         elif ret == 0:
             session['user'] = user
             session['role'] = 'FAN'
-            session['cart'] = []
+            
             return redirect(url_for('main'))
     return render_template('signup.html')
 
-#--------------------------- NEWS ---------------------------
-@app.route('/news', methods=['GET','POST'])
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    session.clear()
+    return redirect(url_for('main'))
+
+
+# --------------------------- NEWS ---------------------------
+
+
+@app.route('/news', methods=['GET', 'POST'])
 def getNews():
     if 'user' in session:
         user = session['user']
@@ -67,7 +82,7 @@ def getNews():
         role = ""
 
     articles = []
-    for i in range(1,6):
+    for i in range(1, 6):
         articles.append(functions.getArticle(i))
 
     if request.method == 'POST':
@@ -94,7 +109,8 @@ def getNews():
             elif request.form["editbut"] == "5":
                 return redirect(url_for('editArticle', anum=5))
 
-    return render_template('news.html', user=user, role=role,articles=articles)
+    return render_template('news.html', user=user, role=role, articles=articles)
+
 
 @app.route('/news/article/<anum>', methods=['GET'])
 def getArticle(anum):
@@ -105,7 +121,8 @@ def getArticle(anum):
         user = None
         role = ""
     article = functions.getArticle(anum)
-    return render_template('article.html', user=user, role=role,article=article)
+    return render_template('article.html', user=user, role=role, article=article)
+
 
 @app.route('/news/article/edit/<anum>', methods=['GET', 'POST'])
 def editArticle(anum):
@@ -118,14 +135,15 @@ def editArticle(anum):
             title = request.form['title']
             headline = request.form['headline']
             body = request.form['body']
-            functions.updateArticle(anum,title,headline,body)
-            return redirect(url_for('getNews'),code=303)
+            functions.updateArticle(anum, title, headline, body)
+            return redirect(url_for('getNews'), code=303)
         article = functions.getArticle(anum)
-        return render_template('editarticle.html', user=user, role=role,article=article,anum=anum)
+        return render_template('editarticle.html', user=user, role=role, article=article, anum=anum)
     else:
         return redirect(url_for('main'))
-    
-#--------------------------- TEAMS ---------------------------
+
+# --------------------------- TEAMS ---------------------------
+
 
 @app.route('/teams/<team>')
 def getTeam(team):
@@ -137,14 +155,15 @@ def getTeam(team):
     if team == "womenfb":
         return(render_template('womenfb.html', user=user))
     elif team == "womenbb":
-        players= functions.getPlayers(team)
+        players = functions.getPlayers(team)
         return(render_template('womenbb.html', user=user, players=players))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":
         return(render_template('menbb.html', user=user))
-    
+
     return(redirect(url_for('main')))
+
 
 @app.route('/<team>/addPlayer', methods=['POST'])
 def addPlayer(team):
@@ -154,24 +173,25 @@ def addPlayer(team):
     else:
         user = None
 
-    name= request.form["playerNameAdd"]
-    age= request.form["playerAgeAdd"]
-    position= request.form["playerPositionAdd"]
-    points= request.form["playerPointsAdd"]
-    assists= request.form["playerAssistsAdd"]
+    name = request.form["playerNameAdd"]
+    age = request.form["playerAgeAdd"]
+    position = request.form["playerPositionAdd"]
+    points = request.form["playerPointsAdd"]
+    assists = request.form["playerAssistsAdd"]
 
     if team == "womenfb":
         return(render_template('womenfb.html', user=user))
     elif team == "womenbb":
-        players= functions.getPlayers(team)
-        functions.addPlayerWomenbb(name,age,position,points,assists)
+        players = functions.getPlayers(team)
+        functions.addPlayerWomenbb(name, age, position, points, assists)
         return(render_template('womenbb.html', user=user, players=players))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":
         return(render_template('menbb.html', user=user))
-    
+
     return(redirect(url_for('main')))
+
 
 @app.route('/<team>/deletePlayer', methods=['POST'])
 def deletePlayer(team):
@@ -180,23 +200,23 @@ def deletePlayer(team):
     else:
         user = None
 
-    playerid= request.form["playerIdDelete"]
-    
+    playerid = request.form["playerIdDelete"]
 
     if team == "womenfb":
         return(render_template('womenfb.html', user=user))
     elif team == "womenbb":
-        players= functions.getPlayers(team)
+        players = functions.getPlayers(team)
         functions.deletePlayerWomenbb(playerid)
         return(render_template('womenbb.html', user=user, players=players))
     elif team == "menfb":
         return(render_template('menfb.html', user=user))
     elif team == "menbb":
         return(render_template('menbb.html', user=user))
-    
+
     return(redirect(url_for('main')))
 
-#--------------------------- FIXTURES ---------------------------
+# --------------------------- FIXTURES ---------------------------
+
 
 @app.route('/fixtures')
 def getFixtures():
@@ -208,10 +228,13 @@ def getFixtures():
         role = ''
     return render_template('fixtures.html', user=user, role=role)
 
+<<<<<<< HEAD
+=======
+# --------------------------- SHOP ---------------------------
+>>>>>>> dc1b78309cb1d88ff3028c69b3a99ae1ab010e5b
 
-#--------------------------- SHOP ---------------------------
 
-@app.route('/shop', methods=['GET','POST'])
+@app.route('/shop', methods=['GET', 'POST'])
 def getShop():
     if 'user' in session:
         user = session['user']
@@ -221,17 +244,18 @@ def getShop():
         role = ""
 
     items = []
-    for i in range(1,9):
+    for i in range(1, 9):
         items.append(functions.getItem(i))
 
     if request.method == 'POST':
         if 'addcartbut' in request.form:
-            return redirect(url_for('addItem', itemid=request.form["itemid"]))
+            return redirect(url_for('addItemCart', itemid=request.form["itemid"]))
 
-    return render_template('shop.html', user=user, role=role,items=items)
+    return render_template('shop.html', user=user, role=role, items=items)
 
-@app.route('/shop/additem/<itemid>')
-def addItem(itemid):
+
+@app.route('/shop/additemcart/<itemid>')
+def addItemCart(itemid):
     if 'user' in session:
         user = session['user']
         role = session['role']
@@ -239,6 +263,37 @@ def addItem(itemid):
         user = None
         role = ""
     session['cart'].append(itemid)
+
+    return(redirect(url_for('getShop')))
+
+@app.route('/shop/additem', methods=['POST'])
+def addItem():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+
+    name= request.form["itemNameAdd"]
+    price= request.form["itemPriceAdd"]
+    Sstock= request.form["itemsizeSAdd"]
+    Mstock= request.form["itemsizeMAdd"]
+    Lstock= request.form["itemsizeLAdd"]
+
+    functions.addItem(name,Sstock, Mstock, Lstock, price)
+
+    return(redirect(url_for('getShop')))
+
+@app.route('/shop/deleteItem', methods=['POST'])
+def deleteItem():
+    if 'user' in session:
+        user = session['user']
+    else:
+        user = None
+
+    itemid= request.form["itemidRemove"]
+
+    functions.deleteItem(itemid)
 
     return(redirect(url_for('getShop')))
 
@@ -254,6 +309,7 @@ def getProfile():
         role = ""
     return render_template('profile_edit_prof.html ', user=user, role=role)
 
+
 @app.route('/profileSetting')
 def getprofileSetting():
     if 'user' in session:
@@ -264,7 +320,8 @@ def getprofileSetting():
         role = ""
     return render_template('profile_account_settings.html', user=user, role=role)
 
-#--------------------------- TICKETS ---------------------------
+# --------------------------- TICKETS ---------------------------
+
 
 @app.route('/tickets')
 def getTickets():
@@ -274,7 +331,9 @@ def getTickets():
         user = None
     return render_template('tickets.html', user=user)
 
-#--------------------------- HONORS FOOTBALL---------------------------
+# --------------------------- HONORS FOOTBALL---------------------------
+
+
 @app.route('/honorsfb')
 def getHonors():
     if 'user' in session:
@@ -283,18 +342,21 @@ def getHonors():
         user = None
     return render_template('honorsfb.html', user=user)
 
-#--------------------------- HONORS BASKETBALL ---------------------------
+# --------------------------- HONORS BASKETBALL ---------------------------
+
+
 @app.route('/honorsbb')
 def getHonorsB():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-         user = None
-         role = ""
+        user = None
+        role = ""
     return render_template('honorsbb.html', user=user, role=role)
 
-#-------------------------- COMMUNITY -------------------------------
+# -------------------------- COMMUNITY -------------------------------
+
 
 @app.route('/community', methods = ['GET','POST'])
 def getCommunity():
@@ -304,13 +366,6 @@ def getCommunity():
     else:
          user = None
          role = ""
-
-    
-    if user is not None:
-        if request.method == 'POST':
-            dateposted = datetime.datetime.now().date()
-            body = request.form['body']
-            functions.addPost(user,dateposted,body)
 
     posts = functions.getPosts()
     return render_template('community.html', user=user, role=role,posts=posts)
@@ -334,9 +389,7 @@ def postCommunity():
     return(redirect(url_for('getCommunity')))
 
 
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
