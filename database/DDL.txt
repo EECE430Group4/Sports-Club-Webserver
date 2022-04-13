@@ -26,9 +26,8 @@ CREATE TABLE article (
   articlebody text NOT NULL
 );
 
- CREATE TABLE shop (
-  rownum int NOT NULL,
-	shopitemid	text PRIMARY KEY,
+CREATE TABLE shop (
+	shopitemid	int PRIMARY KEY,
 	sizeSstock	int NOT NULL,
 	sizeMstock	int NOT NULL,
 	sizeLstock	int NOT NULL,
@@ -36,7 +35,7 @@ CREATE TABLE article (
 	itemName	text NOT NULL
 );
   
-INSERT INTO shop VALUES (1,'S1',10,10,10,20,'T-shirt'), (2,'S2',10,10,10,20,'Shorts'), (3,'S3',10,10,10,20,'Ball'), (4,'S4',10,10,10,20,'Hoodie'), (5,'S5',10,10,10,20,'Long-sleeve'), (6,'S6',10,10,10,20,'T-shirt black'), (7,'S7',10,10,10,20,'T-shirt'), (8,'S8',10,10,10,20,'T-shirt'); 
+INSERT INTO shop VALUES (1,10,10,10,20,'T-shirt'), (2,10,10,10,20,'Shorts'), (3,10,10,10,20,'Ball'), (4,10,10,10,20,'Hoodie'), (5,10,10,10,20,'Long-sleeve'), (6,10,10,10,20,'T-shirt black'), (7,10,10,10,20,'T-shirt'), (8,10,10,10,20,'T-shirt');
   
   
 create table posts (

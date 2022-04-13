@@ -70,59 +70,94 @@ def getPlayers(team):
     players = []
     for row in res:
         players.append(row)
+    length= len(players)
+    remaining= 50-length
+    i=0
+    for i in range(0,remaining):
+        players.append([None])
+        i=i+1
+
     cursor.close()
     conn.close()
     return players
 
-def getItem(row):
+def getItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute(
-        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE rownum="+str(row)+"")
+        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
     res = cursor.fetchall()
     cursor.close()
     conn.close()
-    return (res[0][0], res[0][1], res[0][2], res[0][3], res[0][4], res[0][5])
+    return res
 
-
-def addGames(sport,club1,score,club2,date):
+def addItem(name, Sstock, Mstock, Lstock, price):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    return players
-    SQL = '''insert into games (sport,club1,score,club2,date) values ('{}','{}','{}','{}','{}')'''.format (sport,club1,score,club2,date)
+    cursor.execute("select shopitemid from shop ORDER BY shopitemid DESC LIMIT 1")
+    res= cursor.fetchall()
+    lastId=res[0][0]
+    newId= str(int(lastId)+1)
+    
+    cursor.execute("INSERT INTO shop (shopitemid, sizeSstock, sizeMstock, sizeLstock, itemprice, itemName) VALUES ('"+newId+"', '"+Sstock+"', '"+Mstock+"','"+Lstock+"', '"+price+"', '"+name+"')")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def deleteItem(itemid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM shop WHERE shopitemid= '"+itemid+"'")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def addGames(sport, club1, score, club2, date):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = '''insert into games (sport,club1,score,club2,date) values ('{}','{}','{}','{}','{}')'''.format(
+        sport, club1, score, club2, date)
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
     conn.close()
 
-def editGames(sport,club1,club2,date,score):
+
+def editGames(sport, club1, club2, date, score):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "UPDATE games set sport='"+sport+"',club1='"+club1+"', club2='"+club2+"',date='"+date+"',score='"+score+"'"
+    SQL = "UPDATE games set sport='"+sport+"',club1='"+club1 + \
+        "', club2='"+club2+"',date='"+date+"',score='"+score+"'"
     cursor.execute(SQL)
 
 
-def deleteGames(sport,club1,club2,date):
+def deleteGames(sport, club1, club2, date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "DELETE from games where sport='"+sport+"',club1='"+club1+"', club2='"+club2+"',date='"+date+"'"
+    SQL = "DELETE from games where sport='"+sport + \
+        "',club1='"+club1+"', club2='"+club2+"',date='"+date+"'"
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
     conn.close()
 
-def addPost(username,dateposted,body):
+
+def addPost(username, dateposted, body):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("insert into posts VALUES('{}','{}','{}')".format(username,dateposted,body))
+    cursor.execute("insert into posts VALUES('{}','{}','{}')".format(
+        username, dateposted, body))
     conn.commit()
     cursor.close()
     conn.close()
 
-def deletePost(username,dateposted):
+
+def deletePost(username, dateposted):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("delete from posts where username='"+username+"' and dateposted='"+dateposted+"'")
+    cursor.execute("delete from posts where username='" +
+                   username+"' and dateposted='"+dateposted+"'")
     conn.commit()
     cursor.close()
     conn.close()
@@ -131,12 +166,14 @@ def deletePost(username,dateposted):
 def addPlayerWomenbb(name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("select playerid from players ORDER BY playerid DESC LIMIT 1")
-    res= cursor.fetchall()
-    lastId=res[0][0]
-    newId= str(int(lastId)+1)
-    
-    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('"+newId+"', '"+name+"', '"+age+"', 'womenbb', '"+position+"', '"+points+"', '"+assists+"')")
+    cursor.execute(
+        "select playerid from players ORDER BY playerid DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('" +
+                   newId+"', '"+name+"', '"+age+"', 'womenbb', '"+position+"', '"+points+"', '"+assists+"')")
     conn.commit()
     cursor.close()
     conn.close()
@@ -181,6 +218,3 @@ def deleteTrophyB(trophy_id,sport):
     conn.commit()
     cursor.close()
     conn.close()
-
-
-

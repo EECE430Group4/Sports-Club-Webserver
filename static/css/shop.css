@@ -65,3 +65,13 @@ body {
     display: block;
     margin: auto;
 }
+
+.addItem label, .deleteItem label{
+    margin-top: 1%;
+    color: white;
+    font-size: 18px;
+  }
+  .addItem, .deleteItem{
+    position: relative;
+    left: 8%;
+  }
