@@ -80,9 +80,35 @@
     </nav>
     <!--END OF HEADER-->
 
+
     <!--START HONORS' ROWS-->
     <div class="honorsAll">
-  
+        <div class="honorRow">
+          <h2> ADD NEW TROPHY</h2>
+          <form action="/honorsbb/addTrophy" method="POST">
+            <div class="">
+      
+              <label>Trophy:</label>
+              <input type="text" name="title_add" id="title_add" />
+              <label>Year:</label>
+              <input type="text" name="year_add" id="year_add" />
+              <br />
+              
+              <button>ADD TROPHY</button>
+          
+          </div>
+          </form>
+          <h2>DELETE TROPHY</h2>
+          <form action="/honorsBB/deleteTrophy" method="POST">
+            <div class="">
+              <label for="trophyid">Trophy ID</label>
+              <input type="text" name="trophy_id_delete" id="trophy_id_delete" />
+              <br />
+              <button>DELETE TROPHY</button>
+            </div>
+          </form>
+
+        </div>
         <!-- HONOR ROW  VERSION 1-->
         <div class="honorRow">
           <div class="bringToFrontDiv descriptiveImage">
@@ -95,8 +121,13 @@
             </div>
             <div class="description">
               <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+             <h4>Years</h4>   <!--THEY CAN EDIT THESE-->
             </div>
+            <!--ASSUME THERE IS ALWAYS AN EDIT BUTTON-->
+            <form action="/honorsBB" method="POST" autocomplete="off">
+              <input type="hidden" name="editbut" value="1">
+              <button id="editbut" class="button" type="submit">ADD</button>
+            </form> 
             
           </div>
         </div>
@@ -111,8 +142,13 @@
             </div>
             <div class="description">
               <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+             <h4>Years</h4>   <!--THEY CAN EDIT THESE-->
             </div>
+            <!--ASSUME THERE IS ALWAYS AN EDIT BUTTON-->
+            <form action="#" method="POST" autocomplete="off">
+              <input type="hidden" name="editbut" value="1">
+              <button id="add-button" class="button" type="submit">ADD</button>
+            </form> 
             
           </div>
         </div>
@@ -127,8 +163,13 @@
             </div>
             <div class="description">
               <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+             <h4>Years</h4>   <!--THEY CAN EDIT THESE-->
             </div>
+            <!--ASSUME THERE IS ALWAYS AN EDIT BUTTON-->
+            <form action="#" method="POST" autocomplete="off">
+              <input type="hidden" name="editbut" value="1">
+              <button id="add-button" class="button" type="submit">ADD</button>
+            </form> 
             
           </div>
         </div>
@@ -143,8 +184,13 @@
             </div>
             <div class="description">
               <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+             <h4>Years</h4>   <!--THEY CAN EDIT THESE-->
             </div>
+            <!--ASSUME THERE IS ALWAYS AN EDIT BUTTON-->
+            <form action="#" method="POST" autocomplete="off">
+              <input type="hidden" name="editbut" value="1">
+              <button id="add-button" class="button" type="submit">ADD</button>
+            </form> 
             
           </div>
         </div>
@@ -159,8 +205,13 @@
             </div>
             <div class="description">
               <h3>League Number 1</h3>             <!--THEY CAN EDIT THESE-->
-             <h4>Years: 1990, 2010, 2014, 2017</h4>   <!--THEY CAN EDIT THESE-->
+             <h4>Years</h4>   <!--THEY CAN EDIT THESE-->
             </div>
+            <!--ASSUME THERE IS ALWAYS AN EDIT BUTTON-->
+            <form action="#" method="POST" autocomplete="off">
+              <input type="hidden" name="editbut" value="1">
+              <button id="add-button" class="button" type="submit">ADD</button>
+            </form> 
             
           </div>
         </div>
