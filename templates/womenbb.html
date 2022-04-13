@@ -89,13 +89,13 @@
         <label>Name:</label>
         <input type="text" name="playerNameAdd" id="playerNameAdd" />
         <label>Age:</label>
-        <input type="text" name="playerAgeAdd" id="playerAgeAdd" />
+        <input type="number" name="playerAgeAdd" id="playerAgeAdd" />
         <label>Position:</label>
         <input type="text" name="playerPositionAdd" id="playerPositionAdd" />
         <label>Points:</label>
-        <input type="text" name="playerPointsAdd" id="playerPointsAdd" />
+        <input type="number" name="playerPointsAdd" id="playerPointsAdd" />
         <label>Assists:</label>
-        <input type="text" name="playerAssistsAdd" id="playerAssistsAdd" />
+        <input type="number" name="playerAssistsAdd" id="playerAssistsAdd" />
         <br />
         
         <button>ADD</button>
@@ -107,7 +107,7 @@
   <form action="/womenbb/deletePlayer" method="POST">
     <div class="deletePlayer">
       <label for="playerid">Player ID:</label>
-      <input type="text" name="playerIdDelete" id="playerIdDelete" />
+      <input type="number" name="playerIdDelete" id="playerIdDelete" />
       <br />
       <button>DELETE</button>
     </div>
@@ -128,12 +128,16 @@
           data-holder-rendered="true"
         />
         <div class="overlay">
+          {%if players[0] is none%}
+          <label>player not found</label>
+          {%else%}
           <label>{{players[0][1]}}</label>
           <label id="playerid">{{players[0][0]}}</label><br />
           <label>Age: {{players[0][2]}}</label><br />
           <label>Position: {{players[0][4]}}</label><br />
           <label>Points: {{players[0][5]}}</label><br />
           <label>Assists: {{players[0][6]}}</label>
+          {%endif%}
           <button id="editPlayer">edit</button>
         </div>
       </div>
@@ -183,12 +187,16 @@
           data-holder-rendered="true"
         />
         <div class="overlay">
+          {%if players[3] is none%}
+          <label>player not found</label>
+          {%else%}
           <label>{{players[3][1]}}</label>
           <label id="playerid">{{players[3][0]}}</label><br />
           <label>Age: {{players[3][2]}}</label><br />
           <label>Position: {{players[3][4]}}</label><br />
           <label>Points: {{players[3][5]}}</label><br />
           <label>Assists: {{players[3][6]}}</label>
+          {%endif%}
         </div>
       </div>
     </div>
