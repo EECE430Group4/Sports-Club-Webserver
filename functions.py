@@ -104,6 +104,16 @@ def addItem(name, Sstock, Mstock, Lstock, price):
     cursor.close()
     conn.close()
 
+def getItem(itemid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
 def deleteItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -111,6 +121,17 @@ def deleteItem(itemid):
     conn.commit()
     cursor.close()
     conn.close()
+
+def getTicket(ticketid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select ticketid, oppteam, tickettime, arena, ticketprice from tickets WHERE ticketid="+str(ticketid)+"")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    print(res)
+    return res
 
 
 def addGames(sport, club1, score, club2, date):

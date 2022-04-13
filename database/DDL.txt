@@ -36,7 +36,16 @@ CREATE TABLE shop (
 );
   
 INSERT INTO shop VALUES (1,10,10,10,20,'T-shirt'), (2,10,10,10,20,'Shorts'), (3,10,10,10,20,'Ball'), (4,10,10,10,20,'Hoodie'), (5,10,10,10,20,'Long-sleeve'), (6,10,10,10,20,'T-shirt black'), (7,10,10,10,20,'T-shirt'), (8,10,10,10,20,'T-shirt');
-  
+
+CREATE TABLE tickets (
+	ticketid	int PRIMARY KEY,
+	oppteam	text NOT NULL,
+	tickettime	datetime NOT NULL,
+	arena	text NOT NULL,
+	ticketprice	int NOT NULL
+);
+
+INSERT INTO tickets VALUES (-1, 'AWAY', '2022/04/20 2:00:00', 'Wembley Stadium', 100), (-2, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-3, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-4, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-5, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-6, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-7, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100); 
   
 create table posts (
   username TEXT NOT NULL,
