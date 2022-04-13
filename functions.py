@@ -74,21 +74,41 @@ def getPlayers(team):
     conn.close()
     return players
 
-def getItem(row):
+def getItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute(
-        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE rownum="+str(row)+"")
+        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
     res = cursor.fetchall()
     cursor.close()
     conn.close()
-    return (res[0][0], res[0][1], res[0][2], res[0][3], res[0][4], res[0][5])
+    return res
+
+def addItem(name, Sstock, Mstock, Lstock, price):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select shopitemid from shop ORDER BY shopitemid DESC LIMIT 1")
+    res= cursor.fetchall()
+    lastId=res[0][0]
+    newId= str(int(lastId)+1)
+    
+    cursor.execute("INSERT INTO shop (shopitemid, sizeSstock, sizeMstock, sizeLstock, itemprice, itemName) VALUES ('"+newId+"', '"+Sstock+"', '"+Mstock+"','"+Lstock+"', '"+price+"', '"+name+"')")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def deleteItem(itemid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM shop WHERE shopitemid= '"+itemid+"'")
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 def addGames(sport,club1,score,club2,date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    return players
     SQL = '''insert into games (sport,club1,score,club2,date) values ('{}','{}','{}','{}','{}')'''.format (sport,club1,score,club2,date)
     cursor.execute(SQL)
     conn.commit()
