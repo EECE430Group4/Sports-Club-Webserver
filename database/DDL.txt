@@ -48,16 +48,14 @@ create table posts (
   PRIMARY KEY(username,dateposted)
 );
 
-
 CREATE TABLE games (
+  ID INTEGER primary key AUTOINCREMENT,
   sport TEXT not null,
   club1 text not null,
   score text not null,
   club2 text not null,
-  gamedate date not null,
-  PRIMARY KEY (sport,club1,club2,gamedate)
+  gamedate date not null
 )
-
 
 
 

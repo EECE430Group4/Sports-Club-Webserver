@@ -272,29 +272,12 @@
                 <th scope="col">Club2</th>
                 <th scope="col">Date</th>
                 {% if 'ADMIN' in role%}
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
+                <th scope="col">ID</th>
                 {% endif %}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Women's Basketball</td>
-                <td>Team1</td>
-                <td>2-0</td>
-                <td>Team2</td>
-                <td>22/03/2022</td>
-                {%if 'ADMIN' in role%}
-                <td><form action="/" method="POST" autocomplete="off">
-                  <input type="hidden" name="fixture" value="1">
-                  <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT</button>
-                </form></td>
-                <td><form action="/" method="POST" autocomplete="off">
-                  <input type="hidden" name="fixture" value="1">
-                  <button id="edit-button" class="btn btn-xs" type="submit" style="color:black">DELETE</button>
-                </form></td>
-                {%endif%}
-              </tr>
+              <!--
               <tr>
                 <td>Women's Football</td>
                 <td>Team1</td>
@@ -322,14 +305,18 @@
                 <td>-</td>
                 <td>Team2</td>
                 <td>1/04/2022</td>
-              </tr>
+              </tr>-->
+              {%for game in games%}
               <tr>
-                <td>Women's Football</td>
-                <td>Team1</td>
-                <td>-</td>
-                <td>Team2</td>
-                <td>4/04/2022</td>
+                <td>{{game[1]}}</td>
+                <td>{{game[2]}}</td>
+                <td>{{game[3]}}</td>
+                <td>{{game[4]}}</td>
+                <td>{{game[5]}}</td>
+                <td>{{game[0]}}</td>
               </tr>
+              {%endfor%}
+              <!--
               <tr>
                 <td>Men's Football</td>
                 <td>Team1</td>
@@ -344,20 +331,22 @@
                 <td>Team2</td>
                 <td>8/04/2022</td>
               </tr>
-              <tr>
+              <tr
                 <td>Women's Football</td>
                 <td>Team1</td>
                 <td>-</td>
                 <td>Team2</td>
                 <td>10/04/2022</td>
-              </tr>
+              </tr>-->
             </tbody>
           </table>
           {%if 'ADMIN' in role%}
-          <form action="/" method="POST" autocomplete="off">
-            <input type="hidden" name="fixture" value="1">
-            <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD GAME</button>
-          </form>
+            <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD GAME</button>
+                  <br> <br>
+                  <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT GAME</button>
+                  <input type="hidden" name="fixture" value="1">
+                  <br> <br>
+                  <button id="edit-button" class="btn btn-xs" type="submit" data-toggle="modal" data-target="#deleteModal" style="color:black" >DELETE GAME</button>
           {%endif%}
         </div>
         <div class="col-lg-4 mb-4">
@@ -445,20 +434,29 @@
                   </button>
               </div>
               <div class="modal-body">
+                <form action="/editGames" method="POST">
+                <h>ID of Game:</h>
+                <select name="gameid">
+                  {%for game in games%}
+                  <option value={{game[0]}}>{{game[0]}}</option>
+                  {% endfor %}
+                </select>
+                <br>
                 <h>Sport:</h>
-                <p><input type="text" id="sport"></p>
+                <p><input type="text" name="sportEdit"></p>
                 <h>Club1:</h>
-                <p><input type="text" id="club1"></p>
+                <p><input type="text" name="club1Edit"></p>
                 <h>Club2:</h>
-                <p><input type="text" id="club2"></p>
+                <p><input type="text" name="club2Edit"></p>
                 <h>Score:</h>
-                <p><input type="text" id="score"></p>
+                <p><input type="text" name="scoreEdit"></p>
                 <h>Date:</h>
-                <p><input type="date" id="date"></p>
+                <p><input type="date" name="dateEdit"></p>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
               </div>
           </div>
       </div>
@@ -468,29 +466,60 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="editModalLabel">Add Game</h2>
+                <h2 class="modal-title" id="addModalLabel">Add Game</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+              <form action="/addGame" method="POST">
               <h>Sport:</h>
-              <p><input type="text" id="sport"></p>
+              <p><input type="text" name="sportAdd"></p>
               <h>Club1:</h>
-              <p><input type="text" id="club1"></p>
+              <p><input type="text" name="club1Add"></p>
               <h>Club2:</h>
-              <p><input type="text" id="club2"></p>
+              <p><input type="text" name="club2Add"></p>
               <h>Score:</h>
-              <p><input type="text" id="score"></p>
+              <p><input type="text" name="scoreAdd"></p>
               <h>Date:</h>
-              <p><input type="date" id="date"></p>
+              <p><input type="date" name="dateAdd"></p>
+              <button type="submit" class= "btn btn-primary" >Submit</button>
+              </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2 class="modal-title" id="addModalLabel">Delete Game</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <form action="/deleteGames" method="POST">
+              <h>ID of Game:</h>
+              <select name="deleteid">
+                {%for game in games%}
+                <option value={{game[0]}}>{{game[0]}}</option>
+                {% endfor %}
+              </select>
+              <br>
+            <button type="submit" class= "btn btn-primary" >Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              
+          </div>
+      </div>
+  </div>
 </div>
 
   </body>
