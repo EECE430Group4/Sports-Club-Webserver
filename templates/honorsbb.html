@@ -82,185 +82,166 @@
     </nav>
     <!--END OF HEADER-->
 
-    <!--START HONORS' ROWS-->
-    <div class="honorsAll">
-      {% if 'ADMIN' in role%}
-      <div class="adminContents">
-        <div class="honorRow adminButtons">
-          <h3>ADD NEW TROPHY</h3>
-          <form action="/honorsbb/addTrophyB" method="POST">
-            <div class="add-row">
-              <label>Trophy:</label>
-              <input type="text" name="title_add" id="title_add" required />
-              <label>Year:</label>
-              <input
-                type="number"
-                name="year_add"
-                id="year_add"
-                max="2022"
-                min="1"
-                required
-              />
-              <br />
+  <div class="allContent">
 
-              <button>ADD TROPHY</button>
-            </div>
-          </form>
-        </div>
-        <div class="honorRow adminButtons">
-          <h3>DELETE TROPHY</h3>
-          <form action="/honorsbb/deleteTrophyB" method="POST">
-            <div class="delete-row">
-              <label for="trophyid">Trophy ID</label>
-              <input
-                type="number"
-                name="trophy_id_delete"
-                id="trophy_id_delete"
-                min="1"
-                required
-              />
-              <br />
-              <button>DELETE TROPHY</button>
-            </div>
-          </form>
-        </div>
+    
+    {% if 'ADMIN' in role%}
+    <div class="adminAll"> 
+      <div class="add-row">
+      <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+        <input type="hidden" name="addbut" value="5">
+        <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
+      <!-- </form> -->
       </div>
-      {% endif %}
-      <!-- HONOR ROW  VERSION 1-->
-      <div class="honorRow">
-        <div class="bringToFrontDiv descriptiveImage">
-          <img
-            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
-            alt=""
-          />
-          <!--THEY CAN EDIT THESE-->
-        </div>
-        <div class="bringToFrontDiv descriptive">
-          <div class="descriptionRibbon">
-            <img
-              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
-              alt=""
-            />
-          </div>
-          <div class="description">
-            <h3>{{trophies[0][1]}}</h3>
-            <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[0][2]}}</h4>
-            <h4>Trophy Id {{trophies[0][0]}}</h4>
-            <!--THEY CAN EDIT THESE-->
-          </div>
-          <!--
-            {% if 'ADMIN' in role%}
-            <form action="/honorsBB" method="POST" autocomplete="off">
-              <input type="hidden" name="editbut" value="1">
-              <button id="editbut" class="button" type="submit">EDIT</button>
-            </form> 
-            {% endif %}
-            -->
-        </div>
+      <div class="delete-row">
+        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+          <input type="hidden" name="deletebut" value="5">
+          <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
+        <!-- </form> -->
       </div>
-      <div class="honorRow">
-        <div class="bringToFrontDiv descriptiveImage">
-          <img
-            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
-            alt=""
-          />
-          <!--THEY CAN EDIT THESE-->
-        </div>
-        <div class="bringToFrontDiv descriptive">
-          <div class="descriptionRibbon">
-            <img
-              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
-              alt=""
-            />
-          </div>
-          <div class="description">
-            <h3>{{trophies[1][1]}}</h3>
-            <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[1][2]}}</h4>
-            <h4>Trophy Id {{trophies[1][0]}}</h4>
-            <!--THEY CAN EDIT THESE-->
-            <!--THEY CAN EDIT THESE-->
-          </div>
-          <!--
-            {% if 'ADMIN' in role%}
-            <form action="/honorsBB" method="POST" autocomplete="off">
-              <input type="hidden" name="editbut" value="1">
-              <button id="editbut" class="button" type="submit">EDIT</button>
-            </form> 
-            {% endif %}
-            -->
-        </div>
-      </div>
-      <div class="honorRow">
-        <div class="bringToFrontDiv descriptiveImage">
-          <img
-            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
-            alt=""
-          />
-          <!--THEY CAN EDIT THESE-->
-        </div>
-        <div class="bringToFrontDiv descriptive">
-          <div class="descriptionRibbon">
-            <img
-              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
-              alt=""
-            />
-          </div>
-          <div class="description">
-            <h3>{{trophies[2][1]}}</h3>
-            <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[2][2]}}</h4>
-            <h4>Trophy Id {{trophies[2][0]}}</h4>
-            <!--THEY CAN EDIT THESE-->
-            <!--THEY CAN EDIT THESE-->
-          </div>
-          <!--
-            {% if 'ADMIN' in role%}
-            <form action="/honorsBB" method="POST" autocomplete="off">
-              <input type="hidden" name="editbut" value="1">
-              <button id="editbut" class="button" type="submit">EDIT</button>
-            </form> 
-            {% endif %}
-            -->
-        </div>
-      </div>
-      <div class="honorRow">
-        <div class="bringToFrontDiv descriptiveImage">
-          <img
-            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
-            alt=""
-          />
-          <!--THEY CAN EDIT THESE-->
-        </div>
-        <div class="bringToFrontDiv descriptive">
-          <div class="descriptionRibbon">
-            <img
-              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
-              alt=""
-            />
-          </div>
-          <div class="description">
-            <h3>{{trophies[3][1]}}</h3>
-            <!--THEY CAN EDIT THESE-->
-            <h4>{{trophies[3][2]}}</h4>
-            <h4>Trophy Id {{trophies[3][0]}}</h4>
-            <!--THEY CAN EDIT THESE-->
-            <!--THEY CAN EDIT THESE-->
-          </div>
-          <!--
-            {% if 'ADMIN' in role%}
-            <form action="/honorsBB" method="POST" autocomplete="off">
-              <input type="hidden" name="editbut" value="1">
-              <button id="editbut" class="button" type="submit">EDIT</button>
-            </form> 
-            {% endif %}
-            -->
-        </div>
+      <div class="edit-row">
+          <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+            <input type="hidden" name="editbut" value="5">
+            <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
+          <!-- </form> -->
       </div>
     </div>
-
+    {% endif %}
+      <!--START HONORS' ROWS-->
+    <div class="honorsAll">
+      <!-- HONOR ROW  VERSION 1-->
+      {%for trophy in trophies%}
+      <div class="honorRow">
+        <div class="bringToFrontDiv descriptiveImage">
+          <img
+            src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
+            alt=""
+          />
+          <!--THEY CAN EDIT THESE-->
+        </div>
+        <div class="bringToFrontDiv descriptive">
+          <div class="descriptionRibbon">
+            <img
+              src="{{url_for('static', filename='css/images/honors/ribbon.png')}}"
+              alt=""
+            />
+          </div>
+          <div class="description">
+            <h3>{{trophy[1]}}</h3>
+            <!--THEY CAN EDIT THESE-->
+            <h4>{{trophy[2]}}</h4>
+            {% if 'ADMIN' in role%}
+            <h4>Trophy Id {{trophy[0]}}</h4>
+            {%endif%}
+            <!--THEY CAN EDIT THESE-->
+          </div>
+          <!--
+            {% if 'ADMIN' in role%}
+            <form action="/honorsBB" method="POST" autocomplete="off">
+              <input type="hidden" name="editbut" value="1">
+              <button id="editbut" class="button" type="submit">EDIT</button>
+            </form> 
+            {% endif %}
+            -->
+        </div>
+      </div>
+      {%endfor%}
+    </div>
     <!--END HONORS' ROWS-->
+  </div>
+
+
+
+    <!--EDIT MODAL-->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Edit Honor</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="/honorsbb/editTrophyB" method="POST">
+                <h>ID of Honor:</h>     
+                  <select name="trophy_id" id="my_select">
+                    {%for trophy in trophies%}
+                    <option value={{trophy[0]}}>{{trophy[0]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <h>Title:</h>
+                <input type="text" name="titleEdit" id="txt">
+                <h>Year:</h>
+                <input type="number" name="yearEdit" id="yr" ></p>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!--END OF EDIT MODAL-->
+
+    <!--ADD MODAL-->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Add Honor</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="/honorsbb/addTrophyB" method="POST">
+                <h>Title:</h>
+                <input type="text" name="title_add">
+                <h>Year:</h>
+                <input type="number" name="year_add" max="2022" min="1910" ></p>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!--END OF ADD MODAL-->
+
+    <!--DELETE MODAL-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Delete Honor</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="/honorsbb/deleteTrophyB" method="POST">
+                <h>ID of Honor:</h>     
+                  <select name="trophy_id_delete">
+                    {%for trophy in trophies%}
+                    <option value={{trophy[0]}}>{{trophy[0]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!--END OF DELETE MODAL-->
 
     <!-- Footer -->
     <footer class="page-footer" class="navbar-fixed-footer">

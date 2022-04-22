@@ -221,7 +221,6 @@ def deletePlayer(team):
 
 # --------------------------- FIXTURES ---------------------------
 
-
 @app.route('/fixtures')
 def getFixtures():
     if 'user' in session:
@@ -481,7 +480,6 @@ def getTickets():
 
 # --------------------------- HONORS FOOTBALL---------------------------
 
-
 @app.route('/honorsfb', methods=['GET', 'POST'])
 def getHonorsFB():
     if 'user' in session:
@@ -490,10 +488,10 @@ def getHonorsFB():
     else:
         user = None
         role = ""
+    
     trophies = []
     trophies = functions.getTrophyBS("football")
     return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
-
 
 @app.route('/honorsfb/addTrophyF', methods=['POST'])
 def addTrophyF():
@@ -507,9 +505,6 @@ def addTrophyF():
         return redirect(url_for('main'))
     title = request.form["title_add"]
     year = request.form["year_add"]
-    trophyF = []
-    for i in range(1, 6):
-        trophyF.append(functions.getTrophyB(i, "football"))
     functions.addTrophiesB(title, year, "football")
     return(redirect(url_for('getHonorsFB')))
 
@@ -518,16 +513,25 @@ def addTrophyF():
 def deleteTrophyF():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
-
     trophy_id = request.form["trophy_id_delete"]
-    trophyF = []
-    for i in range(1, 6):
-        trophyF.append(functions.getTrophyB(i, "football"))
     functions.deleteTrophyB(trophy_id, "football")
     return(redirect(url_for('getHonorsFB')))
 
+@app.route('/honorsfb/editTrophyF', methods=['GET', 'POST'])
+def editTrophyF():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None            
+    ID=request.form["trophy_id"]
+    title = request.form['titleEdit']
+    year = request.form['yearEdit']
+    functions.editTrophy(ID,title,year,"football")
+    return (redirect(url_for('getHonorsFB')))
 
 # --------------------------- HONORS BASKETBALL ---------------------------
 
@@ -570,15 +574,22 @@ def deleteTrophyB():
         user = session['user']
     else:
         user = None
-
     trophy_id = request.form["trophy_id_delete"]
-    trophyB = []
-    for i in range(1, 6):
-        trophyB.append(functions.getTrophyB(i, "basketball"))
     functions.deleteTrophyB(trophy_id, "basketball")
     return(redirect(url_for('getHonorsBB')))
 
-
+@app.route('/honorsbb/editTrophyB', methods=['GET', 'POST'])
+def editTrophyB():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None            
+    ID=request.form["trophy_id"]
+    title = request.form['titleEdit']
+    year = request.form['yearEdit']
+    functions.editTrophy(ID,title,year,"basketball")
+    return (redirect(url_for('getHonorsBB')))
 # -------------------------- COMMUNITY -------------------------------
 
 

@@ -181,6 +181,7 @@ def editGames(ID, sport, club1, score, club2, date):
     conn.commit()
     cursor.close()
     conn.close()
+    
 
 
 def deleteGames(ID):
@@ -298,33 +299,6 @@ def deleteTrophyB(trophy_id, sport):
     cursor.close()
     conn.close()
 
-
-def getGames():
-    conn = sqlite3.connect('database/430Group4.db')
-    cursor = conn.cursor()
-    cursor.execute("select * from games")
-    res = cursor.fetchall()
-    games = []
-    for row in res:
-        games.append(row)
-    cursor.close()
-    conn.close()
-    return games
-
-
-def getGames():
-    conn = sqlite3.connect('database/430Group4.db')
-    cursor = conn.cursor()
-    cursor.execute("select * from games")
-    res = cursor.fetchall()
-    games = []
-    for row in res:
-        games.append(row)
-    cursor.close()
-    conn.close()
-    return games
-
-
 def getTrophyBS(sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -333,17 +307,53 @@ def getTrophyBS(sport):
     trophies = []
     for row in res:
         trophies.append(row)
-    length = len(trophies)
-    remaining = 50-length
-    i = 0
-    for i in range(0, remaining):
-        trophies.append([None])
-        i = i+1
-
     cursor.close()
     conn.close()
     return trophies
 
+def getTrophyOne(aid,sport):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select trophy, year from honors WHERE trophy_id='"+str(aid)+"'AND sport='"+sport+"'")
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return list(res)
+
+def editTrophy(ID,title,year,sport):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE honors SET trophy ='" + title+"', year ='" + year+"', sport ='"+sport+"' WHERE trophy_id='"+str(ID)+"'"
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def getGames():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from games")
+    res = cursor.fetchall()
+    games = []
+    for row in res:
+        games.append(row)
+    cursor.close()
+    conn.close()
+    return games
+
+
+def getGames():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from games")
+    res = cursor.fetchall()
+    games = []
+    for row in res:
+        games.append(row)
+    cursor.close()
+    conn.close()
+    return games
 
 def changeUser(user, username):
     conn = sqlite3.connect('database/430Group4.db')

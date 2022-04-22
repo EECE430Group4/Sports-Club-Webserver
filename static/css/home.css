@@ -5,6 +5,34 @@ body{
     background-size: cover;
 
 }
+
+.navbar{
+    box-shadow: 0 0.3rem 0.4rem 4px rgb(0 0 0 / 25%);
+    margin: 0;
+    border: 0;
+    min-height:100%;
+ 
+ }
+ .navbar-fixed-footer{
+     position:fixed;
+     margin-bottom:0; 
+ 
+ }
+ .bringToFrontDiv{
+     background: rgba(219, 223, 230, 0.2);
+     border-radius: 0;
+ }
+ 
+footer{
+
+}
+
+.mod-footer{
+}
+.div-footer{
+    background: rgba(219, 223, 230, 0.2);
+
+}
 .navbar{
    box-shadow: 0 0.3rem 0.4rem 4px rgb(0 0 0 / 25%);
    margin: 0;
@@ -190,4 +218,6 @@ div.content article{
     height:250px;
     width:500px;
 }
+
+
 
