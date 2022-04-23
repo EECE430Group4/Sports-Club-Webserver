@@ -163,7 +163,7 @@
                   </button>
               </div>
               <div class="modal-body">
-                <form action="/honorsbb/editTrophyB" method="POST">
+                <form action="/honorsbb/editTrophyB" id="editFormB" method="POST">
                 <h>ID of Honor:</h>     
                   <select name="trophy_id" id="my_select">
                     {%for trophy in trophies%}
@@ -175,10 +175,11 @@
                 <input type="text" name="titleEdit" id="txt">
                 <h>Year:</h>
                 <input type="number" name="yearEdit" id="yr" ></p>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                
                 </form>
               </div>
               <div class="modal-footer">
+                  <button type="submit" form="editFormB"class="btn btn-primary">Submit</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
           </div>
@@ -197,15 +198,15 @@
                   </button>
               </div>
               <div class="modal-body">
-                <form action="/honorsbb/addTrophyB" method="POST">
+                <form action="/honorsbb/addTrophyB" id="addFormB" method="POST">
                 <h>Title:</h>
                 <input type="text" name="title_add">
                 <h>Year:</h>
                 <input type="number" name="year_add" max="2022" min="1910" ></p>
-                <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
               </div>
               <div class="modal-footer">
+                <button type="submit" form="addFormB" class="btn btn-primary">Submit</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
           </div>
@@ -224,7 +225,7 @@
                   </button>
               </div>
               <div class="modal-body">
-                <form action="/honorsbb/deleteTrophyB" method="POST">
+                <form action="/honorsbb/deleteTrophyB" id="deleteB"method="POST">
                 <h>ID of Honor:</h>     
                   <select name="trophy_id_delete">
                     {%for trophy in trophies%}
@@ -232,10 +233,11 @@
                     {% endfor %}
                 </select>
                 <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+              
                 </form>
               </div>
               <div class="modal-footer">
+                <button type="submit" form="deleteB"class="btn btn-primary">Submit</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
           </div>

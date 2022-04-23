@@ -145,7 +145,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <form action="/honorsfb/editTrophyF" method="POST">
+                  <form action="/honorsfb/editTrophyF" id="editFormF" method="POST">
                   <h>ID of Honor:</h>     
                     <select name="trophy_id">
                       {%for trophy in trophies%}
@@ -157,10 +157,11 @@
                   <input type="text" name="titleEdit">
                   <h>Year:</h>
                   <input type="number" name="yearEdit" ></p>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                 
                   </form>
                 </div>
                 <div class="modal-footer">
+                  <button type="submit" form="editFormF"class="btn btn-primary">Submit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -179,15 +180,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <form action="/honorsbb/addTrophyB" method="POST">
-                  <h>Title:</h>
+                  <form action="/honorsfb/addTrophyF" id="addFormF" method="POST">
+                  <h>Title</h>
                   <input type="text" name="title_add">
-                  <h>Year:</h>
+                  <h>Year</h>
                   <input type="number" name="year_add" max="2022" min="1910" ></p>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                 
                   </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" form="addFormF" class="btn btn-primary">Submit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -206,7 +208,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <form action="/honorsfb/deleteTrophyF" method="POST">
+                  <form action="/honorsfb/deleteTrophyF" id="deleteF"method="POST">
                   <h>ID of Honor:</h>     
                     <select name="trophy_id_delete">
                       {%for trophy in trophies%}
@@ -214,10 +216,11 @@
                       {% endfor %}
                   </select>
                   <br>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  
                   </form>
                 </div>
                 <div class="modal-footer">
+                  <button type="submit" form="deleteF"class="btn btn-primary">Submit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -226,7 +229,8 @@
     <!--END OF DELETE MODAL-->
 
     <!-- Footer -->
-<footer class="page-footer " class="navbar-fixed-footer">
+  <div class="footer-footer">
+    <footer class="page-footer " class="navbar-fixed-footer">
   <!-- Copyright -->
   <div
     class="footer-copyright text-center py-3"
@@ -237,7 +241,8 @@
     <a> WebsiteName</a>
   </div>
   <!-- Copyright -->
-</footer>
+    </footer>
+  </div>
 <!-- Footer -->
 
 
