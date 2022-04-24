@@ -329,7 +329,7 @@ def getShop():
         user = None
         role = ""
 
-    items = functions.getItem2()
+    items = functions.getItem()
     print(items)
     if request.method == 'POST':
         if 'addcartbut' in request.form:
@@ -385,7 +385,7 @@ def deleteItem():
 
 
 # --------------------------- TICKETS ---------------------------
-'''
+
 @app.route('/tickets', methods=['GET', 'POST'])
 def getTicket():
     if 'user' in session:
@@ -395,59 +395,58 @@ def getTicket():
         user = None
         role = ""
 
-    tickets = []
-    for i in range(-1, -7, -1):
-        tickets.append(functions.getTicket(i))
-
-    print("-----------")
+    tickets = functions.getTicket()
     print(tickets)
+    if request.method == 'POST':
+        if 'addcartbut' in request.form:
+            return redirect(url_for('addTicketCart', ticketid=request.form["ticketid"]))
 
     return render_template('tickets.html', user=user, role=role, tickets=tickets)
 
 
-@app.route('/shop/additemcart/<itemid>')
-def addItemCart(itemid):
+@app.route('/tickets/addticketcart/<ticketid>')
+def addTicketCart(ticketid):
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
         user = None
         role = ""
-    session['cart'].append(itemid)
+    session['cart'].append(ticketid)
 
-    return(redirect(url_for('getShop')))
+    return(redirect(url_for('getTicket')))
 
-@app.route('/shop/additem', methods=['POST'])
-def addItem():
+@app.route('/ticket/addticket', methods=['POST'])
+def addTicket():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
         user = None
 
-    name= request.form["itemNameAdd"]
-    price= request.form["itemPriceAdd"]
-    Sstock= request.form["itemsizeSAdd"]
-    Mstock= request.form["itemsizeMAdd"]
-    Lstock= request.form["itemsizeLAdd"]
+    oppteam= request.form["oppTeamAdd"]
+    tickettime= request.form["ticketTimeAdd"]
+    arena= request.form["arenaAdd"]
+    price= request.form["ticketPriceAdd"]
+    stock= request.form["ticketStockAdd"]
 
-    functions.addItem(name,Sstock, Mstock, Lstock, price)
+    functions.addTicket(oppteam,tickettime, arena, price, stock)
 
-    return(redirect(url_for('getShop')))
+    return(redirect(url_for('getTicket')))
 
-@app.route('/shop/deleteItem', methods=['POST'])
-def deleteItem():
+@app.route('/ticket/deleteTicket', methods=['POST'])
+def deleteTicket():
     if 'user' in session:
         user = session['user']
     else:
         user = None
 
-    itemid= request.form["itemidRemove"]
+    ticketid= request.form["ticketidRemove"]
 
-    functions.deleteItem(itemid)
+    functions.deleteTicket(ticketid)
 
-    return(redirect(url_for('getShop')))
-'''
+    return(redirect(url_for('getTicket')))
+
 
 # --------------------------- PROFILE ---------------------------
 
@@ -505,16 +504,6 @@ def changeProfileSetting():
     functions.changePassword(user, password)
     return redirect(url_for('getProfileSetting'))
 
-# --------------------------- TICKETS ---------------------------
-
-
-@app.route('/tickets')
-def getTickets():
-    if 'user' in session:
-        user = session['user']
-    else:
-        user = None
-    return render_template('tickets.html', user=user)
 
 
 # --------------------------- HONORS FOOTBALL---------------------------
