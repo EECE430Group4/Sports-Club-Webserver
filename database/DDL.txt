@@ -47,10 +47,11 @@ CREATE TABLE tickets (
 	oppteam	text NOT NULL,
 	tickettime	datetime NOT NULL,
 	arena	text NOT NULL,
-	ticketprice	int NOT NULL
+	ticketprice	int NOT NULL,
+  stock int NOT NULL
 );
 
-INSERT INTO tickets VALUES (-1, 'AWAY', '2022/04/20 2:00:00', 'Wembley Stadium', 100), (-2, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-3, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-4, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-5, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-6, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100), (-7, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100); 
+INSERT INTO tickets VALUES (-1, 'AWAY', '2022/04/20 2:00:00', 'Wembley Stadium', 100, 20), (-2, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100, 20), (-3, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100, 20), (-4, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100, 20), (-5, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100, 20), (-6, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100, 20), (-7, 'AWAY', '2022/04/20 3:00:00', 'Camp Nou', 100, 20); 
   
 create table posts (
   username TEXT NOT NULL,

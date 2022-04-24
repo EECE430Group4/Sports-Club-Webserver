@@ -82,35 +82,25 @@ def getPlayers(team):
     return players
 
 
-def getItem(itemid):
-    conn = sqlite3.connect('database/430Group4.db')
-    cursor = conn.cursor()
-    cursor.execute(
-        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
-    res = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return res
 
-
-def getItem2():
+def getItem():
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute("select * from shop")
     res = cursor.fetchall()
-    tickets = []
+    items = []
     for row in res:
-        tickets.append(row)
-    length = len(tickets)
+        items.append(row)
+    length = len(items)
     remaining = 50-length
     i = 0
     for i in range(0, remaining):
-        tickets.append([None])
+        items.append([None])
         i = i+1
 
     cursor.close()
     conn.close()
-    return tickets
+    return items
 
 
 def addItem(name, Sstock, Mstock, Lstock, price):
@@ -129,16 +119,6 @@ def addItem(name, Sstock, Mstock, Lstock, price):
     conn.close()
 
 
-def getItem(itemid):
-    conn = sqlite3.connect('database/430Group4.db')
-    cursor = conn.cursor()
-    cursor.execute(
-        "select sizeSstock, sizeMstock, sizeLstock, itemprice, itemName, shopitemid from shop WHERE shopitemid="+str(itemid)+"")
-    res = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return res
-
 
 def deleteItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
@@ -149,16 +129,47 @@ def deleteItem(itemid):
     conn.close()
 
 
-def getTicket(ticketid):
+def getTicket():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("select * from tickets")
+    res = cursor.fetchall()
+    tickets = []
+    for row in res:
+        tickets.append(row)
+    length = len(tickets)
+    remaining = 50-length
+    i = 0
+    print(remaining)
+    for i in range(0, remaining):
+       ## tickets.append([None])
+        i = i+1
+    cursor.close()
+    conn.close()
+    return tickets
+
+def addTicket(oppteam, tickettime, arena, price, stock):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute(
-        "select ticketid, oppteam, tickettime, arena, ticketprice from tickets WHERE ticketid="+str(ticketid)+"")
+        "select ticketid from tickets ORDER BY ticketid ASC LIMIT 1")
     res = cursor.fetchall()
+    lastId = res[0][0]
+    newId = str(int(lastId)-1)
+
+    cursor.execute("INSERT INTO tickets (ticketid, oppteam, tickettime, arena, ticketprice, stock) VALUES ('" +
+                   newId+"', '"+oppteam+"', '"+tickettime+"','"+arena+"', '"+price+"', '"+stock+"')")
+    conn.commit()
     cursor.close()
     conn.close()
-    print(res)
-    return res
+
+def deleteTicket(ticketid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM tickets WHERE ticketid= '"+ticketid+"'")
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 def addGames(sport, club1, score, club2, date):
