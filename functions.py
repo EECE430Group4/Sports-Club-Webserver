@@ -250,6 +250,15 @@ def addPlayerWomenbb(name, age, position, points, assists):
     cursor.close()
     conn.close()
 
+def editPlayerWomenbb(id, name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE players set name='"+name+"', age='"+age+"', team = 'womenbb' , position='"+position+"', points='"+points+"', assists='"+assists+"' WHERE playerid= '"+id+"' "
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 
 def deletePlayerWomenbb(playerid):
     conn = sqlite3.connect('database/430Group4.db')
@@ -258,6 +267,8 @@ def deletePlayerWomenbb(playerid):
     conn.commit()
     cursor.close()
     conn.close()
+
+
 
 
 def getTrophyB(aid, sport):

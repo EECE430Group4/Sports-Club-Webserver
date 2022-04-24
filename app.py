@@ -219,6 +219,35 @@ def deletePlayer(team):
 
     return(redirect(url_for('main')))
 
+@app.route('/<team>/editPlayer', methods=['POST'])
+def editPlayer(team):
+
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+
+    id= request.form["playerIdEdit"]
+    name = request.form["playerNameEdit"]
+    age = request.form["playerAgeEdit"]
+    position = request.form["playerPositionEdit"]
+    points = request.form["playerPointsEdit"]
+    assists = request.form["playerAssistsEdit"]
+
+    if team == "womenfb":
+        return(render_template('womenfb.html', user=user))
+    elif team == "womenbb":
+        players = functions.getPlayers(team)
+        functions.editPlayerWomenbb(id, name, age, position, points, assists)
+        return(redirect(url_for('getTeam', team=team)))
+    elif team == "menfb":
+        return(render_template('menfb.html', user=user))
+    elif team == "menbb":
+        return(render_template('menbb.html', user=user))
+
+    return(redirect(url_for('main')))
+
 # --------------------------- FIXTURES ---------------------------
 
 @app.route('/fixtures')
