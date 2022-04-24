@@ -106,6 +106,22 @@
     ></script>
     <script>
       function verifyPassword() {
+        var str = document.getElementById("pwd").value;
+        if (
+          str.match(/[a-z]/g) &&
+          str.match(/[A-Z]/g) &&
+          str.match(/[0-9]/g) &&
+          str.match(/[^a-zA-Z\d]/g) &&
+          str.length >= 8
+        )
+          console.log("corrpwd");
+        else {
+          alert(
+            "Password must contain:\nAt least 1 uppercase character.\nAt least 1 lowercase character.\nAt least 1 digit.\nAtleast 1 Special Character.\nMinimum 8 characters."
+          );
+          return false;
+        }
+
         var pw1 = document.getElementById("pwd");
         var pw2 = document.getElementById("confpwd");
         if (pw1.value != pw2.value) {

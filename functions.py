@@ -1,3 +1,4 @@
+from calendar import c
 import sqlite3
 
 
@@ -40,6 +41,16 @@ def register(name, username, password):
     return 0
 
 
+def addArticle(title, body, headline):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute("insert into article values({},'{}','{}','{}')".format(
+        len(getArticles())+1, title, body, headline))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
 def getArticle(aid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -51,11 +62,36 @@ def getArticle(aid):
     return (res[0][0], res[0][1], res[0][2])
 
 
+def getArticles():
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select articletitle, articleheadline, articlebody, articleid from article")
+    res = cursor.fetchall()
+    articles = []
+    for row in res:
+        articles.append(row)
+    cursor.close()
+    conn.close()
+    return (articles)
+
+
 def updateArticle(aid, title, hd, body):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     SQL = "UPDATE article SET articletitle ='" + title+"', articleheadline ='" + \
         hd+"', articlebody ='"+body+"' WHERE articleid='"+str(aid)+"'"
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def delArticle(aid):
+    print("HERE IS AID", aid)
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "delete from article WHERE articleid='"+str(aid)+"'"
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
@@ -181,7 +217,6 @@ def editGames(ID, sport, club1, score, club2, date):
     conn.commit()
     cursor.close()
     conn.close()
-    
 
 
 def deleteGames(ID):
@@ -242,7 +277,7 @@ def addPlayerWomenbb(name, age, position, points, assists):
         "select playerid from players ORDER BY playerid DESC LIMIT 1")
     res = cursor.fetchall()
     lastId = res[0][0]
-    #new sql query filtered by team to set max number
+    # new sql query filtered by team to set max number
     newId = str(int(lastId)+1)
 
     cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('" +
@@ -251,10 +286,13 @@ def addPlayerWomenbb(name, age, position, points, assists):
     cursor.close()
     conn.close()
 
+
 def editPlayerWomenbb(id, name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "UPDATE players set name='"+name+"', age='"+age+"', team = 'womenbb' , position='"+position+"', points='"+points+"', assists='"+assists+"' WHERE playerid= '"+id+"' "
+    SQL = "UPDATE players set name='"+name+"', age='"+age+"', team = 'womenbb' , position='" + \
+        position+"', points='"+points+"', assists='" + \
+        assists+"' WHERE playerid= '"+id+"' "
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
@@ -268,8 +306,6 @@ def deletePlayerWomenbb(playerid):
     conn.commit()
     cursor.close()
     conn.close()
-
-
 
 
 def getTrophyB(aid, sport):
@@ -311,6 +347,7 @@ def deleteTrophyB(trophy_id, sport):
     cursor.close()
     conn.close()
 
+
 def getTrophyBS(sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -323,7 +360,8 @@ def getTrophyBS(sport):
     conn.close()
     return trophies
 
-def getTrophyOne(aid,sport):
+
+def getTrophyOne(aid, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute(
@@ -333,15 +371,18 @@ def getTrophyOne(aid,sport):
     conn.close()
     return list(res)
 
-def editTrophy(ID,title,year,sport):
+
+def editTrophy(ID, title, year, sport):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "UPDATE honors SET trophy ='" + title+"', year ='" + year+"', sport ='"+sport+"' WHERE trophy_id='"+str(ID)+"'"
+    SQL = "UPDATE honors SET trophy ='" + title+"', year ='" + \
+        year+"', sport ='"+sport+"' WHERE trophy_id='"+str(ID)+"'"
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
     conn.close()
 
+
 def getGames():
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -366,6 +407,7 @@ def getGames():
     cursor.close()
     conn.close()
     return games
+
 
 def changeUser(user, username):
     conn = sqlite3.connect('database/430Group4.db')

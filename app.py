@@ -1,11 +1,6 @@
-from asyncio import trsock
-from turtle import update
 from flask import Flask, render_template, redirect, url_for, session, request, abort
 import functions
 import sqlite3
-
-import datetime
-
 import datetime
 
 
@@ -84,35 +79,34 @@ def getNews():
         user = None
         role = ""
 
-    articles = []
-    for i in range(1, 6):
-        articles.append(functions.getArticle(i))
+    articles = functions.getArticles()
 
     if request.method == 'POST':
         if 'readbut' in request.form:
-            if request.form["readbut"] == "1":
-                return redirect(url_for('getArticle', anum=1))
-            elif request.form["readbut"] == "2":
-                return redirect(url_for('getArticle', anum=2))
-            elif request.form["readbut"] == "3":
-                return redirect(url_for('getArticle', anum=3))
-            elif request.form["readbut"] == "4":
-                return redirect(url_for('getArticle', anum=4))
-            elif request.form["readbut"] == "5":
-                return redirect(url_for('getArticle', anum=5))
+            return redirect(url_for('getArticle', anum=request.form['readbut']))
         elif 'editbut' in request.form:
-            if request.form["editbut"] == "1":
-                return redirect(url_for('editArticle', anum=1))
-            elif request.form["editbut"] == "2":
-                return redirect(url_for('editArticle', anum=2))
-            elif request.form["editbut"] == "3":
-                return redirect(url_for('editArticle', anum=3))
-            elif request.form["editbut"] == "4":
-                return redirect(url_for('editArticle', anum=4))
-            elif request.form["editbut"] == "5":
-                return redirect(url_for('editArticle', anum=5))
+            return redirect(url_for('editArticle', anum=request.form['editbut']))
+        elif 'delbut' in request.form:
+            return redirect(url_for('delArticle', anum=request.form['delbut']))
+    return render_template('news.html', user=user, role=role, articles=articles, num=len(articles))
 
-    return render_template('news.html', user=user, role=role, articles=articles)
+
+@app.route('/news/add', methods=['GET', 'POST'])
+def addArticle():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+        if role != 'ADMIN':
+            return redirect(url_for('main'))
+        if request.method == 'POST':
+            title = request.form['title']
+            headline = request.form['headline']
+            body = request.form['body']
+            functions.addArticle(title, headline, body)
+            return redirect(url_for('getNews'), code=303)
+        return render_template('addarticle.html', user=user, role=role)
+    else:
+        return redirect(url_for('main'))
 
 
 @app.route('/news/article/<anum>', methods=['GET'])
@@ -142,6 +136,20 @@ def editArticle(anum):
             return redirect(url_for('getNews'), code=303)
         article = functions.getArticle(anum)
         return render_template('editarticle.html', user=user, role=role, article=article, anum=anum)
+    else:
+        return redirect(url_for('main'))
+
+
+@app.route('/news/article/del/<anum>', methods=['GET', 'POST'])
+def delArticle(anum):
+    print("HERE IS ", anum)
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+        if role != 'ADMIN':
+            return redirect(url_for('main'))
+        functions.delArticle(anum)
+        return redirect(url_for('getNews'), code=303)
     else:
         return redirect(url_for('main'))
 
@@ -219,6 +227,7 @@ def deletePlayer(team):
 
     return(redirect(url_for('main')))
 
+
 @app.route('/<team>/editPlayer', methods=['POST'])
 def editPlayer(team):
 
@@ -228,7 +237,7 @@ def editPlayer(team):
     else:
         user = None
 
-    id= request.form["playerIdEdit"]
+    id = request.form["playerIdEdit"]
     name = request.form["playerNameEdit"]
     age = request.form["playerAgeEdit"]
     position = request.form["playerPositionEdit"]
@@ -249,6 +258,7 @@ def editPlayer(team):
     return(redirect(url_for('main')))
 
 # --------------------------- FIXTURES ---------------------------
+
 
 @app.route('/fixtures')
 def getFixtures():
@@ -517,10 +527,11 @@ def getHonorsFB():
     else:
         user = None
         role = ""
-    
+
     trophies = []
     trophies = functions.getTrophyBS("football")
     return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
+
 
 @app.route('/honorsfb/addTrophyF', methods=['POST'])
 def addTrophyF():
@@ -549,17 +560,18 @@ def deleteTrophyF():
     functions.deleteTrophyB(trophy_id, "football")
     return(redirect(url_for('getHonorsFB')))
 
+
 @app.route('/honorsfb/editTrophyF', methods=['GET', 'POST'])
 def editTrophyF():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-        user = None            
-    ID=request.form["trophy_id"]
+        user = None
+    ID = request.form["trophy_id"]
     title = request.form['titleEdit']
     year = request.form['yearEdit']
-    functions.editTrophy(ID,title,year,"football")
+    functions.editTrophy(ID, title, year, "football")
     return (redirect(url_for('getHonorsFB')))
 
 # --------------------------- HONORS BASKETBALL ---------------------------
@@ -607,17 +619,18 @@ def deleteTrophyB():
     functions.deleteTrophyB(trophy_id, "basketball")
     return(redirect(url_for('getHonorsBB')))
 
+
 @app.route('/honorsbb/editTrophyB', methods=['GET', 'POST'])
 def editTrophyB():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
-        user = None            
-    ID=request.form["trophy_id"]
+        user = None
+    ID = request.form["trophy_id"]
     title = request.form['titleEdit']
     year = request.form['yearEdit']
-    functions.editTrophy(ID,title,year,"basketball")
+    functions.editTrophy(ID, title, year, "basketball")
     return (redirect(url_for('getHonorsBB')))
 # -------------------------- COMMUNITY -------------------------------
 
