@@ -1,14 +1,32 @@
+html{
+    min-height:100%;
+    max-width:100%;
+    
+}
 body{
+    display:flex;
+    flex-direction:column;
     background-image: url('images/bg.jpeg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
-
+    background-size:cover;
+    min-height: 100%;
 }
+
+.page-footer{
+    margin-bottom:0;
+    background-color: white;
+}
+.footer-footer{
+    margin-bottom:0;
+   
+}
+
 .navbar{
    box-shadow: 0 0.3rem 0.4rem 4px rgb(0 0 0 / 25%);
-   margin: 0;
    border: 0;
+   margin: 0;
+   min-height:100%;
 
 }
 .navbar-fixed-footer{
@@ -62,11 +80,11 @@ div.descriptive, div.content h2,h3,h4,p{
 .description{
     margin:10%;
     margin-right:0;
-    width: 150%;
-    height:400%
+    width: 70rem;
+    height:100%;
 }
 .descriptiveImage{
-    width:220px;
+    width:22rem;
     border-radius: 10px;
     margin-right: 0px;
     margin-left:1%;
@@ -84,46 +102,77 @@ div.descriptiveImage img {
 
 .honorRow{
     display:flex;
-    height:250px;
+    height:25rem;
     justify-content: center;
+    flex-direction: row;
     
 }
 .honorsAll{
     display:flex;
     flex-direction: column;
-    column-gap:20px; 
+    row-gap:0.5rem; 
     margin:2%;
+    padding-top: 2rem;
 }
-
-.editButton{
-    width:50%; 
-    height: 50%;
-    margin-top:12.5%;
-}
-.editButton button{
-    width:50%; 
-    height: 50%;
-
- }
-
- .delete-row,.add-row{
-     display:flex;
-     justify-content: flex-start;
- }
-
- .delete-row,.add-row h3{
-    justify-content: flex-start;}
-
-.adminContents{
+.allContent{
     display:flex;
     flex-direction: column;
-    row-gap:0rem;
+    row-gap:2rem; 
+    margin:5%;
+    margin-bottom:0;
+}
+.adminAll{
+    display:flex;
+    flex-direction: row;
+    column-gap:1rem;
+    margin:17rem;
+    margin-top:1%;
+    margin-bottom:0;
+    justify-content: flex-end;
+    width:70%; 
+}
 
+/* MODAL DESIGN */
+.modal-header{
+   display:flex;
+   flex-direction: row;
+   justify-content: space-between;
 }
-.adminButtons{
-    padding:2rem;
-    height:20%;
+.modal-title{
+  margin:0;
+  text-align: left;
+  margin-bottom:0;
+  margin-left:1rem;
 }
-.adminButtons label{
-    color:white;
+.close{
+    margin:0;
+    align-self: flex-end;
+    margin-left: auto;
+    margin-bottom: 1rem;
+    margin-right:1rem;
+}
+
+.modal-body{
+    margin:1rem;
+    display:flex;
+    flex-direction: column;
+}
+.modal-body form{
+    display:flex;
+    flex-direction: column;
+}
+.modal-body input {
+    border-radius: 10px;
+    border-width:1px;
+    border-style:solid;
+    border-color: rgba(168, 168, 168, 0.463);
+    height:3rem;
+    margin-bottom:1rem;
+}
+
+.modal-footer{
+display:flex;
+flex-direction: row;
+column-gap:1rem;
+justify-content: flex-end;
 }

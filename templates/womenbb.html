@@ -95,55 +95,121 @@
         }
       }
     </script>
+
+   
     {%if 'ADMIN' in role%}
-    <h2>ADD NEW PLAYER</h2>
-    <form name="addPlayerForm" action="/womenbb/addPlayer" method="POST">
-      <div class="addPlayer">
-        <label>Name:</label>
-        <input type="text" name="playerNameAdd" id="playerNameAdd" required />
-        <label>Age:</label>
-        <input type="number" name="playerAgeAdd" id="playerAgeAdd" required />
-        <label>Position:</label>
-        <input
-          type="text"
-          name="playerPositionAdd"
-          id="playerPositionAdd"
-          required
-        />
-        <label>Points:</label>
-        <input
-          type="number"
-          name="playerPointsAdd"
-          id="playerPointsAdd"
-          required
-        />
-        <label>Assists:</label>
-        <input
-          type="number"
-          name="playerAssistsAdd"
-          id="playerAssistsAdd"
-          required
-        />
-        <br />
-
-        <button
-          onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)"
-        >
-          ADD
-        </button>
-      </div>
-    </form>
-
-    <h2>DELETE PLAYER</h2>
-    <form action="/womenbb/deletePlayer" method="POST">
-      <div class="deletePlayer">
-        <label for="playerid">Player ID:</label>
-        <input type="number" name="playerIdDelete" id="playerIdDelete" />
-        <br />
-        <button>DELETE</button>
-      </div>
-    </form>
+    <h2>EDIT TEAM</h2>
+        <div class="editTeams">
+            <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD PLAYER</button>
+                  
+            <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT PLAYER</button>
+            
+                  
+            <button id="edit-button" class="btn btn-xs" type="submit" data-toggle="modal" data-target="#deleteModal" style="color:black" >DELETE PLAYER</button>
+        </div>
     {%endif%}
+
+
+
+    
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="addModalLabel">Add Player</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form name="addPlayerForm" action="/womenbb/addPlayer" method="POST">
+                <h>Name:</h>
+                <p><input type="text" name="playerNameAdd" id="playerNameAdd" required /></p>
+                <h>Age:</h>
+                <p><input type="number" name="playerAgeAdd" id="playerAgeAdd" required /></p>
+                <h>Position:</h>
+                <p><input type="text" name="playerPositionAdd" id="playerPositionAdd" required /></p>
+                <h>Points:</h>
+                <p><input type="number" name="playerPointsAdd" id="playerPointsAdd" required /></p>
+                <h>Assists:</h>
+                <p><input type="number" name="playerAssistsAdd" id="playerAssistsAdd" required /></p>
+                <button type="submit" class= "btn btn-primary" onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)">
+                  Submit
+                </button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Edit Player</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+
+                <form name="editPlayerForm" action="/womenbb/editPlayer" method="POST">
+                  <br>
+                  <h>Choose a Player:</h>
+                  <p><input type="number" name="playerIdEdit" id="playerIdEdit" /></p>
+                  <h>Name:</h>
+                  <p><input type="text" name="playerNameEdit"></p>
+                  <h>Age:</h>
+                  <p><input type="number" name="playerAgeEdit"></p>
+                  <h>Position:</h>
+                  <p><input type="text" name="playerPositionEdit"></p>
+                  <h>Points:</h>
+                  <p><input type="number" name="playerPointsEdit"></p>
+                  <h>Assists:</h>
+                  <p><input type="number" name="playerAssistsEdit"></p>
+                  <button type="submit" class="btn btn-primary" onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)">
+                    Submit</button>
+                 </form>
+               
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="addModalLabel">Delete Player</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form action="/womenbb/deletePlayer" method="POST">
+                <h>Player ID:</h>
+                <input type="number" name="playerIdDelete" id="playerIdDelete" />
+                <br> <br>
+              <button type="submit" class= "btn btn-primary" >Submit</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                
+            </div>
+        </div>
+    </div>
+  </div>
+
     <h2>FULL ROSTER</h2>
 
     <hr class="featurette-divider" style="opacity: 0%" />
@@ -165,6 +231,7 @@
           <label>Position: {{players[0][4]}}</label><br />
           <label>Points: {{players[0][5]}}</label><br />
           <label>Assists: {{players[0][6]}}</label>
+
         </div>
       </div>
 

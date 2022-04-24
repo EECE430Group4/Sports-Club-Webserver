@@ -20,7 +20,7 @@
     <title>Team name</title>
   </head>
   <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse bringToFrontDiv">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">TeamName</a>
@@ -69,33 +69,37 @@
 
     <!--FEATURED ARTICLES PANEL-->
     <div class="featuredArticles">
+      
       <!--SINGLE  FEATURED ARTICLE-->
       <div class="articles">
+        <div class="card__content"></div>
         <img
           src="{{url_for('static', filename='css/images/home/football_win.jpeg')}}"
           alt="win1"
         />
         <div class="hero_content">
-          <h4>What A Game!</h4>
+          <h3>What A Game!</h3>
         </div>
       </div>
       <!--END OF SINGLE FEATURED ARTICLE-->
       <div class="articles">
+        <div class="card__content"></div>
         <img
           src="{{url_for('static', filename='css/images/home/football_win.jpeg')}}"
           alt="win1"
         />
         <div class="hero_content">
-          <h4>What A Game!</h4>
+          <h3>What A Game!</h3>
         </div>
       </div>
       <div class="articles">
+        <div class="card__content"></div>
         <img
           src="{{url_for('static', filename='css/images/home/football_win.jpeg')}}"
           alt="win1"
         />
         <div class="hero_content">
-          <h4>What A Game!</h4>
+          <h3>What A Game!</h3>
         </div>
       </div>
     </div>
@@ -215,15 +219,17 @@
     </div>
 
     <!-- Footer -->
-    <footer class="page-footer font-small blue">
-      <!-- Copyright -->
+   <footer class="page-footer font-small blue">
+     <!-- Copyright -->
       <div class="footer-copyright text-center py-3">
         © 2020 Copyright:
         <a href="/"> MDBootstrap.com</a>
       </div>
       <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
+   </footer>
+    <!-- Footer --> 
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
