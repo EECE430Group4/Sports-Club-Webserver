@@ -7,7 +7,7 @@ import sqlite3
 import datetime
 
 import datetime
-
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
@@ -491,7 +491,8 @@ def getHonorsFB():
     
     trophies = []
     trophies = functions.getTrophyBS("football")
-    return render_template('honorsfb.html', user=user, role=role, trophies=trophies)
+    today_year=date.today().year
+    return render_template('honorsfb.html', user=user, role=role, trophies=trophies,today_year=today_year)
 
 @app.route('/honorsfb/addTrophyF', methods=['POST'])
 def addTrophyF():
@@ -546,7 +547,8 @@ def getHonorsBB():
         role = ""
     trophies = []
     trophies = functions.getTrophyBS("basketball")
-    return render_template('honorsbb.html', user=user, role=role, trophies=trophies)
+    today_year=date.today().year
+    return render_template('honorsbb.html', user=user, role=role, trophies=trophies,today_year=today_year)
 
 
 @app.route('/honorsbb/addTrophyB', methods=['POST'])
