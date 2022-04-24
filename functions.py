@@ -242,6 +242,7 @@ def addPlayerWomenbb(name, age, position, points, assists):
         "select playerid from players ORDER BY playerid DESC LIMIT 1")
     res = cursor.fetchall()
     lastId = res[0][0]
+    #new sql query filtered by team to set max number
     newId = str(int(lastId)+1)
 
     cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('" +
