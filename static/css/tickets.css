@@ -84,3 +84,30 @@ div.descriptiveImage img {
     position: center;
 }
 
+
+.cart_button{
+    background-color: white;
+    float: right;
+    width: 3%;
+    height: 2%;
+    z-index: -1;
+    margin: 1% 1% 1% 1%;
+}
+
+.cart_img{
+    float: right;
+    width: 100%;
+    height: 100%;
+    z-index: +1;
+}
+
+
+.addItem label, .deleteItem label{
+    margin-top: 1%;
+    color: white;
+    font-size: 18px;
+  }
+  .addItem, .deleteItem{
+    position: relative;
+    left: 8%;
+  }

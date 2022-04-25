@@ -320,7 +320,7 @@ def getShop():
         role = ""
 
     items = functions.getItem()
-    print(items)
+    #print(items)
     if request.method == 'POST':
         if 'addcartbut' in request.form:
             return redirect(url_for('addItemCart', itemid=request.form["itemid"]))
@@ -337,6 +337,9 @@ def addItemCart(itemid):
         user = None
         role = ""
     session['cart'].append(itemid)
+
+    print("cart in shop:")
+    print(session['cart'])
 
     return(redirect(url_for('getShop')))
 
@@ -386,9 +389,9 @@ def getTicket():
         role = ""
 
     tickets = functions.getTicket()
-    print(tickets)
+    ##print(tickets)
     if request.method == 'POST':
-        if 'addcartbut' in request.form:
+        if 'addticketcartbut' in request.form:
             return redirect(url_for('addTicketCart', ticketid=request.form["ticketid"]))
 
     return render_template('tickets.html', user=user, role=role, tickets=tickets)
@@ -404,6 +407,8 @@ def addTicketCart(ticketid):
         role = ""
     session['cart'].append(ticketid)
 
+    print("items in cart:")
+    print(session['cart'])
     return(redirect(url_for('getTicket')))
 
 @app.route('/ticket/addticket', methods=['POST'])

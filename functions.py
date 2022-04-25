@@ -95,7 +95,7 @@ def getItem():
     remaining = 50-length
     i = 0
     for i in range(0, remaining):
-        items.append([None])
+        ##items.append([None])
         i = i+1
 
     cursor.close()
@@ -140,7 +140,6 @@ def getTicket():
     length = len(tickets)
     remaining = 50-length
     i = 0
-    print(remaining)
     for i in range(0, remaining):
        ## tickets.append([None])
         i = i+1
