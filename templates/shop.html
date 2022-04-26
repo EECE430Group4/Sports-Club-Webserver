@@ -67,66 +67,91 @@
           </nav>
 
     <div class="container-fluid">
+
+
+      <!--ADDED MODALS -->
       {% if 'ADMIN' in role%}
-      <div class="addItem">
-        <h3 style="color: white">Add Item</h3>
-        <form action="/shop/additem" method="POST" autocomplete="off">
-          <label>Name:</label>
-          <input type="text" name="itemNameAdd" id="itemNameAdd" required/><br>
-          <label>Price:</label>
-          <input type="text" name="itemPriceAdd" id="itemPriceAdd" required/><br>
-          <label>Number of size S in Stock:</label>
-          <input type="text" name="itemsizeSAdd" id="itemsizeSAdd" required/><br>
-          <label>Number of size M in Stock:</label>
-          <input type="text" name="itemsizeMAdd" id="itemsizeMAdd" required/><br>
-          <label>Number of size L in Stock:</label>
-          <input type="text" name="itemsizeLAdd" id="itemsizeLAdd" required/><br>
-          <input type="hidden" name="additembut" value=1>
-          <button id="addItem-button" type="submit">Add Item</button>
-        </form>
+      <div class="adminAll"> 
+        <div class="add-row">
+      <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+        <input type="hidden" name="addbut" value="5">
+        <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
+      <!-- </form> -->
+        </div>
+        <div class="delete-row">
+        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+          <input type="hidden" name="deletebut" value="5">
+          <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
+        <!-- </form> -->
+        </div>
+        <div class="edit-row">
+          <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+            <input type="hidden" name="editbut" value="5">
+            <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
+          <!-- </form> -->
+        </div>
       </div>
-      <div class="addItem">
-        <h3 style="color: white">Remove Item</h3>
-        <form action="/shop/deleteItem" method="POST" autocomplete="off">
-          <label>Item ID:</label>
-          <input type="text" name="itemidRemove" id="itemidRemove" />
-          <input type="hidden" name="removeitembut" value=1>
-          <button id="removeItem-button" type="submit" required>Remove Item</button>
-        </form>
-      </div>
-      {%endif%}
+      {% endif %}
+
       <div class="row">
         <button class="cart_button">
           <img class="cart_img" src="{{url_for('static', filename='css/images/shop/shopping-cart.png')}}"/>
         </button>
       </div>
+      <!--FOR MILIA, CONDITIONAL-->
+      {%set len=items|length%}
+      {%for j in range (0,len,4)%}      
       <div class="row">
+        {%for i in range(0,4)%}
+        {%if (len > (i+j))%}
         <div class="col-md-3">
             <div class="wrapper">
-            <img class="product" src="{{url_for('static', filename='css/images/news/testimage.jpg')}}" class="center"/>
-            <div class="item_detail">{{items[0][5]}}</div>
-            <div class="item_detail">{{items[0][4]}}$</div>
-            {% if 'ADMIN' in role%}
-            <div class="item_detail">item id: {{items[0][0]}}</div>
-            {%endif%}
-            <select id="item-size">
-              <option value="small">S</option>
-              <option value="medium">M</option>
-              <option value="large">L</option>
-            </select>
-            <form action="/shop" method="POST" autocomplete="off">
-              <input type="hidden" name="itemid" value="{{items[0][5]}}">
-              <input type="hidden" name="addcartbut" value=1>
-              <button id="addCart-button" type="submit">Add To Cart</button>
-            </form>
-            <!--
-            <form action="/shop" method="POST" autocomplete="off">
-              <input type="hidden" name="edititem" value="{{items[0][5]}}">
-              <button id="editItem-button" type="submit">Edit Item</button>
-            </form>
-            -->
+              <img class="product" src="{{url_for('static', filename='css/images/news/testimage.jpg')}}" class="center"/>
+              <div class="item_detail">{{items[i+j][5]}}</div>
+              <div class="item_detail">{{items[i+j][4]}}$</div>
+              {% if 'ADMIN' in role%}
+              <div class="item_detail">item id: {{items[i+j][0]}}</div>
+              {%endif%}
+              <select id="item-size">
+                <option value="small">S</option>
+                <option value="medium">M</option>
+                <option value="large">L</option>
+              </select>
+              <form action="/shop" method="POST" autocomplete="off">
+                <input type="hidden" name="itemid" value="{{items[0][5]}}">
+                <input type="hidden" name="addcartbut" value=1>
+                <button id="addCart-button" type="submit">Add To Cart</button>
+              </form>
+            </div>
         </div>
-        </div>
+        {%endif%}
+        {%endfor%}
+      </div>
+      {%endfor%}
+
+        
+<!--
+      <div class="row">
+      <div class="col-md-3">
+        <div class="wrapper">
+        <img class="product" src="{{url_for('static', filename='css/images/news/testimage.jpg')}}" class="center"/>
+        <div class="item_detail">{{items[0][5]}}</div>
+        <div class="item_detail">{{items[0][4]}}$</div>
+        {% if 'ADMIN' in role%}
+        <div class="item_detail">item id: {{items[0][0]}}</div>
+        {%endif%}
+        <select>
+          <option>S</option>
+          <option>M</option>
+          <option>L</option>
+        </select>
+        <form action="/shop" method="POST" autocomplete="off">
+          <input type="hidden" name="itemid" value="{{items[1][5]}}">
+          <input type="hidden" name="addcartbut" value=2>
+          <button id="addCart-button" type="submit">Add To Cart</button>
+        </form>
+    </div>
+      </div>
         <div class="col-md-3">
             <div class="wrapper">
             <img class="product" src="{{url_for('static', filename='css/images/news/testimage.jpg')}}" class="center"/>
@@ -171,7 +196,7 @@
               <button id="editItem-button" type="submit">Edit Item</button>
             </form>
           -->
-        </div>
+       <!-- </div>
         </div>
         <div class="col-md-3">
             <div class="wrapper">
@@ -197,7 +222,7 @@
               <button id="editItem-button" type="submit">Edit Item</button>
             </form>
           -->
-        </div>
+        <!--</div>
         </div>
       </div>
       <div class="row">
@@ -225,7 +250,7 @@
               <button id="editItem-button" type="submit">Edit Item</button>
             </form>
           -->
-        </div>
+      <!-- </div>
         </div>
         <div class="col-md-3">
             <div class="wrapper">
@@ -251,7 +276,7 @@
               <button id="editItem-button" type="submit">Edit Item</button>
             </form>
           -->
-        </div>
+        <!--</div>
         </div>
         <div class="col-md-3">
             <div class="wrapper">
@@ -277,7 +302,7 @@
               <button id="editItem-button" type="submit">Edit Item</button>
             </form>
           -->
-        </div>
+        <!--</div>
         </div>
         <div class="col-md-3">
             <div class="wrapper">
@@ -303,10 +328,127 @@
               <button id="editItem-button" type="submit">Edit Item</button>
             </form>
           -->
-        </div>
+        <!--</div>
         </div>
       </div>
+    
     </div>
+    -->
+
+
+
+
+  <!--EDIT MODAL-->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Edit Honor</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="/shop/editItem" id="editForm" method="POST">
+                <h>ID of Item</h>     
+                  <select name="item_id">
+                    {%for item in items%}
+                    <option value={{item[0]}}>{{item[0]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <label>Name:</label>
+                <input type="text" name="itemNameEdit" id="itemNameEdit" required/><br>
+                <label>Price:</label>
+                <input type="text" name="itemPriceEdit" id="itemPriceEdit" required/><br>
+                <label>Number of size S in Stock:</label>
+                <input type="text" name="itemsizeSEdit" id="itemsizeSEdit" required/><br>
+                <label>Number of size M in Stock:</label>
+                <input type="text" name="itemsizeMEdit" id="itemsizeMEdit" required/><br>
+                <label>Number of size L in Stock:</label>
+                <input type="text" name="itemsizeLEdit" id="itemsizeLEdit" required/><br>
+                <input type="hidden" name="additembut" value=1>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" form="editForm"class="btn btn-primary submit">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--END OF EDIT MODAL-->
+
+  <!--ADD MODAL-->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Add Item</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="/shop/additem" id="addForm" method="POST" autocomplete="off">
+                  <label>Name:</label>
+                  <input type="text" name="itemNameAdd" id="itemNameAdd" required/><br>
+                  <label>Price:</label>
+                  <input type="text" name="itemPriceAdd" id="itemPriceAdd" required/><br>
+                  <label>Number of size S in Stock:</label>
+                  <input type="text" name="itemsizeSAdd" id="itemsizeSAdd" required/><br>
+                  <label>Number of size M in Stock:</label>
+                  <input type="text" name="itemsizeMAdd" id="itemsizeMAdd" required/><br>
+                  <label>Number of size L in Stock:</label>
+                  <input type="text" name="itemsizeLAdd" id="itemsizeLAdd" required/><br>
+                  <input type="hidden" name="additembut" value=1>
+                </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" form="addForm" class="btn btn-primary submit">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--END OF ADD MODAL-->
+
+  <!--DELETE MODAL-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title" id="editModalLabel">Delete Item</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form action="/shop/deleteItem" id="deleteItem" method="POST" autocomplete="off">
+                    <label>Item ID:</label>
+                    <select name="itemidRemove">
+                      {%for item in items%}
+                      <option value={{item[0]}}>{{item[0]}}</option>
+                      {%endfor%}
+                    </select>
+                  </form>
+                </select>
+                <br>
+                
+                </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" form="deleteItem"class="btn btn-primary submit">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--END OF DELETE MODAL-->
+
+
+
+
 
     <!-- Footer -->
     <footer class="page-footer font-small blue">

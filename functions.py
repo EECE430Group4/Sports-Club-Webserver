@@ -106,13 +106,6 @@ def getPlayers(team):
     players = []
     for row in res:
         players.append(row)
-    length = len(players)
-    remaining = 50-length
-    i = 0
-    for i in range(0, remaining):
-        players.append([None])
-        i = i+1
-
     cursor.close()
     conn.close()
     return players
@@ -127,13 +120,6 @@ def getItem():
     items = []
     for row in res:
         items.append(row)
-    length = len(items)
-    remaining = 50-length
-    i = 0
-    for i in range(0, remaining):
-        items.append([None])
-        i = i+1
-
     cursor.close()
     conn.close()
     return items
@@ -164,7 +150,15 @@ def deleteItem(itemid):
     cursor.close()
     conn.close()
 
-
+def editItem(ID, name, price, small,medium,large):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE shop set itemName='"+name+"',itemprice='"+price+"', sizeSstock='" + \
+        small+"',sizeMstock='"+medium+"',sizeLstock='"+large+"' WHERE shopitemid="+ID
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
 def getTicket():
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()

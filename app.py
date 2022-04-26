@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request, abort
+from flask import Flask, jsonify, render_template, redirect, url_for, session, request, abort
 import functions
 import sqlite3
 import datetime
@@ -14,11 +14,13 @@ app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
 def main():
     if 'user' in session:
         user = session['user']
+        role = session['role']
     else:
         user = None
+        role = ""
     if 'cart' not in session:
         session['cart'] = []
-    return render_template('HomePage.html', user=user)
+    return render_template('HomePage.html', user=user,role=role)
 
 # --------------------------- LOGIN + SIGNUP + LOGOUT ---------------------------
 
@@ -382,7 +384,22 @@ def deleteItem():
     functions.deleteItem(itemid)
 
     return(redirect(url_for('getShop')))
+@app.route('/shop/editItem',methods=['GET', 'POST'])
+def editItem():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+    ID = request.form["item_id"]
+    name = request.form['itemNameEdit']
 
+    price = request.form['itemPriceEdit']
+    small = request.form['itemsizeSEdit']
+    medium = request.form['itemsizeMEdit']
+    large = request.form['itemsizeLEdit']
+    functions.editItem(ID, name, price, small,medium,large)
+    return (redirect(url_for('getShop')))
 
 # --------------------------- TICKETS ---------------------------
 
@@ -564,6 +581,7 @@ def editTrophyF():
     functions.editTrophy(ID, title, year, "football")
     return (redirect(url_for('getHonorsFB')))
 
+
 # --------------------------- HONORS BASKETBALL ---------------------------
 
 
@@ -623,6 +641,13 @@ def editTrophyB():
     year = request.form['yearEdit']
     functions.editTrophy(ID, title, year, "basketball")
     return (redirect(url_for('getHonorsBB')))
+
+'''@app.route('/honorsbb/editing', methods=['GET', 'GPOST'])
+def showEdit():
+    trophies_json = []
+    trophies_json = functions.getTrophyBS("basketball")
+    trophies_json=jsonify(trophies_json)
+    return (redirect(url_for('getHonorsBB')))'''
 # -------------------------- COMMUNITY -------------------------------
 
 

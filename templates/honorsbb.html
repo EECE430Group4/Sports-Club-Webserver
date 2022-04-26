@@ -84,7 +84,6 @@
 
   <div class="allContent">
 
-    
     {% if 'ADMIN' in role%}
     <div class="adminAll"> 
       <div class="add-row">
@@ -107,7 +106,43 @@
       </div>
     </div>
     {% endif %}
+
+    {% if 'ADMIN' in role%}
+    <div class="honorsAllAdmin">
+      <div class="row honorRowAdmin">
+        <div class="col-lg-8 mb-4">
+          <table class="table honorsTable" >
+            <thead>
+              <tr>
+                <th scope="col">Honor Image</th>
+                <th scope="col">Honor Title</th>
+                <th scope="col">Year</th>
+                <th scope="col">ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for trophy in trophies%}
+              <tr>
+                <td> 
+                  <img
+                  src="{{url_for('static', filename='css/images/honors/trophy.jpg')}}"
+                  alt=""
+                  />
+                </td>
+                <td>{{trophy[1]}}</td>
+                <td>{{trophy[2]}}</td>
+                <td>{{trophy[0]}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+      </div>
+    </div>
+    </div>
+    {% endif %}
+
       <!--START HONORS' ROWS-->
+    {% if role!='ADMIN'%}
     <div class="honorsAll">
       <!-- HONOR ROW  VERSION 1-->
       {%for trophy in trophies%}
@@ -147,6 +182,7 @@
       </div>
       {%endfor%}
     </div>
+    {% endif %}
     <!--END HONORS' ROWS-->
   </div>
 
@@ -163,18 +199,19 @@
                   </button>
               </div>
               <div class="modal-body">
-                <form action="/honorsbb/editTrophyB" id="editFormB" method="POST">
+                <form action="/honorsbb/editTrophyB" id="editFormB" method="POST" data-trophies='{{ trophies_json }}'>
                 <h>ID of Honor</h>     
                   <select name="trophy_id" id="my_select">
+                    <option value="" selected disabled hidden>Select a Trophy By Id</option>
                     {%for trophy in trophies%}
                     <option value={{trophy[0]}}>{{trophy[0]}}</option>
                     {% endfor %}
                 </select>
                 <br>
                 <h>Title</h>
-                <input type="text" name="titleEdit" id="txt">
+                <input type="text" name="titleEdit" id="txtEdit" value="">
                 <h>Year</h>
-                <input type="number" name="yearEdit" id="yr" ></p>
+                <input type="number" name="yearEdit" id="yearEdit" value="" ></p>
                 
                 </form>
               </div>
@@ -250,20 +287,22 @@
     </div>
     <!--END OF DELETE MODAL-->
 
-    <!-- Footer -->
-    <footer class="page-footer" class="navbar-fixed-footer">
-      <!-- Copyright -->
-      <div
-        class="footer-copyright text-center py-3"
-        class="navbar-fixed-bottom"
-        style="background-color: black; color: white"
-      >
-        © 2020 Copyright:
-        <a> WebsiteName</a>
-      </div>
-      <!-- Copyright -->
+   <!-- Footer -->
+   <div class="footer-footer">
+    <footer class="page-footer " class="navbar-fixed-footer">
+  <!-- Copyright -->
+  <div
+    class="footer-copyright text-center py-3"
+    class="navbar-fixed-bottom"
+    style="background-color: black; color: white;"
+  >
+    © 2020 Copyright:
+    <a> WebsiteName</a>
+  </div>
+  <!-- Copyright -->
     </footer>
-    <!-- Footer -->
+   </div>
+  <!-- Footer -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -274,6 +313,7 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="{{ url_for('static', filename='js/honors.js') }}"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

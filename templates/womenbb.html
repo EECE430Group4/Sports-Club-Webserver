@@ -210,12 +210,20 @@
     </div>
   </div>
 
-    <h2>FULL ROSTER</h2>
+  <h2>FULL ROSTER</h2>
 
-    <hr class="featurette-divider" style="opacity: 0%" />
+  <hr class="featurette-divider" style="opacity: 0%" />
 
-    <!--ROW 1 IMAGES-->
+  
+  <!--ROW 1 IMAGES-->
+  
+     <!--FOR RAZ, REPEATING RENDER-->
+    
+    {%set len=players|length%}
+    {%for j in range (0,len,4)%}
     <div class="row">
+      {%for i in range(0,4)%}
+      {%if (len > (i+j))%}
       <div class="col-md-1"></div>
       <div class="col-md-2 container">
         <img
@@ -225,72 +233,95 @@
           data-holder-rendered="true"
         />
         <div class="overlay">
-          <label>{{players[0][1]}}</label>
-          <label id="playerid">{{players[0][0]}}</label><br />
-          <label>Age: {{players[0][2]}}</label><br />
-          <label>Position: {{players[0][4]}}</label><br />
-          <label>Points: {{players[0][5]}}</label><br />
-          <label>Assists: {{players[0][6]}}</label>
+          <label>{{players[i+j][1]}}</label>
+          <label id="playerid">{{players[i+j][0]}}</label><br />
+          <label>Age: {{players[i+j][2]}}</label><br />
+          <label>Position: {{players[i+j][4]}}</label><br />
+          <label>Points: {{players[i+j][5]}}</label><br />
+          <label>Assists: {{players[i+j][6]}}</label>
 
         </div>
       </div>
+      {%endif%}
+      {%endfor%}
+      {%endfor%}
+    <!--
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 container">
+      <img
+        class="featurette-image img-fluid mx-auto image"
+        alt="Player 1"
+        src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
+        data-holder-rendered="true"
+      />
+      <div class="overlay">
+        <label>{{players[0][1]}}</label>
+        <label id="playerid">{{players[0][0]}}</label><br />
+        <label>Age: {{players[0][2]}}</label><br />
+        <label>Position: {{players[0][4]}}</label><br />
+        <label>Points: {{players[0][5]}}</label><br />
+        <label>Assists: {{players[0][6]}}</label>
 
-      <div class="col-md-1"></div>
-      <div class="col-md-2 container">
-        <img
-          class="featurette-image img-fluid mx-auto image"
-          alt="Player 1"
-          src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
-          data-holder-rendered="true"
-        />
-        <div class="overlay">
-          <label>{{players[1][1]}}</label>
-          <label id="playerid">{{players[1][0]}}</label><br />
-          <label>Age: {{players[1][2]}}</label><br />
-          <label>Position: {{players[1][4]}}</label><br />
-          <label>Points: {{players[1][5]}}</label><br />
-          <label>Assists: {{players[1][6]}}</label>
-        </div>
-      </div>
-
-      <div class="col-md-1"></div>
-      <div class="col-md-2 container">
-        <img
-          class="featurette-image img-fluid mx-auto image"
-          alt="Player 1"
-          src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
-          data-holder-rendered="true"
-        />
-        <div class="overlay">
-          <label>{{players[2][1]}}</label>
-          <label id="playerid">{{players[2][0]}}</label><br />
-          <label>Age: {{players[2][2]}}</label><br />
-          <label>Position: {{players[2][4]}}</label><br />
-          <label>Points: {{players[2][5]}}</label><br />
-          <label>Assists: {{players[2][6]}}</label>
-        </div>
-      </div>
-
-      <div class="col-md-1"></div>
-      <div class="col-md-2 container">
-        <img
-          class="featurette-image img-fluid mx-auto image"
-          alt="Player 1"
-          src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
-          data-holder-rendered="true"
-        />
-        <div class="overlay">
-          <label>{{players[3][1]}}</label>
-          <label id="playerid">{{players[3][0]}}</label><br />
-          <label>Age: {{players[3][2]}}</label><br />
-          <label>Position: {{players[3][4]}}</label><br />
-          <label>Points: {{players[3][5]}}</label><br />
-          <label>Assists: {{players[3][6]}}</label>
-        </div>
       </div>
     </div>
 
-    <hr class="featurette-divider" />
+    <div class="col-md-1"></div>
+    <div class="col-md-2 container">
+      <img
+        class="featurette-image img-fluid mx-auto image"
+        alt="Player 1"
+        src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
+        data-holder-rendered="true"
+      />
+      <div class="overlay">
+        <label>{{players[1][1]}}</label>
+        <label id="playerid">{{players[1][0]}}</label><br />
+        <label>Age: {{players[1][2]}}</label><br />
+        <label>Position: {{players[1][4]}}</label><br />
+        <label>Points: {{players[1][5]}}</label><br />
+        <label>Assists: {{players[1][6]}}</label>
+      </div>
+    </div>
+
+    <div class="col-md-1"></div>
+    <div class="col-md-2 container">
+      <img
+        class="featurette-image img-fluid mx-auto image"
+        alt="Player 1"
+        src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
+        data-holder-rendered="true"
+      />
+      <div class="overlay">
+        <label>{{players[2][1]}}</label>
+        <label id="playerid">{{players[2][0]}}</label><br />
+        <label>Age: {{players[2][2]}}</label><br />
+        <label>Position: {{players[2][4]}}</label><br />
+        <label>Points: {{players[2][5]}}</label><br />
+        <label>Assists: {{players[2][6]}}</label>
+      </div>
+    </div>
+
+    <div class="col-md-1"></div>
+    <div class="col-md-2 container">
+      <img
+        class="featurette-image img-fluid mx-auto image"
+        alt="Player 1"
+        src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
+        data-holder-rendered="true"
+      />
+      <div class="overlay">
+        <label>{{players[3][1]}}</label>
+        <label id="playerid">{{players[3][0]}}</label><br />
+        <label>Age: {{players[3][2]}}</label><br />
+        <label>Position: {{players[3][4]}}</label><br />
+        <label>Points: {{players[3][5]}}</label><br />
+        <label>Assists: {{players[3][6]}}</label>
+      </div>
+    </div>
+  </div>
+-->
+  <hr class="featurette-divider" />
 
     <!-- FOOTER -->
     <div class="footer">
