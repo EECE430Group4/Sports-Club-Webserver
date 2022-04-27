@@ -400,11 +400,7 @@ def goCheckOut():
         role = ""
     return render_template('checkout.html', user=user, role=role)
 
-<<<<<<< HEAD
 #MILIA
-=======
-
->>>>>>> f3df956a88f131724988594bc12fe4c9f2af3a77
 @app.route('/shop/additemcart/<itemid>')
 def addItemCart(itemid):
     if 'user' in session:
