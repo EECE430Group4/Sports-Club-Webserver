@@ -127,8 +127,7 @@ div.descriptiveImage img {
     flex-direction: column;
     row-gap:2rem; 
     margin:5%;
-    
-    /*height:80rem;*/
+    min-height:70vh;
 }
 
 /*HONORS FOR ADMINS*/
@@ -142,62 +141,81 @@ div.descriptiveImage img {
     justify-content: flex-end;
     width:70%; 
 }
-
 .honorsAllAdmin{
     display:flex;
     flex-direction: column;
     row-gap:0.5rem; 
-    margin:2%;
-    padding-top: 2rem;
     min-height: 45rem;
+    width:80%;
+    padding:0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:rgba(255, 255, 255, 0);
+}
+
+.honorsRowAdmin{
+    display:flex;
+    height:25rem;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    flex-direction: row;
 
 }
 
 .honorsTable{
-    margin-left:auto;
-    margin-right:auto;
-    border-style:solid; 
     border-radius: 10px;
+    border-style:solid; 
     border-color: rgb(255, 255, 255); 
     color: rgb(255, 255, 255); 
     background-color: rgba(255, 255, 255, 0.2);
-    /*BORDERS FOR DIVS*/
-    margin:1%;
-    
-
-}
-.honorsTable tr{
-    border-radius: 10px;
-}
-
-.honorsTable img{
-    height:10rem;
-    width:15rem;
-}
-
-.honorsTable table {
-    border-collapse: collapse;
-    border-radius: 1em;
-    overflow: hidden;
-    min-height:40rem;
-}
-.honorsTable tbody{
-
-}
-.honorsTable th, td {
-    padding: 1em;
-    border-bottom: 2px solid white; 
-}
-.honorRowAdmin{ /*SIMILAR TO honorsAll */
-    display:flex;
-    height:25em;
-    justify-content: center;
+    background-color: white; /*V2*/
+    box-shadow: 0 0 10em 1em rgba(219, 223, 230, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:2%;
     margin-bottom:2%;
 
 }
 
+.honorsTable, .table table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    min-height:40rem;
+    width: 100rem; 
+
+   
+}
+.honorsTable img{
+    height:10rem;
+    width:15rem;
+}
+.honorsTable tr,th{
+    border-radius: 10px;
+    color: hsl(216, 25%, 38%);
+   /* border-bottom: 1.5px solid hsl(216, 25%, 38%); */
+}
+.honorsTable th, td {
+    padding: 1em;
+    border-bottom: 2px solid white; 
+    /*V2*/
+    color: hsl(216, 25%, 38%);
+    /*border-bottom: 1.5px solid hsl(216, 25%, 38%); 
+    border-top: 1.5px solid hsl(216, 25%, 38%); */
 
 
+}
+
+tr:nth-child(odd) td{
+    background-color:hsla(218, 25%, 77%, 0.546);
+    color: hsl(216, 25%, 38%);
+    border-radius: 0;
+}
+.table, tr{
+   /* border-bottom: 1.5px solid hsl(216, 25%, 38%); */
+
+}
 
 
 /* MODAL DESIGN */
