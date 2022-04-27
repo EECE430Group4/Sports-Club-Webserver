@@ -488,6 +488,23 @@ def deleteTicket():
 
     return(redirect(url_for('getTicket')))
 
+@app.route('/tickets/editTicket',methods=['GET', 'POST'])
+def editTicket():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+    ID = request.form["ticketid"]
+
+    oppteam= request.form["oppTeamEdit"]
+    tickettime= request.form["ticketTimeEdit"]
+    arena= request.form["arenaEdit"]
+    price= request.form["ticketPriceEdit"]
+    stock= request.form["ticketStockEdit"]
+    functions.editTicket(ID, oppteam, tickettime,arena,price, stock)
+    return (redirect(url_for('getTicket')))
+
 
 # --------------------------- PROFILE ---------------------------
 

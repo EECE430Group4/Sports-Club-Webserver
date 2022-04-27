@@ -96,8 +96,14 @@
   </select>
     <input type="hidden" name="removeticketbut" value=1>
     <button id="removeTicket-button" class="btn btn-primary submit" form="deleteT" type="submit" required>Remove Ticket</button>
-
   </form>
+
+  <div class="edit-row">
+    <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+      <input type="hidden" name="editbut" value="5">
+      <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
+    <!-- </form> -->
+  </div>
 
    <div class="row">
     <button class="cart_button">
@@ -147,6 +153,49 @@
 
     </div>
     <!--END OF CONTENTS-->
+
+
+
+     <!--EDIT MODAL-->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="editModalLabel">Edit Ticket</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form action="/tickets/editTicket" id="editForm" method="POST">
+              <h>ID of Ticket</h>     
+                <select name="ticketid">
+                  {%for ticket in tickets%}
+                  <option value={{ticket[0]}}>{{ticket[0]}}</option>
+                  {% endfor %}
+              </select>
+              <br>
+              <label>Opposing Team:</label>
+              <input type="text" name="oppTeamEdit" id="oppTeamEdit" required/><br>
+              <label>Game Time:</label>
+              <input type="text" name="ticketTimeEdit" id="ticketTimeEdit" required/><br>
+              <label>Arena:</label>
+              <input type="text" name="arenaEdit" id="arenaEdit" required/><br>
+              <label>Price:</label>
+              <input type="text" name="ticketPriceEdit" id="ticketPriceEdit" required/><br>
+              <label>Number of tickets in stock:</label>
+              <input type="text" name="ticketStockEdit" id="ticketStockEdit" required/><br>
+              <input type="hidden" name="additembut" value=1>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" form="editForm"class="btn btn-primary submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END OF EDIT MODAL-->
 
 
 

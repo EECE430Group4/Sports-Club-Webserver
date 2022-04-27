@@ -200,6 +200,16 @@ def deleteTicket(ticketid):
     cursor.close()
     conn.close()
 
+def editTicket(ID, oppteam, tickettime,arena ,price, stock):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE tickets set oppteam='"+oppteam+"',tickettime='"+tickettime+"', arena='" + \
+        arena+"',ticketprice='"+ price +"',stock='"+stock+"' WHERE ticketid="+ID
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 
 def addGames(sport, club1, score, club2, date):
     conn = sqlite3.connect('database/430Group4.db')
