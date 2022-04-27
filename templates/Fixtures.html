@@ -310,10 +310,12 @@
               <tr>
                 <td>{{game[1]}}</td>
                 <td>{{game[2]}}</td>
-                <td>{{game[3]}}</td>
-                <td>{{game[4]}}</td>
+                <td>{{game[3]}}-{{game[4]}}</td>
                 <td>{{game[5]}}</td>
+                <td>{{game[6]}}</td>
+                {% if 'ADMIN' in role%}
                 <td>{{game[0]}}</td>
+                {% endif %}
               </tr>
               {%endfor%}
               <!--
@@ -444,12 +446,14 @@
                 <br>
                 <h>Sport:</h>
                 <p><input type="text" name="sportEdit"></p>
-                <h>Club1:</h>
+                <h>Home Club:</h>
                 <p><input type="text" name="club1Edit"></p>
-                <h>Club2:</h>
+                <h>Away Club:</h>
                 <p><input type="text" name="club2Edit"></p>
-                <h>Score:</h>
-                <p><input type="text" name="scoreEdit"></p>
+                <h>Home Team Goals/Points:</h>
+                <p><input type="number" name="homeScoreEdit" min="0" oninput="validity.valid||(value='');"></p>
+                <h>Away Team Goals/Points:</h>
+                <p><input type="number" name="awayScoreEdit" min="0" oninput="validity.valid||(value='');"></p>
                 <h>Date:</h>
                 <p><input type="date" name="dateEdit"></p>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -475,12 +479,14 @@
               <form action="/addGame" method="POST">
               <h>Sport:</h>
               <p><input type="text" name="sportAdd"></p>
-              <h>Club1:</h>
+              <h>Home Club:</h>
               <p><input type="text" name="club1Add"></p>
-              <h>Club2:</h>
+              <h>Away Club:</h>
               <p><input type="text" name="club2Add"></p>
-              <h>Score:</h>
-              <p><input type="text" name="scoreAdd"></p>
+              <h>Home Team Goals/Points:</h>
+              <p><input type="number" name="homeScoreAdd" min="0" oninput="validity.valid||(value='');"></p>
+              <h>Away Team Goals/Points:</h>
+              <p><input type="number" name="awayScoreAdd" min="0" oninput="validity.valid||(value='');"></p>
               <h>Date:</h>
               <p><input type="date" name="dateAdd"></p>
               <button type="submit" class= "btn btn-primary" >Submit</button>

@@ -111,7 +111,6 @@ def getPlayers(team):
     return players
 
 
-
 def getItem():
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -141,7 +140,6 @@ def addItem(name, Sstock, Mstock, Lstock, price):
     conn.close()
 
 
-
 def deleteItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -150,7 +148,8 @@ def deleteItem(itemid):
     cursor.close()
     conn.close()
 
-def editItem(ID, name, price, small,medium,large):
+
+def editItem(ID, name, price, small, medium, large):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     SQL = "UPDATE shop set itemName='"+name+"',itemprice='"+price+"', sizeSstock='" + \
@@ -159,6 +158,8 @@ def editItem(ID, name, price, small,medium,large):
     conn.commit()
     cursor.close()
     conn.close()
+
+
 def getTicket():
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -171,11 +172,12 @@ def getTicket():
     remaining = 50-length
     i = 0
     for i in range(0, remaining):
-       ## tickets.append([None])
+       # tickets.append([None])
         i = i+1
     cursor.close()
     conn.close()
     return tickets
+
 
 def addTicket(oppteam, tickettime, arena, price, stock):
     conn = sqlite3.connect('database/430Group4.db')
@@ -192,6 +194,7 @@ def addTicket(oppteam, tickettime, arena, price, stock):
     cursor.close()
     conn.close()
 
+
 def deleteTicket(ticketid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -200,33 +203,35 @@ def deleteTicket(ticketid):
     cursor.close()
     conn.close()
 
-def editTicket(ID, oppteam, tickettime,arena ,price, stock):
+
+def editTicket(ID, oppteam, tickettime, arena, price, stock):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     SQL = "UPDATE tickets set oppteam='"+oppteam+"',tickettime='"+tickettime+"', arena='" + \
-        arena+"',ticketprice='"+ price +"',stock='"+stock+"' WHERE ticketid="+ID
+        arena+"',ticketprice='" + price + "',stock='"+stock+"' WHERE ticketid="+ID
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
     conn.close()
 
 
-def addGames(sport, club1, score, club2, date):
+def addGames(sport, club1, club2, homeScore, awayScore, date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = '''insert into games (sport,club1,score,club2,gamedate) values ('{}','{}','{}','{}','{}')'''.format(
-        sport, club1, score, club2, date)
+    SQL = '''insert into games values ('{}','{}',{},{},'{}','{}')'''.format(
+        sport, club1, homeScore, awayScore, club2, date)
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
     conn.close()
 
 
-def editGames(ID, sport, club1, score, club2, date):
+def editGames(ID, sport, club1, club2, homeScore, awayScore, date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     SQL = "UPDATE games set sport='"+sport+"',club1='"+club1+"', club2='" + \
-        club2+"',gamedate='"+date+"',score='"+score+"' WHERE ID="+ID
+        club2+"',gamedate='"+date+"',homescore=" + \
+        homeScore+",awayscore="+awayScore+" WHERE ID="+ID
     cursor.execute(SQL)
     conn.commit()
     cursor.close()
@@ -300,6 +305,7 @@ def addPlayerWomenbb(name, age, position, points, assists):
     cursor.close()
     conn.close()
 
+
 def editPlayerWomenbb(id, name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -327,6 +333,7 @@ def addPlayerWomenfb(name, age, position, points, assists):
     conn.commit()
     cursor.close()
     conn.close()
+
 
 def editPlayerWomenfb(id, name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
@@ -356,6 +363,7 @@ def addPlayerMenbb(name, age, position, points, assists):
     cursor.close()
     conn.close()
 
+
 def editPlayerMenbb(id, name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -384,6 +392,7 @@ def addPlayerMenfb(name, age, position, points, assists):
     cursor.close()
     conn.close()
 
+
 def editPlayerMenfb(id, name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -394,7 +403,6 @@ def editPlayerMenfb(id, name, age, position, points, assists):
     conn.commit()
     cursor.close()
     conn.close()
-
 
 
 def deletePlayer(playerid):
