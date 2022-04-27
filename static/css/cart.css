@@ -172,7 +172,7 @@ body{
     cursor: pointer;
     border-bottom: 1px solid #E44C4C;
 }
-.my-cart-items{
+.my-cart-items, .my-cart-tickets{
     margin: auto;
     width: 90%;
     height: 30%;

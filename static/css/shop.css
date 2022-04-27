@@ -14,7 +14,7 @@ body {
     background-color: #ecf0f3;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.4);
-  }
+}
 
 .wrapper_cart {
     max-width: 1500px;
@@ -70,8 +70,8 @@ body {
     margin-top: 1%;
     color: white;
     font-size: 18px;
-  }
+}
   .addItem, .deleteItem{
     position: relative;
     left: 8%;
-  }
+}

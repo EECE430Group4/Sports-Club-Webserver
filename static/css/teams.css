@@ -1,13 +1,23 @@
 .container {
     position: relative;
+    
   }
 
+/*
   .my-container{
     display:flex;
     flex-direction:column;
     justify-content: space-between;
     min-height: 100vh;
-}
+    margin-right: auto;
+    margin-left: auto;
+
+}*/
+  .row{
+    margin-right:auto;
+    margin-left: auto;
+    margin-bottom:2rem;
+  }
   .image {
     display: block;
     margin: auto;
@@ -41,7 +51,7 @@
   }
   .editTeams{
     position: relative;
-    left: 8%;
+    margin-left: 8%;
   }
 
   .editTeams button{
@@ -77,15 +87,9 @@
     background-size: cover;
   }
 
-  html,
-  body {
-    width: auto;
-    height: 100%;
-  }
-
   h2 {
     position: relative;
-    left: 8%;
+    margin-left: 8%;
     margin-bottom: 2%;
     margin-top: 2%;
     color: white;
