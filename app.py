@@ -371,15 +371,6 @@ def getShop():
     return render_template('shop.html', user=user, role=role, items=items)
 
 
-@app.route('/cart', methods=['GET', 'POST'])
-def getCart():
-    if 'user' in session:
-        user = session['user']
-        role = session['role']
-    else:
-        user = None
-        role = ""
-    return render_template('cart.html', user=user, role=role)
 
 
 @app.route('/cart/checkout', methods=['GET', 'POST'])
@@ -401,11 +392,11 @@ def addItemCart(itemid):
     else:
         user = None
         role = ""
-    print(session['cart'])
+    #print(session['cart'])
     arr = session['cart']
     arr.append(itemid)
     session['cart'] = arr
-    print(session['cart'])
+    #print(session['cart'])
     return(redirect(url_for('getShop')))
 
 
@@ -488,11 +479,11 @@ def addTicketCart(ticketid):
     else:
         user = None
         role = ""
-    print(session['cart'])
+    #print(session['cart'])
     arr = session['cart']
     arr.append(ticketid)
     session['cart'] = arr
-    print(session['cart'])
+    #print(session['cart'])
     return(redirect(url_for('getTicket')))
 
 
@@ -503,6 +494,7 @@ def addTicket():
         role = session['role']
     else:
         user = None
+        role=""
 
     oppteam = request.form["oppTeamAdd"]
     tickettime = request.form["ticketTimeAdd"]
@@ -521,6 +513,7 @@ def deleteTicket():
         user = session['user']
     else:
         user = None
+        role=""
 
     ticketid = request.form["ticketidRemove"]
 
@@ -536,6 +529,7 @@ def editTicket():
         role = session['role']
     else:
         user = None
+        role = ""
     ID = request.form["ticketid"]
 
     oppteam = request.form["oppTeamEdit"]
@@ -546,7 +540,46 @@ def editTicket():
     functions.editTicket(ID, oppteam, tickettime, arena, price, stock)
     return (redirect(url_for('getTicket')))
 
+# --------------------------- CART + CHECKOUT ---------------------------
+@app.route('/cart/checkout', methods=['GET', 'POST'])
+def getCheckout():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
 
+    return render_template('checkout.html', user=user, role=role)
+
+@app.route('/cart', methods=['GET', 'POST'])
+def getCart():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    
+    cartitems= []
+    arr = session['cart']
+    for item in arr:
+        cartitem = functions.getCartItem(item)
+        cartitems.append(cartitem[0])
+
+    shopitems= []
+    ticketitems= []
+   
+    for item in cartitems:
+        print(item)
+        if int(item[0]) < 0:
+            ticketitems.append(item)
+        else:
+            shopitems.append(item)
+    
+    total = functions.getTotalPrice(ticketitems, shopitems)
+
+    return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems, total=total)
 # --------------------------- PROFILE ---------------------------
 
 
