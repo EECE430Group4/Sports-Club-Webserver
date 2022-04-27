@@ -74,7 +74,7 @@
       <div class="my-2-container my-checkout-form">
         <div class="my-cart-container">
           <div class="my-header-cart">
-            <h3 class="my-heading">Order Summary</h3> 
+            <h3 class="my-heading">Order Summary from Shop</h3> 
           </div>
 
          <!--FOR MILIA: place a for loop here for items in cart-->
@@ -99,44 +99,30 @@
           <hr>
           <!--FOR MILIA: end the for loop here-->
 
-          <!--FOR MILIA: You can delete all the my-cart-items groups below-->
-          <div class="my-cart-items">
-            <div class=”my-image-box”>
-              <!--FOR MILIA: fill in product image-->
-              <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
-            </div>
-            <div class=”my-about”>
-                <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
-                <h3 class=”my-title”>Product Name</h3>
-                <h3 class=”my-subtitle”>Size: Size</h3>
-                <h3 class=”my-subtitle”>Quantity: 2</h3>
-                </div>
-              <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
+          <div class="my-header-cart">
+            <h3 class="my-heading">Order Summary from Booking</h3> 
+          </div>
+         <!--FOR MILIA: place a for loop here for items in cart-->
+         <div class="my-cart-tickets">
+          <div class=”my-image-box”>
+            <!--FOR MILIA: fill in product image-->
+            <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
+          </div>
+          <div class=”my-about”>
+              <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
+            <h3 class=”my-title”>Ticket T1 vs T2</h3>
+            <h3 class=”my-subtitle”>Arena: Arena</h3>
+            <h3 class=”my-subtitle”>Date: Date</h3>
+            <h3 class=”my-subtitle”>Quantity: 2</h3>
+          </div>
+            <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
             <div class="my-money">
               <div class="my-money-one">$Price</div>
             </div>
-          </div>
+        </div>
 
-          <hr>
-
-          <div class="my-cart-items">
-            <div class=”my-image-box”>
-              <!--FOR MILIA: fill in product image-->
-              <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
-            </div>
-            <div class=”my-about”>
-                <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
-              <h3 class=”my-title”>Product Name</h3>
-              <h3 class=”my-subtitle”>Size: Size</h3>
-              <h3 class=”my-subtitle”>Quantity: 2</h3>
-            </div>
-              <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
-            <div class="my-money">
-              <div class="my-money-one">$Price</div>
-            </div>
-          </div>
-
-          <hr>
+        <hr>
+        <!--FOR MILIA: end the for loop here-->
 
           <!--FOR MILIA: Stop deleting. Don't delete the lines below-->
           <div class="my-checkout">
