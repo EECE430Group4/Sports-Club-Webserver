@@ -300,7 +300,6 @@ def addPlayerWomenbb(name, age, position, points, assists):
     cursor.close()
     conn.close()
 
-
 def editPlayerWomenbb(id, name, age, position, points, assists):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -313,7 +312,92 @@ def editPlayerWomenbb(id, name, age, position, points, assists):
     conn.close()
 
 
-def deletePlayerWomenbb(playerid):
+def addPlayerWomenfb(name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select playerid from players ORDER BY playerid DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    # new sql query filtered by team to set max number
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('" +
+                   newId+"', '"+name+"', '"+age+"', 'womenfb', '"+position+"', '"+points+"', '"+assists+"')")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def editPlayerWomenfb(id, name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE players set name='"+name+"', age='"+age+"', team = 'womenfb' , position='" + \
+        position+"', points='"+points+"', assists='" + \
+        assists+"' WHERE playerid= '"+id+"' "
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def addPlayerMenbb(name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select playerid from players ORDER BY playerid DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    # new sql query filtered by team to set max number
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('" +
+                   newId+"', '"+name+"', '"+age+"', 'menbb', '"+position+"', '"+points+"', '"+assists+"')")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def editPlayerMenbb(id, name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE players set name='"+name+"', age='"+age+"', team = 'menbb' , position='" + \
+        position+"', points='"+points+"', assists='" + \
+        assists+"' WHERE playerid= '"+id+"' "
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def addPlayerMenfb(name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "select playerid from players ORDER BY playerid DESC LIMIT 1")
+    res = cursor.fetchall()
+    lastId = res[0][0]
+    # new sql query filtered by team to set max number
+    newId = str(int(lastId)+1)
+
+    cursor.execute("INSERT INTO players (playerid, name, age, team, position, points, assists) VALUES ('" +
+                   newId+"', '"+name+"', '"+age+"', 'menfb', '"+position+"', '"+points+"', '"+assists+"')")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def editPlayerMenfb(id, name, age, position, points, assists):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "UPDATE players set name='"+name+"', age='"+age+"', team = 'menfb' , position='" + \
+        position+"', points='"+points+"', assists='" + \
+        assists+"' WHERE playerid= '"+id+"' "
+    cursor.execute(SQL)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+
+def deletePlayer(playerid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute("DELETE FROM players WHERE playerid= '"+playerid+"'")

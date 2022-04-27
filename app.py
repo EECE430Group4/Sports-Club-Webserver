@@ -167,14 +167,17 @@ def getTeam(team):
         user = None
         role = ""
     if team == "womenfb":
-        return(render_template('womenfb.html', user=user))
+        players = functions.getPlayers(team)
+        return(render_template('womenfb.html', user=user, role=role, players=players))
     elif team == "womenbb":
         players = functions.getPlayers(team)
         return(render_template('womenbb.html', user=user, role=role, players=players))
     elif team == "menfb":
-        return(render_template('menfb.html', user=user))
+        players = functions.getPlayers(team)
+        return(render_template('menfb.html', user=user, role=role, players=players))
     elif team == "menbb":
-        return(render_template('menbb.html', user=user))
+        players = functions.getPlayers(team)
+        return(render_template('menbb.html', user=user, role=role, players=players))
 
     return(redirect(url_for('main')))
 
@@ -194,15 +197,24 @@ def addPlayer(team):
     assists = request.form["playerAssistsAdd"]
 
     if team == "womenfb":
-        return(render_template('womenfb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.addPlayerWomenfb(name, age, position, points, assists)
+        return(redirect(url_for('getTeam', team=team)))
+
     elif team == "womenbb":
         players = functions.getPlayers(team)
         functions.addPlayerWomenbb(name, age, position, points, assists)
         return(redirect(url_for('getTeam', team=team)))
+
     elif team == "menfb":
-        return(render_template('menfb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.addPlayerMenfb(name, age, position, points, assists)
+        return(redirect(url_for('getTeam', team=team)))
+
     elif team == "menbb":
-        return(render_template('menbb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.addPlayerMenbb(name, age, position, points, assists)
+        return(redirect(url_for('getTeam', team=team)))
 
     return(redirect(url_for('main')))
 
@@ -217,15 +229,24 @@ def deletePlayer(team):
     playerid = request.form["playerIdDelete"]
 
     if team == "womenfb":
-        return(render_template('womenfb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.deletePlayer(playerid)
+        return(redirect(url_for('getTeam', team=team)))
+
     elif team == "womenbb":
         players = functions.getPlayers(team)
-        functions.deletePlayerWomenbb(playerid)
+        functions.deletePlayer(playerid)
         return(redirect(url_for('getTeam', team=team)))
+
     elif team == "menfb":
-        return(render_template('menfb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.deletePlayer(playerid)
+        return(redirect(url_for('getTeam', team=team)))
+
     elif team == "menbb":
-        return(render_template('menbb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.deletePlayer(playerid)
+        return(redirect(url_for('getTeam', team=team)))
 
     return(redirect(url_for('main')))
 
@@ -247,15 +268,24 @@ def editPlayer(team):
     assists = request.form["playerAssistsEdit"]
 
     if team == "womenfb":
-        return(render_template('womenfb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.editPlayerWomenfb(id, name, age, position, points, assists)
+        return(redirect(url_for('getTeam', team=team)))
+
     elif team == "womenbb":
         players = functions.getPlayers(team)
         functions.editPlayerWomenbb(id, name, age, position, points, assists)
         return(redirect(url_for('getTeam', team=team)))
+
     elif team == "menfb":
-        return(render_template('menfb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.editPlayerMenfb(id, name, age, position, points, assists)
+        return(redirect(url_for('getTeam', team=team)))
+
     elif team == "menbb":
-        return(render_template('menbb.html', user=user))
+        players = functions.getPlayers(team)
+        functions.editPlayerMenbb(id, name, age, position, points, assists)
+        return(redirect(url_for('getTeam', team=team)))
 
     return(redirect(url_for('main')))
 
