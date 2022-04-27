@@ -22,6 +22,7 @@
   <body>
    
     <div>
+      <!--START OF HEADER-->
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -67,14 +68,12 @@
           </ul>
         </div>
       </nav>
+      <!--END OF HEADER-->
+
       <div class="container-fluid">
         <div class="row">
-          <div
-            class="col-sm-12"
-            style="background-color: red"
-            style="color: white"
-          >
-            <h3><strong style="color: white">Must Read Articles</strong></h3>
+          <div class="col-sm-12 featured-header">
+            <h3><strong>Must Read Articles</strong></h3>
           </div>
         </div>
       </div>
@@ -121,7 +120,21 @@
         </a>
       </div>
 
-      <hr class="featurette-divider" />
+      <hr>
+      {% if 'ADMIN' in role%}
+      <div class="adminAll"> 
+        <div class="add-row">
+          <form action="/news/add" method="GET" autocomplete="off">
+            <button id="add-button" class="button" type="submit">ADD ARTICLE</button>
+          </form>
+        </div>
+        <div class="add-row">
+          <form action="/upload" method="GET" autocomplete="off">
+            <button id="add-button" class="button" type="submit">ADD ARTICLE</button>
+          </form>
+        </div>
+      </div>
+      {% endif %}
       {% for article in articles %}
         <div class="row ">
             <div class="col-md-1"></div>
@@ -164,13 +177,25 @@
             {% endif %}
           </div>
         </div>
-        <hr class="featurette-divider" />
+        <hr>
         {%endfor%}
-        {% if 'ADMIN' in role%}
-        <form action="/news/add" method="GET" autocomplete="off">
-          <button id="add-button" class="button" type="submit">ADD ARTICLE</button>
-          </form>
-          {% endif %}
+
+  <!-- Footer -->
+   <div class="footer-footer">
+    <footer class="page-footer " class="navbar-fixed-footer">
+  <!-- Copyright -->
+  <div
+    class="footer-copyright text-center py-3"
+    class="navbar-fixed-bottom"
+    style="background-color: black; color: white;"
+  >
+    © 2020 Copyright:
+    <a> WebsiteName</a>
+  </div>
+  <!-- Copyright -->
+    </footer>
+   </div>
+  <!-- Footer -->
   </body>
 
   <script

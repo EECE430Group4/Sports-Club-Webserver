@@ -226,7 +226,7 @@ def getCartItem(itemid):
     return res
 
 def getTotalPrice(ticketitems, shopitems):
-    
+    return 0
 
 
 def addGames(sport, club1, club2, homeScore, awayScore, date):

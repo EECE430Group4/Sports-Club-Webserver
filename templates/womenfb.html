@@ -22,6 +22,8 @@
     />
   </head>
   <body>
+
+    <!--START OF HEADER-->
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -68,13 +70,10 @@
         </ul>
       </div>
     </nav>
-
-    <!-- HEADER DONE -->
+    <!-- END OF HEADER -->
 
     <h1> <strong>WOMEN'S FOOTBALL TEAM</strong></h1>
-
     <hr class="featurette-divider" />
-
     <img
       src="{{url_for('static', filename='css/images/teams/imgWomensFB.jpg')}}"
       alt="Women's BasketBall Team"
@@ -82,7 +81,6 @@
       height="100%"
       class="img-fluid"
     />
-
     <script>
       function allLetter(inputtxt1, inputtxt2) {
         var letters = /^[A-Za-z]+$/;
@@ -247,7 +245,15 @@
     </div>
       {%endfor%}
       <!-- Copyright -->
-    </footer>
+<!-- FOOTER -->
+<footer class="page-footer font-small blue">
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    © 2020 Copyright:
+    <a href="/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

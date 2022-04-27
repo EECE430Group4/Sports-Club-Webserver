@@ -1,11 +1,19 @@
-from flask import Flask, jsonify, render_template, redirect, url_for, session, request, abort
+from flask import Flask, jsonify, render_template, redirect, url_for, session, request, abort,flash
 import functions
 import sqlite3
 import datetime
 from datetime import date
 
+#THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
+import os
+import urllib.request
+from werkzeug.utils import secure_filename
+
+
+
 app = Flask(__name__)
 app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
+
 
 # --------------------------- HOMEPAGE ---------------------------
 
@@ -371,19 +379,6 @@ def getShop():
     return render_template('shop.html', user=user, role=role, items=items)
 
 
-
-
-@app.route('/cart/checkout', methods=['GET', 'POST'])
-def goCheckOut():
-    if 'user' in session:
-        user = session['user']
-        role = session['role']
-    else:
-        user = None
-        role = ""
-    return render_template('checkout.html', user=user, role=role)
-
-
 @app.route('/shop/additemcart/<itemid>')
 def addItemCart(itemid):
     if 'user' in session:
@@ -467,10 +462,11 @@ def getTicket():
     if request.method == 'POST':
         if 'addticketcartbut' in request.form:
             return redirect(url_for('addTicketCart', ticketid=request.form["ticketid"]))
-
+    print("cart in shop:")
+    print(session['cart'])
     return render_template('tickets.html', user=user, role=role, tickets=tickets)
 
-
+#MILIA
 @app.route('/tickets/addticketcart/<ticketid>')
 def addTicketCart(ticketid):
     if 'user' in session:
@@ -712,7 +708,40 @@ def getHonorsBB():
     today_year = date.today().year
     return render_template('honorsbb.html', user=user, role=role, trophies=trophies, today_year=today_year)
 
+#-------- UPLOAD ----------
+UPLOAD_FOLDER = "static/uploads"
+#THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['POST'])
+def upload_image():
+	if 'file' not in request.files:
+		flash('No file part')
+		return redirect(request.url)
+	file = request.files['file']
+	if file.filename == '':
+		flash('No image selected for uploading')
+		return redirect(request.url)
+	if file and allowed_file(file.filename):
+		filename = secure_filename(file.filename)
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		#print('upload_image filename: ' + filename)
+		flash('Image successfully uploaded and displayed below')
+		return render_template('honorsbb.html', filename=filename)
+	else:
+		flash('Allowed image types are -> png, jpg, jpeg, gif')
+		return redirect(request.url)
+
+@app.route('/display/<filename>')
+def display_image(filename):
+	#print('display_image filename: ' + filename)
+	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+    
 @app.route('/honorsbb/addTrophyB', methods=['POST'])
 def addTrophyB():
     if 'user' in session:

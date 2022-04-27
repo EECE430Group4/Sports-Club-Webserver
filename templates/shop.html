@@ -106,7 +106,7 @@
       <div class="row">
         {%for i in range(0,4)%}
         {%if (len > (i+j))%}
-        <div class="col-md-3">
+        <div class="col-md-3 small">
             <div class="wrapper">
               <img class="product" src="{{url_for('static', filename='css/images/news/testimage.jpg')}}" class="center"/>
               <div class="item_detail">{{items[i+j][5]}}</div>

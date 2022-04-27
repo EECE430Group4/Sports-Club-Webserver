@@ -13,6 +13,7 @@
     />
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}" async></script>
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -110,23 +111,30 @@
           <hr>
           <!--FOR MILIA: end the for loop here-->
 
-          <!--FOR MILIA: You can delete all the my-cart-items groups below-->
-          <div class="my-cart-items">
+          <!--FOR MILIA: You need to have an if statement where this only generates if tickets were added to cart to begin with-->
+          <div class="my-header-cart">
+            <h3 class="my-heading">Tickets Cart</h3> 
+            <h5 class="my-action">Remove all</h5> <!--FOR MILIA: functionality to delete all in cart-->
+          </div>
+          <!--FOR MILIA: place a for loop here for items in cart-->
+          <div class="my-cart-tickets">
             <div class=”my-image-box”>
               <!--FOR MILIA: fill in product image-->
               <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
             </div>
             <div class=”my-about”>
                 <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
-              <h3 class=”my-title”>Product Name</h3>
-              <h3 class=”my-subtitle”>Size: Size</h3>
+              <h3 class=”my-title”>Ticket T1 vs T2</h3>
+              <h3 class=”my-subtitle”>Arena: Arena</h3>
+              <h3 class=”my-subtitle”>Date: Date</h3>
+
             </div>
             <div class="my-counter">
               <!--FOR MILIA: functionality to increase quantity-->
               <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
-              <div class="my-btn">+</div>
+              <div class="my-btn">-</div>
               <div class="my-count">2</div> 
-              <div class="my-btn">-</button></div>
+              <div class="my-btn">+</button></div>
             </div> 
               <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
               <div class="my-money">
@@ -140,35 +148,8 @@
           </div>
 
           <hr>
-          <div class="my-cart-items">
-            <div class=”my-image-box”>
-              <!--FOR MILIA: fill in product image-->
-              <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
-            </div>
-            <div class=”my-about”>
-                <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
-              <h3 class=”my-title”>Product Name</h3>
-              <h3 class=”my-subtitle”>Size: Size</h3>
-            </div>
-            <div class="my-counter">
-              <!--FOR MILIA: functionality to increase quantity-->
-              <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
-              <div class="my-btn">+</div>
-              <div class="my-count">2</div> 
-              <div class="my-btn">-</button></div>
-            </div> 
-              <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
-              <div class="my-money">
-                <div class="my-money-one">$Price/unit</div>
-                <div class="my-money-one">$Price</div>
-                <div class="my-mods">
-                  <div class="my-save">Save for later</div>
-                  <div class="my-remove">Remove</div>
-                </div>
-              </div>
-          </div>
+          <!--FOR MILIA: end the for loop here-->
 
-          <hr>
           <!--FOR MILIA: Stop deleting. Don't delete the lines below-->
           <div class="my-checkout">
             <div class="my-total">
@@ -237,7 +218,6 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
