@@ -7,7 +7,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
     <link
-      href="{{ url_for('static', filename='css/home.css') }}"
+      href="{{ url_for('static', filename='css/cart.css') }}"
       rel="stylesheet"
       type="text/css"
     />
@@ -17,69 +17,195 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <title>Team name</title>
+    <title>Your Shopping Cart</title>
   </head>
   <body>
-    
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">TeamName</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"
-              >Teams <span class="caret"></span
-            ></a>
-            <ul class="dropdown-menu">
-              <li><a href="/teams/womenfb">Women Football</a></li>
-              <li><a href="/teams/menfb">Men Football</a></li>
-              <li><a href="/teams/womenbb">Women Basketball</a></li>
-              <li><a href="/teams/menbb">Men Basketball</a></li>
-            </ul>
-          </li>
-          <li><a href="/fixtures">Fixtures</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/tickets">Tickets</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="/community">Community</a></li>
-          <li><a href="/honorsfb">Honors</a></li>
-        </ul>
-        <form class="navbar-form navbar-right" action="/action_page.php">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" />
+    <div class="my-container">
+      <!--HEADER-->
+
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">TeamName</a>
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            {%if user is none%}
-            <a href="/login">
-              <span class="glyphicon glyphicon-user"></span>
-            </a>
-            {%else%}
-            <a href="/profile">
-              <span class="glyphicon glyphicon-user"></span> {{user}}</a
-            >
-            {%endif%}
-          </li>
-        </ul>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                >Teams <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="/teams/womenfb">Women Football</a></li>
+                <li><a href="/teams/menfb">Men Football</a></li>
+                <li><a href="/teams/womenbb">Women Basketball</a></li>
+                <li><a href="/teams/menbb">Men Basketball</a></li>
+              </ul>
+            </li>
+            <li><a href="/fixtures">Fixtures</a></li>
+            <li><a href="/news">News</a></li>
+            <li><a href="/tickets">Tickets</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/community">Community</a></li>
+            <li><a href="/honorsfb">Honors</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" action="/action_page.php">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" />
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              {%if user is none%}
+              <a href="/login">
+                <span class="glyphicon glyphicon-user"></span>
+              </a>
+              {%else%}
+              <a href="/profile">
+                <span class="glyphicon glyphicon-user"></span> {{user}}</a
+              >
+              {%endif%}
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!--END OF HEADER-->
+
+      <div class="my-2-container">
+        <div class="my-cart-container">
+          <div class="my-header-cart">
+            <h3 class="my-heading">Shopping Cart</h3> 
+            <h5 class="my-action">Remove all</h5> <!--FOR MILIA: functionality to delete all in cart-->
+          </div>
+
+         <!--FOR MILIA: place a for loop here for items in cart-->
+          <div class="my-cart-items">
+            <div class=”my-image-box”>
+              <!--FOR MILIA: fill in product image-->
+              <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
+            </div>
+            <div class=”my-about”>
+                <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
+              <h3 class=”my-title”>Product Name</h3>
+              <h3 class=”my-subtitle”>Size: Size</h3>
+            </div>
+            <div class="my-counter">
+              <!--FOR MILIA: functionality to increase quantity-->
+              <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
+              <div class="my-btn">+</div>
+              <div class="my-count">2</div> 
+              <div class="my-btn">-</button></div>
+            </div> 
+              <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
+            <div class="my-money">
+              <div class="my-money-one">$Price/unit</div>
+              <div class="my-money-one">$Price</div>
+              <div class="my-mods">
+                <div class="my-save">Save for later</div>
+                <div class="my-remove">Remove</div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <!--FOR MILIA: end the for loop here-->
+
+          <!--FOR MILIA: You can delete all the my-cart-items groups below-->
+          <div class="my-cart-items">
+            <div class=”my-image-box”>
+              <!--FOR MILIA: fill in product image-->
+              <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
+            </div>
+            <div class=”my-about”>
+                <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
+              <h3 class=”my-title”>Product Name</h3>
+              <h3 class=”my-subtitle”>Size: Size</h3>
+            </div>
+            <div class="my-counter">
+              <!--FOR MILIA: functionality to increase quantity-->
+              <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
+              <div class="my-btn">+</div>
+              <div class="my-count">2</div> 
+              <div class="my-btn">-</button></div>
+            </div> 
+              <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
+              <div class="my-money">
+                <div class="my-money-one">$Price/unit</div>
+                <div class="my-money-one">$Price</div>
+                <div class="my-mods">
+                  <div class="my-save">Save for later</div>
+                  <div class="my-remove">Remove</div>
+                </div>
+              </div>
+          </div>
+
+          <hr>
+          <div class="my-cart-items">
+            <div class=”my-image-box”>
+              <!--FOR MILIA: fill in product image-->
+              <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
+            </div>
+            <div class=”my-about”>
+                <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
+              <h3 class=”my-title”>Product Name</h3>
+              <h3 class=”my-subtitle”>Size: Size</h3>
+            </div>
+            <div class="my-counter">
+              <!--FOR MILIA: functionality to increase quantity-->
+              <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
+              <div class="my-btn">+</div>
+              <div class="my-count">2</div> 
+              <div class="my-btn">-</button></div>
+            </div> 
+              <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
+              <div class="my-money">
+                <div class="my-money-one">$Price/unit</div>
+                <div class="my-money-one">$Price</div>
+                <div class="my-mods">
+                  <div class="my-save">Save for later</div>
+                  <div class="my-remove">Remove</div>
+                </div>
+              </div>
+          </div>
+
+          <hr>
+          <!--FOR MILIA: Stop deleting. Don't delete the lines below-->
+          <div class="my-checkout">
+            <div class="my-total">
+              <div class="my-side-sub">
+                <div class="my-subtotal">Sub-Total</div>
+                <!--FOR MILIA: fill number of items in cart-->
+                <div class="my-items">2 items</div>
+              </div>
+                <!--FOR MILIA: fill total-->
+              <div class="my-total-amount">$6.18</div>
+            </div>
+            <div class="my-many-buttons">
+              <!--FOR MILIA: goes back to shop, if we want to implement this functionality-->
+              <button class="my-button my-continue">Continue Shopping</button>
+              <button class="my-button">Checkout</button>
+            </div>
+          </div>
+
+        </div>
+
       </div>
-    </nav>
+      
 
 
-    <!-- Footer -->
-    <footer class="page-footer font-small blue">
-      <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">
-        © 2020 Copyright:
-        <a href="/"> MDBootstrap.com</a>
-      </div>
-      <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
 
+
+      <!-- Footer -->
+      <footer class="page-footer font-small blue">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+          © 2020 Copyright:
+          <a href="/"> MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

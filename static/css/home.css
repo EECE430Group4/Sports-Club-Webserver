@@ -247,7 +247,6 @@ div.content article{
 }
 
 
-
 /* MODAL DESIGN */
 .modal-header{
     display:flex;
@@ -297,7 +296,7 @@ div.content article{
      background-color: rgba(72, 92, 121, 1);
  }
 
-.video-content{
+ .video-content{
     display:flex;
     flex-direction: column;
     row-gap:2rem; 
