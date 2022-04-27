@@ -349,6 +349,16 @@ def getCart():
         role = ""
     return render_template('cart.html', user=user, role=role)
 
+@app.route('/cart/checkout', methods=['GET', 'POST'])
+def goCheckOut():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    return render_template('checkout.html', user=user, role=role)
+
 @app.route('/shop/additemcart/<itemid>')
 def addItemCart(itemid):
     if 'user' in session:
