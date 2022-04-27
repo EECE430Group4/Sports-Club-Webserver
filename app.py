@@ -20,7 +20,7 @@ def main():
         role = ""
     if 'cart' not in session:
         session['cart'] = []
-    return render_template('HomePage.html', user=user,role=role)
+    return render_template('HomePage.html', user=user, role=role)
 
 # --------------------------- LOGIN + SIGNUP + LOGOUT ---------------------------
 
@@ -314,11 +314,12 @@ def addGames():
 
     sport = request.form["sportAdd"]
     club1 = request.form["club1Add"]
-    score = request.form["scoreAdd"]
     club2 = request.form["club2Add"]
+    homeScore = request.form["homeScoreAdd"]
+    awayScore = request.form["awayScoreAdd"]
     date = request.form["dateAdd"]
 
-    functions.addGames(sport, club1, score, club2, date)
+    functions.addGames(sport, club1, club2, homeScore, awayScore, date)
     return(redirect(url_for('getFixtures')))
 
 
@@ -332,10 +333,11 @@ def editGames():
     ID = request.form["gameid"]
     sport = request.form["sportEdit"]
     club1 = request.form["club1Edit"]
-    score = request.form["scoreEdit"]
     club2 = request.form["club2Edit"]
+    homeScore = request.form["homeScoreEdit"]
+    awayScore = request.form["awayScoreEdit"]
     date = request.form["dateEdit"]
-    functions.editGames(ID, sport, club1, score, club2, date)
+    functions.editGames(ID, sport, club1, club2, homeScore, awayScore, date)
     return(redirect(url_for('getFixtures')))
 
 
@@ -362,12 +364,12 @@ def getShop():
         role = ""
 
     items = functions.getItem()
-    #print(items)
     if request.method == 'POST':
         if 'addcartbut' in request.form:
             return redirect(url_for('addItemCart', itemid=request.form["itemid"]))
 
     return render_template('shop.html', user=user, role=role, items=items)
+
 
 @app.route('/cart', methods=['GET', 'POST'])
 def getCart():
@@ -379,6 +381,7 @@ def getCart():
         role = ""
     return render_template('cart.html', user=user, role=role)
 
+
 @app.route('/cart/checkout', methods=['GET', 'POST'])
 def goCheckOut():
     if 'user' in session:
@@ -389,6 +392,7 @@ def goCheckOut():
         role = ""
     return render_template('checkout.html', user=user, role=role)
 
+
 @app.route('/shop/additemcart/<itemid>')
 def addItemCart(itemid):
     if 'user' in session:
@@ -397,11 +401,11 @@ def addItemCart(itemid):
     else:
         user = None
         role = ""
-    session['cart'].append(itemid)
-
-    print("cart in shop:")
     print(session['cart'])
-
+    arr = session['cart']
+    arr.append(itemid)
+    session['cart'] = arr
+    print(session['cart'])
     return(redirect(url_for('getShop')))
 
 
@@ -436,7 +440,9 @@ def deleteItem():
     functions.deleteItem(itemid)
 
     return(redirect(url_for('getShop')))
-@app.route('/shop/editItem',methods=['GET', 'POST'])
+
+
+@app.route('/shop/editItem', methods=['GET', 'POST'])
 def editItem():
     if 'user' in session:
         user = session['user']
@@ -450,10 +456,11 @@ def editItem():
     small = request.form['itemsizeSEdit']
     medium = request.form['itemsizeMEdit']
     large = request.form['itemsizeLEdit']
-    functions.editItem(ID, name, price, small,medium,large)
+    functions.editItem(ID, name, price, small, medium, large)
     return (redirect(url_for('getShop')))
 
 # --------------------------- TICKETS ---------------------------
+
 
 @app.route('/tickets', methods=['GET', 'POST'])
 def getTicket():
@@ -465,7 +472,7 @@ def getTicket():
         role = ""
 
     tickets = functions.getTicket()
-    ##print(tickets)
+    # print(tickets)
     if request.method == 'POST':
         if 'addticketcartbut' in request.form:
             return redirect(url_for('addTicketCart', ticketid=request.form["ticketid"]))
@@ -481,11 +488,13 @@ def addTicketCart(ticketid):
     else:
         user = None
         role = ""
-    session['cart'].append(ticketid)
-
-    print("items in cart:")
+    print(session['cart'])
+    arr = session['cart']
+    arr.append(ticketid)
+    session['cart'] = arr
     print(session['cart'])
     return(redirect(url_for('getTicket')))
+
 
 @app.route('/ticket/addticket', methods=['POST'])
 def addTicket():
@@ -495,15 +504,16 @@ def addTicket():
     else:
         user = None
 
-    oppteam= request.form["oppTeamAdd"]
-    tickettime= request.form["ticketTimeAdd"]
-    arena= request.form["arenaAdd"]
-    price= request.form["ticketPriceAdd"]
-    stock= request.form["ticketStockAdd"]
+    oppteam = request.form["oppTeamAdd"]
+    tickettime = request.form["ticketTimeAdd"]
+    arena = request.form["arenaAdd"]
+    price = request.form["ticketPriceAdd"]
+    stock = request.form["ticketStockAdd"]
 
-    functions.addTicket(oppteam,tickettime, arena, price, stock)
+    functions.addTicket(oppteam, tickettime, arena, price, stock)
 
     return(redirect(url_for('getTicket')))
+
 
 @app.route('/ticket/deleteTicket', methods=['POST'])
 def deleteTicket():
@@ -512,13 +522,14 @@ def deleteTicket():
     else:
         user = None
 
-    ticketid= request.form["ticketidRemove"]
+    ticketid = request.form["ticketidRemove"]
 
     functions.deleteTicket(ticketid)
 
     return(redirect(url_for('getTicket')))
 
-@app.route('/tickets/editTicket',methods=['GET', 'POST'])
+
+@app.route('/tickets/editTicket', methods=['GET', 'POST'])
 def editTicket():
     if 'user' in session:
         user = session['user']
@@ -527,12 +538,12 @@ def editTicket():
         user = None
     ID = request.form["ticketid"]
 
-    oppteam= request.form["oppTeamEdit"]
-    tickettime= request.form["ticketTimeEdit"]
-    arena= request.form["arenaEdit"]
-    price= request.form["ticketPriceEdit"]
-    stock= request.form["ticketStockEdit"]
-    functions.editTicket(ID, oppteam, tickettime,arena,price, stock)
+    oppteam = request.form["oppTeamEdit"]
+    tickettime = request.form["ticketTimeEdit"]
+    arena = request.form["arenaEdit"]
+    price = request.form["ticketPriceEdit"]
+    stock = request.form["ticketStockEdit"]
+    functions.editTicket(ID, oppteam, tickettime, arena, price, stock)
     return (redirect(url_for('getTicket')))
 
 
@@ -593,7 +604,6 @@ def changeProfileSetting():
     return redirect(url_for('getProfileSetting'))
 
 
-
 # --------------------------- HONORS FOOTBALL---------------------------
 
 @app.route('/honorsfb', methods=['GET', 'POST'])
@@ -607,8 +617,8 @@ def getHonorsFB():
 
     trophies = []
     trophies = functions.getTrophyBS("football")
-    today_year=date.today().year
-    return render_template('honorsfb.html', user=user, role=role, trophies=trophies,today_year=today_year)
+    today_year = date.today().year
+    return render_template('honorsfb.html', user=user, role=role, trophies=trophies, today_year=today_year)
 
 
 @app.route('/honorsfb/addTrophyF', methods=['POST'])
@@ -666,8 +676,8 @@ def getHonorsBB():
         role = ""
     trophies = []
     trophies = functions.getTrophyBS("basketball")
-    today_year=date.today().year
-    return render_template('honorsbb.html', user=user, role=role, trophies=trophies,today_year=today_year)
+    today_year = date.today().year
+    return render_template('honorsbb.html', user=user, role=role, trophies=trophies, today_year=today_year)
 
 
 @app.route('/honorsbb/addTrophyB', methods=['POST'])
@@ -712,6 +722,7 @@ def editTrophyB():
     year = request.form['yearEdit']
     functions.editTrophy(ID, title, year, "basketball")
     return (redirect(url_for('getHonorsBB')))
+
 
 '''@app.route('/honorsbb/editing', methods=['GET', 'GPOST'])
 def showEdit():

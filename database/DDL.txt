@@ -67,12 +67,13 @@ CREATE TABLE games (
   ID INTEGER primary key AUTOINCREMENT,
   sport TEXT not null,
   club1 text not null,
-  score text not null,
+  homescore int not null,
+  awayscore int not null,
   club2 text not null,
   gamedate date not null
 );
 
-insert into games (sport,club1,score,club2,gamedate) values ('Womens Football','Team1','2-0','Team2','2022-03-14')
+insert into games values (1,'Womens Football','Team1',2,0,'Team2','2022-03-14')
 
 CREATE TABLE honors (
 	trophy_id	int PRIMARY KEY,
