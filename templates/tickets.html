@@ -70,30 +70,34 @@
     </nav>
    <!--END OF HEADER-->
 
-   {% if 'ADMIN' in role%}
-   <div class="adminAll"> 
-     <div class="add-row">
-     <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-       <input type="hidden" name="addbut" value="5">
-       <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
-     <!-- </form> -->
-     </div>
-     <div class="delete-row">
-       <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-         <input type="hidden" name="deletebut" value="5">
-         <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
-       <!-- </form> -->
-     </div>
-     <div class="edit-row">
-         <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-           <input type="hidden" name="editbut" value="5">
-           <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
-         <!-- </form> -->
-     </div>
-   </div>
-   {% endif %}
+   <form action="/ticket/addticket" method="POST" id="addFormT" autocomplete="off">
+    <label>Opposing team name:</label>
+    <input type="text" name="oppTeamAdd" id="oppTeamAdd" required/><br>
+    <label>Time (format should be year/month/day hr:min:sec):</label>
+    <input type="text" name="ticketTimeAdd" id="ticketTimeAdd" required/><br>
+    <label>Arena:</label>
+    <input type="text" name="arenaAdd" id="arenaAdd" required/><br>
+    <label>Price:</label>
+    <input type="text" name="ticketPriceAdd" id="ticketPriceAdd" required/><br>
+    <label>Number in stock:</label>
+    <input type="text" name="ticketStockAdd" id="ticketStockAdd" required/><br>
+    <input type="hidden" name="addticketbut" value=1>
+    <button id="addTicket-button"form="addFormT"  class="btn btn-primary submit" type="submit">Add Ticket</button>
 
+  
+  </form>
+  <form action="/ticket/deleteTicket" id="deleteT" method="POST" autocomplete="off">
+                   
+    <label>Ticket ID:</label>
+    <select name="ticketidRemove" id="ticketidRemove" >
+      {%for ticket in tickets%}                      
+      <option value={{ticket[0]}}>{{ticket[0]}}</option>
+      {% endfor %}
+  </select>
+    <input type="hidden" name="removeticketbut" value=1>
+    <button id="removeTicket-button" class="btn btn-primary submit" form="deleteT" type="submit" required>Remove Ticket</button>
 
+  </form>
 
    <div class="row">
     <button class="cart_button">
@@ -158,116 +162,6 @@
     </footer>
     <!-- Footer -->
 
-
-
-
-        <!--EDIT MODAL-->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h2 class="modal-title" id="editModalLabel">Edit Honor</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                <form action="" id="editFormT" method="POST">
-                  <label>Ticket ID:</label>
-                    <select name="ticketidRemove" id="ticketidRemove" >
-                      {%for ticket in tickets%}                      
-                      <option value={{ticket[0]}}>{{ticket[0]}}</option>
-                      {% endfor %}
-                  </select>
-                <br>
-                <label>Opposing team name:</label>
-                <input type="text" name="oppTeamAdd" id="oppTeamAdd" required/><br>
-                <label>Time (format should be year/month/day hr:min:sec):</label>
-                <input type="text" name="ticketTimeAdd" id="ticketTimeAdd" required/><br>
-                <label>Arena:</label>
-                <input type="text" name="arenaAdd" id="arenaAdd" required/><br>
-                <label>Price:</label>
-                <input type="text" name="ticketPriceAdd" id="ticketPriceAdd" required/><br>
-                <label>Number in stock:</label>
-                <input type="text" name="ticketStockAdd" id="ticketStockAdd" required/><br>
-                <input type="hidden" name="addticketbut" value=1>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" form="editFormB"class="btn btn-primary submit">Submit</button>
-              </div>
-          </div>
-      </div>
-    </div>
-    <!--END OF EDIT MODAL-->
-  
-      <!--ADD MODAL-->
-      <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="editModalLabel">Add Honor</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                  <form action="/ticket/addticket" method="POST" id="addFormT" autocomplete="off">
-                    <label>Opposing team name:</label>
-                    <input type="text" name="oppTeamAdd" id="oppTeamAdd" required/><br>
-                    <label>Time (format should be year/month/day hr:min:sec):</label>
-                    <input type="text" name="ticketTimeAdd" id="ticketTimeAdd" required/><br>
-                    <label>Arena:</label>
-                    <input type="text" name="arenaAdd" id="arenaAdd" required/><br>
-                    <label>Price:</label>
-                    <input type="text" name="ticketPriceAdd" id="ticketPriceAdd" required/><br>
-                    <label>Number in stock:</label>
-                    <input type="text" name="ticketStockAdd" id="ticketStockAdd" required/><br>
-                    <input type="hidden" name="addticketbut" value=1>
-                  
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button id="addTicket-button"form="addFormT"  class="btn btn-primary submit" type="submit">Add Ticket</button>
-                </div>
-            </div>
-        </div>
-      </div>
-      <!--END OF ADD MODAL-->
-  
-      <!--DELETE MODAL-->
-      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="editModalLabel">Delete Honor</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                  <form action="/ticket/deleteTicket" id="deleteT" method="POST" autocomplete="off">
-                   
-                    <label>Ticket ID:</label>
-                    <select name="ticketidRemove" id="ticketidRemove" >
-                      {%for ticket in tickets%}                      
-                      <option value={{ticket[0]}}>{{ticket[0]}}</option>
-                      {% endfor %}
-                  </select>
-                    <input type="hidden" name="removeticketbut" value=1>
-                   
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button id="removeTicket-button" class="btn btn-primary submit" form="deleteT" type="submit" required>Remove Ticket</button>
-                </div>
-            </div>
-        </div>
-      </div>
-      <!--END OF DELETE MODAL-->
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

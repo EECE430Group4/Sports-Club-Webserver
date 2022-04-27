@@ -9,7 +9,6 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size:cover;
-    min-height: 100%;
 
 }
 .my-container{
@@ -17,11 +16,13 @@ body{
     flex-direction:column;
     justify-content: space-between;
     min-height: 100vh;
+
 }
 
 .page-footer{
     margin-bottom:0;
     background-color: white;
+    margin-top: auto;
 }
 .footer-footer{
     margin-bottom:0;
@@ -119,12 +120,14 @@ div.descriptiveImage img {
     row-gap:0.5rem; 
     margin:2%;
     padding-top: 2rem;
+    min-height: 45rem;
 }
 .allContent{
     display:flex;
     flex-direction: column;
     row-gap:2rem; 
     margin:5%;
+    
     /*height:80rem;*/
 }
 
@@ -146,6 +149,7 @@ div.descriptiveImage img {
     row-gap:0.5rem; 
     margin:2%;
     padding-top: 2rem;
+    min-height: 45rem;
 
 }
 
@@ -159,6 +163,7 @@ div.descriptiveImage img {
     background-color: rgba(255, 255, 255, 0.2);
     /*BORDERS FOR DIVS*/
     margin:1%;
+    
 
 }
 .honorsTable tr{
@@ -174,19 +179,26 @@ div.descriptiveImage img {
     border-collapse: collapse;
     border-radius: 1em;
     overflow: hidden;
+    min-height:40rem;
 }
-  
+.honorsTable tbody{
+
+}
 .honorsTable th, td {
     padding: 1em;
     border-bottom: 2px solid white; 
 }
 .honorRowAdmin{ /*SIMILAR TO honorsAll */
     display:flex;
-    height:25rem;
+    height:25em;
     justify-content: center;
     margin-bottom:2%;
 
 }
+
+
+
+
 
 /* MODAL DESIGN */
 .modal-header{
