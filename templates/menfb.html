@@ -84,35 +84,147 @@
           class="img-fluid"
         />
     
-        <div class="group">
-          <h2>GOALKEEPERS</h2>
+        <script>
+          function allLetter(inputtxt1, inputtxt2) {
+            var letters = /^[A-Za-z]+$/;
+            if (inputtxt1.value.match(letters) && inputtxt2.value.match(letters)) {
+              return true;
+            } else {
+              alert("player name and position cannot contain numbers");
+              event.returnValue = false;
+              return false;
+            }
+          }
+        </script>
     
-          <hr class="featurette-divider" style="opacity: 0%" />
+       
+        {%if 'ADMIN' in role%}
+        <h2>EDIT TEAM</h2>
+            <div class="editTeams">
+                <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD PLAYER</button>
+                      
+                <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT PLAYER</button>
+                
+                      
+                <button id="edit-button" class="btn btn-xs" type="submit" data-toggle="modal" data-target="#deleteModal" style="color:black" >DELETE PLAYER</button>
+            </div>
+        {%endif%}
     
-          <!--GOALKEEPERS IMAGES-->
-          <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-2 container">
-              <img
-                class="featurette-image img-fluid mx-auto image"
-                alt="Player 1"
-                src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
-                data-holder-rendered="true"
-              />
-              <div class="overlay">
-                <div class="text">Get stats</div>
+    
+    
+        
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h2 class="modal-title" id="addModalLabel">Add Player</h2>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="addPlayerForm" action="/menfb/addPlayer" method="POST">
+                    <h>Name:</h>
+                    <p><input type="text" name="playerNameAdd" id="playerNameAdd" required /></p>
+                    <h>Age:</h>
+                    <p><input type="number" name="playerAgeAdd" id="playerAgeAdd" required /></p>
+                    <h>Position:</h>
+                    <p><input type="text" name="playerPositionAdd" id="playerPositionAdd" required /></p>
+                    <h>Points:</h>
+                    <p><input type="number" name="playerPointsAdd" id="playerPointsAdd" required /></p>
+                    <h>Assists:</h>
+                    <p><input type="number" name="playerAssistsAdd" id="playerAssistsAdd" required /></p>
+                    <button type="submit" class= "btn btn-primary" onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)">
+                      Submit
+                    </button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      
+                  </div>
               </div>
-            </div>
-            
           </div>
-      </div>
+        </div>
     
-      <div class="group">
-        <h2>DEFENDERS</h2>
+    
+    
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h2 class="modal-title" id="editModalLabel">Edit Player</h2>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+    
+                    <form name="editPlayerForm" action="/menfb/editPlayer" method="POST">
+                      <br>
+                      <h>Choose a Player:</h>
+                      <p><input type="number" name="playerIdEdit" id="playerIdEdit" /></p>
+                      <h>Name:</h>
+                      <p><input type="text" name="playerNameEdit"></p>
+                      <h>Age:</h>
+                      <p><input type="number" name="playerAgeEdit"></p>
+                      <h>Position:</h>
+                      <p><input type="text" name="playerPositionEdit"></p>
+                      <h>Points:</h>
+                      <p><input type="number" name="playerPointsEdit"></p>
+                      <h>Assists:</h>
+                      <p><input type="number" name="playerAssistsEdit"></p>
+                      <button type="submit" class="btn btn-primary" onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)">
+                        Submit</button>
+                     </form>
+                   
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+    
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="addModalLabel">Delete Player</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form action="/menfb/deletePlayer" method="POST">
+                    <h>Player ID:</h>
+                    <input type="number" name="playerIdDelete" id="playerIdDelete" />
+                    <br> <br>
+                  <button type="submit" class= "btn btn-primary" >Submit</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    
+        <h2>FULL ROSTER</h2>
     
         <hr class="featurette-divider" style="opacity: 0%" />
     
+      
+      <!--ROW 1 IMAGES-->
+      
+         <!--FOR RAZ, REPEATING RENDER-->
+        
+        {%set len=players|length%}
+        {%for j in range (0,len,4)%}
         <div class="row">
+          {%for i in range(0,4)%}
+          {%if (len > (i+j))%}
           <div class="col-md-1"></div>
           <div class="col-md-2 container">
             <img
@@ -122,55 +234,20 @@
               data-holder-rendered="true"
             />
             <div class="overlay">
-              <div class="text">Get stats</div>
+              <label>{{players[i+j][1]}}</label>
+              <label id="playerid">{{players[i+j][0]}}</label><br />
+              <label>Age: {{players[i+j][2]}}</label><br />
+              <label>Position: {{players[i+j][4]}}</label><br />
+              <label>Points: {{players[i+j][5]}}</label><br />
+              <label>Assists: {{players[i+j][6]}}</label>
+    
             </div>
           </div>
+          {%endif%}
+          {%endfor%}
         </div>
-      </div>
-    
-      <div class="group">
-        <h2>MIDFIELDERS</h2>
-    
-        <hr class="featurette-divider" style="opacity: 0%" />
-    
-        <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-2 container">
-            <img
-              class="featurette-image img-fluid mx-auto image"
-              alt="Player 1"
-              src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
-              data-holder-rendered="true"
-            />
-            <div class="overlay">
-              <div class="text">Get stats</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="group">
-        <h2>FORWARDS</h2>
-    
-        <hr class="featurette-divider" style="opacity: 0%" />
-    
-        <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-2 container">
-            <img
-              class="featurette-image img-fluid mx-auto image"
-              alt="Player 1"
-              src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
-              data-holder-rendered="true"
-            />
-            <div class="overlay">
-              <div class="text">Get stats</div>
-            </div>
-          </div>
-        </div>
-      </div>
-        <hr class="featurette-divider" />
-    
+          {%endfor%}
+
         <!-- FOOTER -->
         <div class="footer">
           <p>copyright information</p>
