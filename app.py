@@ -28,6 +28,8 @@ def main():
         role = ""
     if 'cart' not in session:
         session['cart'] = []
+    if 'total' not in session:
+        session['total'] = 0
     return render_template('HomePage.html', user=user, role=role)
 
 # --------------------------- LOGIN + SIGNUP + LOGOUT ---------------------------
@@ -391,7 +393,8 @@ def addItemCart(itemid):
     arr = session['cart']
     arr.append(itemid)
     session['cart'] = arr
-    #print(session['cart'])
+    print("in add item cart")
+    print(session['cart'])
     return(redirect(url_for('getShop')))
 
 
@@ -460,6 +463,7 @@ def getTicket():
     tickets = functions.getTicket()
     # print(tickets)
     if request.method == 'POST':
+        print("hello from if")
         if 'addticketcartbut' in request.form:
             return redirect(url_for('addTicketCart', ticketid=request.form["ticketid"]))
     print("cart in shop:")
@@ -545,8 +549,8 @@ def getCheckout():
     else:
         user = None
         role = ""
-
-    return render_template('checkout.html', user=user, role=role)
+    total=session['total']
+    return render_template('checkout.html', user=user, role=role, total=total)
 
 @app.route('/cart', methods=['GET', 'POST'])
 def getCart():
@@ -572,10 +576,63 @@ def getCart():
             ticketitems.append(item)
         else:
             shopitems.append(item)
-    
-    total = functions.getTotalPrice(ticketitems, shopitems)
 
-    return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems, total=total)
+    return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems)
+
+@app.route('/cart/RemoveTickets', methods=['POST'])
+def RemoveTickets():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    arr = session['cart']
+    for item in arr:
+        print(item)
+        if int(item[0]) < 0:
+            arr.remove(item)
+    session['cart'] = arr
+    return (redirect(url_for('getcart')))
+
+@app.route('/cart/RemoveItems', methods=['POST'])
+def RemoveItems():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    arr = session['cart']
+    for item in arr:
+        if int(item[0]) > 0:
+            arr.remove(item)
+    session['cart'] = arr
+    return (redirect(url_for('getcart')))
+
+@app.route('/cart/quantity', methods=['POST'])
+def getQuantity():
+    if 'user' in session:
+        user = session['user']
+        role = session['role']
+    else:
+        user = None
+        role = ""
+    arr = session['cart']
+    itemid = request.form['quantityitemid']
+    quantity = request.form['quantity']
+    price = 0
+    for item in arr:
+        if item[0] == itemid:
+            price = item[4]
+    tot = session['total']
+    tot = tot + (quantity * price)
+    session['total'] = tot
+
+    print(session['total'])
+
+    return (redirect(url_for('getcart')))
+
 # --------------------------- PROFILE ---------------------------
 
 
