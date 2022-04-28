@@ -179,15 +179,15 @@
                   </select>
                   <br>
                   <h>Name:</h>
-                  <p><input type="text" name="playerNameEdit"></p>
+                  <p><input type="text" name="playerNameEdit" required></p>
                   <h>Age:</h>
-                  <p><input type="number" name="playerAgeEdit"></p>
+                  <p><input type="number" name="playerAgeEdit" required></p>
                   <h>Position:</h>
-                  <p><input type="text" name="playerPositionEdit"></p>
+                  <p><input type="text" name="playerPositionEdit" required></p>
                   <h>Points:</h>
-                  <p><input type="number" name="playerPointsEdit"></p>
+                  <p><input type="number" name="playerPointsEdit" required></p>
                   <h>Assists:</h>
-                  <p><input type="number" name="playerAssistsEdit"></p>
+                  <p><input type="number" name="playerAssistsEdit" required></p>
                   <button type="submit" class="btn btn-primary" onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)">
                     Submit</button>
                  </form>
@@ -212,7 +212,7 @@
             <div class="modal-body">
               <form action="/womenfb/deletePlayer" method="POST">
                 <h>Player ID:</h>
-                <input type="number" name="playerIdDelete" id="playerIdDelete" />
+                <input type="number" name="playerIdDelete" id="playerIdDelete" required/>
                 <br> <br>
               <button type="submit" class= "btn btn-primary" >Submit</button>
               </form>
