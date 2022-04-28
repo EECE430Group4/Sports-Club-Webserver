@@ -170,18 +170,24 @@
 
                 <form name="editPlayerForm" action="/womenfb/editPlayer" method="POST">
                   <br>
-                  <h>Choose a Player:</h>
-                  <p><input type="number" name="playerIdEdit" id="playerIdEdit" /></p>
+                  <h>Choose a Player by ID:</h>
+                  <br>
+                  <select name="playerIdEdit">
+                  {%for player in players%}
+                    <option value={{player[0]}}>{{player[0]}}</option>
+                    {% endfor %}
+                  </select>
+                  <br>
                   <h>Name:</h>
-                  <p><input type="text" name="playerNameEdit"></p>
+                  <p><input type="text" name="playerNameEdit" required></p>
                   <h>Age:</h>
-                  <p><input type="number" name="playerAgeEdit"></p>
+                  <p><input type="number" name="playerAgeEdit" required></p>
                   <h>Position:</h>
-                  <p><input type="text" name="playerPositionEdit"></p>
+                  <p><input type="text" name="playerPositionEdit" required></p>
                   <h>Points:</h>
-                  <p><input type="number" name="playerPointsEdit"></p>
+                  <p><input type="number" name="playerPointsEdit" required></p>
                   <h>Assists:</h>
-                  <p><input type="number" name="playerAssistsEdit"></p>
+                  <p><input type="number" name="playerAssistsEdit" required></p>
                   <button type="submit" class="btn btn-primary" onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)">
                     Submit</button>
                  </form>
@@ -206,7 +212,7 @@
             <div class="modal-body">
               <form action="/womenfb/deletePlayer" method="POST">
                 <h>Player ID:</h>
-                <input type="number" name="playerIdDelete" id="playerIdDelete" />
+                <input type="number" name="playerIdDelete" id="playerIdDelete" required/>
                 <br> <br>
               <button type="submit" class= "btn btn-primary" >Submit</button>
               </form>
@@ -238,7 +244,7 @@
         <img
           class="featurette-image img-fluid mx-auto image"
           alt="Player 1"
-          src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
+          src="{{url_for('static', filename='css/images/teams/jersey.PNG')}}"
           data-holder-rendered="true"
         />
         <div class="overlay">
