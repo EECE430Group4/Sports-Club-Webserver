@@ -34,14 +34,12 @@ INSERT INTO article VALUES (1,'What A Lame Game!','The <team> beat <team> 4-3 in
 
 CREATE TABLE shop (
 	shopitemid	int PRIMARY KEY,
-	sizeSstock	int NOT NULL,
-	sizeMstock	int NOT NULL,
-	sizeLstock	int NOT NULL,
+	stock	int NOT NULL,
 	itemprice	int NOT NULL,
 	itemName	text NOT NULL
 );
   
-INSERT INTO shop VALUES (1,10,10,10,20,'T-shirt'), (2,10,10,10,20,'Shorts'), (3,10,10,10,20,'Ball'), (4,10,10,10,20,'Hoodie'), (5,10,10,10,20,'Long-sleeve'), (6,10,10,10,20,'T-shirt black'), (7,10,10,10,20,'T-shirt'), (8,10,10,10,20,'T-shirt');
+INSERT INTO shop VALUES (1,10,20,'T-shirt'), (2,10,20,'Shorts'), (3,10,20,'Ball'), (4,10,20,'Hoodie'), (5,10,20,'Long-sleeve'), (6,10,20,'T-shirt black'), (7,10,20,'T-shirt'), (8,10,20,'T-shirt');
 
 CREATE TABLE tickets (
 	ticketid	int PRIMARY KEY,

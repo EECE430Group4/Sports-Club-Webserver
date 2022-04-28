@@ -27,7 +27,7 @@ def main():
         user = None
         role = ""
     if 'cart' not in session:
-        session['cart'] = []
+        session['cart'] = {}
     if 'total' not in session:
         session['total'] = 0
     return render_template('HomePage.html', user=user, role=role)
@@ -404,10 +404,12 @@ def addItemCart(itemid):
     else:
         user = None
         role = ""
-    #print(session['cart'])
-    arr = session['cart']
-    arr.append(itemid)
-    session['cart'] = arr
+    dict = session['cart']
+    if itemid not in dict:
+        dict[itemid] = 1
+    else:
+        dict[itemid]+=1
+    session['cart'] = dict
     print("in add item cart")
     print(session['cart'])
     return(redirect(url_for('getShop')))
@@ -478,11 +480,8 @@ def getTicket():
     tickets = functions.getTicket()
     # print(tickets)
     if request.method == 'POST':
-        print("hello from if")
         if 'addticketcartbut' in request.form:
             return redirect(url_for('addTicketCart', ticketid=request.form["ticketid"]))
-    print("cart in shop:")
-    print(session['cart'])
     return render_template('tickets.html', user=user, role=role, tickets=tickets)
 
 #MILIA
@@ -494,11 +493,13 @@ def addTicketCart(ticketid):
     else:
         user = None
         role = ""
-    #print(session['cart'])
-    arr = session['cart']
-    arr.append(ticketid)
-    session['cart'] = arr
-    #print(session['cart'])
+    dict = session['cart']
+    if ticketid not in dict:
+        dict[ticketid] = 1
+    else:
+        dict[ticketid]+=1
+    session['cart'] = dict
+    print(session['cart'])
     return(redirect(url_for('getTicket')))
 
 
@@ -575,56 +576,40 @@ def getCart():
     else:
         user = None
         role = ""
-    
     cartitems= []
-    arr = session['cart']
-    for item in arr:
+    dict = session['cart']
+    print(dict)
+    for item in dict:
         cartitem = functions.getCartItem(item)
-        cartitems.append(cartitem[0])
-
+        amount = (dict[str(cartitem[0][0])],)
+        cartitems.append(cartitem[0]+amount)
+    print(cartitems)
     shopitems= []
     ticketitems= []
-   
+    total = 0
     for item in cartitems:
-        print(item) #FOR DEBUGGING PURPOSES
         if int(item[0]) < 0:
             ticketitems.append(item) 
+            total = total + int(item[4])*int(item[5])
         else:
             shopitems.append(item)
-    print(shopitems) #FOR DEBUGGING PURPOSES
-    return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems)
+            total = total + int(item[2])*int(item[4])   
+    session['total'] = total
 
-@app.route('/cart/RemoveTickets', methods=['POST'])
-def RemoveTickets():
+    print(ticketitems,shopitems)
+    return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems,total=total,cartitems=cartitems)
+
+@app.route('/cart/RemoveAll', methods=['POST'])
+def RemoveAll():
     if 'user' in session:
         user = session['user']
         role = session['role']
     else:
         user = None
         role = ""
-    arr = session['cart']
-    arrnew = []
-    for item in arr:
-        if int(item) > 0:
-            arrnew.append(item)
-    session['cart'] = arrnew
+    session['cart'] = {}
     return (redirect(url_for('getCart')))
-
-@app.route('/cart/RemoveItems', methods=['POST'])
-def RemoveItems():
-    if 'user' in session:
-        user = session['user']
-        role = session['role']
-    else:
-        user = None
-        role = ""
-    arr = session['cart']
-    arrnew = []
-    for item in arr:
-        if int(item) < 0:
-            arrnew.append(item)
-    session['cart'] = arrnew
-    return (redirect(url_for('getCart')))
+    
 @app.route('/cart/quantity', methods=['POST'])
 def getQuantity():
     if 'user' in session:
@@ -650,6 +635,31 @@ def getQuantity():
 
     return (redirect(url_for('getCart')))
 
+
+@app.route('/cart/update', methods=['POST'])
+def updateCart():
+    cartitems= []
+    dict = session['cart']
+    print(dict)
+    for item in dict:
+        cartitem = functions.getCartItem(item)
+        amount = (dict[str(cartitem[0][0])],)
+        cartitems.append(cartitem[0]+amount)
+    print(cartitems)
+    shopitems= []
+    ticketitems= []
+    strs = []
+    for item in cartitems:
+        if int(item[0]) < 0:
+            ticketitems.append(item) 
+        else:
+            shopitems.append(item)
+        strs.append((item[0],str(item[0])+"quantity"))
+    for x in strs:
+        if x[1] in request.form:
+            dict[str(x[0])] = request.form[x[1]]
+    session['cart'] = dict
+    return redirect(url_for('getCart'))
 # --------------------------- PROFILE ---------------------------
 
 

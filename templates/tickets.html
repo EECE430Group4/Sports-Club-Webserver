@@ -95,9 +95,11 @@
 
 
    <div class="row">
-    <button class="cart_button">
-      <img class="cart_img" src="{{url_for('static', filename='css/images/shop/shopping-cart.png')}}"/>
-    </button>
+    <form action="/cart" method="POST" autocomplete="off">
+      <button class="cart_button">
+        <img class="cart_img" src="{{url_for('static', filename='css/images/shop/shopping-cart.png')}}"/>
+      </button>
+    </form>
   </div>
 
     <!--CONTENTS-->

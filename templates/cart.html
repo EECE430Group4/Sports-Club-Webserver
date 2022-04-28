@@ -76,9 +76,6 @@
         <div class="my-cart-container">
           <div class="my-header-cart">
             <h3 class="my-heading">Shopping Cart</h3> 
-            <form action="/cart/RemoveItems" method="POST" autocomplete="off">
-              <button class="my-action">Remove all</button> <!--FOR MILIA: functionality to delete all in cart-->
-              </form>
           </div>
 
          {%for shopitem in shopitems%}
@@ -89,24 +86,25 @@
             </div>
             <div class=”my-about”>
                 <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
-              <h3 class=”my-title”>{{shopitem[5]}}</h3>
-              <h3 class=”my-subtitle”>Size: CHECK SIZE SITUATION LATER</h3>
+              <h3 class=”my-title” style="margin-right:10px">{{shopitem[3]}}</h3>
             </div>
             <div class="my-counter">
               <!--FOR MILIA: functionality to increase quantity-->
               <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
-              <form action="/cart/quantity" method="POST" autocomplete="off">
-                <input type="hidden" name="quantityitemid" value={{shopitem[0]}}>
-                <input type="number" min="1" value="1" class="quantity" id="quantity" name="quantity"></input>
-            </form>
+              <form action="/cart/update" method="POST" autocomplete="off">
+                <input type="hidden" name="quantityitemid" value={{shopitem[0]}}>            
+                <input type="number" min="1" value="{{shopitem[4]}}" class="quantity" id="quantity" name="{{shopitem[0]}}quantity"></input>     
             </div> 
               <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
             <div class="my-money">
-              <div class="my-money-one">{{shopitem[4]}} $ Price/Unit</div>
+              <div class="my-money-one">{{shopitem[2]}} $ Price/Unit</div>
               <div class="my-mods">
-                <div class="my-save"><u>Save for later</u></div>
+                <button class="my-button2" type="submit">UPDATE ITEM COUNT</button>    
+              </form>
                 <div class="my-remove"><u>Remove</u></div>
+              
               </div>
+           
             </div>
           </div>
 
@@ -117,9 +115,6 @@
           <!--FOR MILIA: You need to have an if statement where this only generates if tickets were added to cart to begin with-->
           <div class="my-header-cart">
             <h3 class="my-heading">Tickets Cart</h3>
-            <form action="/cart/RemoveTickets" method="POST" autocomplete="off">
-            <button class="my-action">Remove all</button> <!--FOR MILIA: functionality to delete all in cart-->
-            </form>
           </div>
           {%for ticketitem in ticketitems%}
           <!--FOR MILIA: place a for loop here for items in cart-->
@@ -138,16 +133,15 @@
             <div class="my-counter">
               <!--FOR MILIA: functionality to increase quantity-->
               <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
-              <form action="/cart/quantity" method="POST" autocomplete="off">
+              <form action="/cart/update" method="POST" autocomplete="off">
                 <input type="hidden" name="quantityitemid" value={{ticketitem[0]}}>
-                <input type="number" min="1" class="quantity" name="quantity"></input>
+                <input type="number" min="1" value={{ticketitem[5]}} class="quantity" name="{{ticketitem[0]}}quantity"></input>
             </form>
             </div> 
               <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
               <div class="my-money">
                 <div class="my-money-one">{{ticketitem[4]}} $Price/unit</div>
                 <div class="my-mods">
-                  <div class="my-save">Save for later</div>
                   <div class="my-remove">Remove</div>
                 </div>
               </div>
@@ -163,10 +157,10 @@
               <div class="my-side-sub">
                 <div class="my-subtotal">Sub-Total</div>
                 <!--FOR MILIA: fill number of items in cart-->
-                <div class="my-items">2 items</div>
+                <div class="my-items">{{cartitems | length}} items    </div>
               </div>
                 <!--FOR MILIA: fill total-->
-              <div class="my-total-amount">$6.18</div>
+              <div class="my-total-amount">${{total}}</div>
             </div>
             <div class="my-total">
               <div class="my-side-sub">
@@ -175,7 +169,7 @@
                 <div class="my-items">in USD</div>
               </div>
                 <!--FOR MILIA: fill total-->
-              <div class="my-total-amount">$cost</div>
+              <div class="my-total-amount">$2</div>
             </div>
             <hr>
             <div class="my-total">
@@ -185,11 +179,13 @@
                 <div class="my-items">in USD</div>
               </div>
                 <!--FOR MILIA: fill total-->
-              <div class="my-total-amount">$total</div>
+              <div class="my-total-amount">${{total+2}}</div>
             </div>
             <div class="my-many-buttons">
-              <!--FOR MILIA: goes back to shop, if we want to implement this functionality-->
-              <form action="" method="POST" autocomplete="off">
+              <form action="/cart/RemoveAll" method="POST" autocomplete="off">
+                <button class="my-action">Remove all</button> <!--FOR MILIA: functionality to delete all in cart-->
+                </form>
+              <form action="/shop" method="POST" autocomplete="off">
                 <button class="my-button my-continue">Continue Shopping</button>
               </form>
               <form action="/cart/checkout" method="POST" autocomplete="off">

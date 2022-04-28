@@ -351,6 +351,22 @@ hr{
     margin-right:15em;
 
 }
+.my-button2{
+    margin-top:5px;
+    height:20px;
+    border:none;
+    background:linear-gradient(to bottom right,hsl(234,22%,18%),hsl(216, 25%, 38%));
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    color:white;
+    width:30%;
+    margin-right:15em;
+
+}
+
 
 .my-continue{
     background: white;

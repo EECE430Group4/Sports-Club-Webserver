@@ -69,94 +69,7 @@
           </ul>
         </div>
       </nav>
-      <!--END OF HEADER-->
-
-      <div class="my-2-container my-checkout-form">
-        <div class="my-cart-container">
-          <div class="my-header-cart">
-            <h3 class="my-heading">Order Summary from Shop</h3> 
-          </div>
-
-         <!--FOR MILIA: place a for loop here for items in cart-->
-          <div class="my-cart-items">
-            <div class=”my-image-box”>
-              <!--FOR MILIA: fill in product image-->
-              <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
-            </div>
-            <div class=”my-about”>
-              <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
-              <h3 class=”my-title”>Product Name</h3>
-              <h3 class=”my-subtitle”>Size: Size</h3>
-              <h3 class=”my-subtitle”>Quantity: 2</h3>
-              </div>
-         
-              <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
-            <div class="my-money">
-              <div class="my-money-one">$Price</div>
-            </div>
-          </div>
-
-          <hr>
-          <!--FOR MILIA: end the for loop here-->
-
-          <div class="my-header-cart">
-            <h3 class="my-heading">Order Summary from Booking</h3> 
-          </div>
-         <!--FOR MILIA: place a for loop here for items in cart-->
-         <div class="my-cart-tickets">
-          <div class=”my-image-box”>
-            <!--FOR MILIA: fill in product image-->
-            <img class="my-product-image"src="{{url_for('static', filename='css/images/news/testimage.jpg')}}"/> 
-          </div>
-          <div class=”my-about”>
-              <!--FOR MILIA:fill in product name, size,and price of 1 unit-->
-            <h3 class=”my-title”>Ticket T1 vs T2</h3>
-            <h3 class=”my-subtitle”>Arena: Arena</h3>
-            <h3 class=”my-subtitle”>Date: Date</h3>
-            <h3 class=”my-subtitle”>Quantity: 2</h3>
-          </div>
-            <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
-            <div class="my-money">
-              <div class="my-money-one">$Price</div>
-            </div>
-        </div>
-
-        <hr>
         <!--FOR MILIA: end the for loop here-->
-
-          <!--FOR MILIA: Stop deleting. Don't delete the lines below-->
-          <div class="my-checkout">
-            <div class="my-total">
-              <div class="my-side-sub">
-                <div class="my-subtotal">Sub-Total</div>
-                <!--FOR MILIA: fill number of items in cart-->
-                <div class="my-items">2 items</div>
-              </div>
-                <!--FOR MILIA: fill total-->
-              <div class="my-total-amount">${{total}}</div>
-            </div>
-            <div class="my-total">
-              <div class="my-side-sub">
-                <div class="my-subtotal">Shipping</div>
-                <!--FOR MILIA: fill number of items in cart-->
-                <div class="my-items">in USD</div>
-              </div>
-                <!--FOR MILIA: fill total-->
-              <div class="my-total-amount">$cost</div>
-            </div>
-            <hr>
-            <div class="my-total">
-              <div class="my-side-sub">
-                <div class="my-subtotal">Total</div>
-                <!--FOR MILIA: fill number of items in cart-->
-                <div class="my-items">in USD</div>
-              </div>
-                <!--FOR MILIA: fill total-->
-              <div class="my-total-amount">$total</div>
-            </div>
-          </div>
-
-        </div>
         <div class="my-cart-container">
           <div class="my-header-cart my-info">
             <h3 class="my-heading">Shipping Address</h3> 
@@ -165,7 +78,7 @@
             <p>We apologize for any inconvenience but at the given moment we only accept cash on delivery.</p> 
           </div>
           <div class="shipping-form-div">
-            <form action="">
+            <form action="/shop" method="post">
               <label>Name</label>
               <input type="text" name="address-name" id="nameAd" value=""> 
               <label>Email</label>
@@ -178,7 +91,7 @@
               <input type="text" name="address-landmark" id="landmarkAd" value=""> 
               <label>Address</label>
               <textarea type="text" name="address-address" id="adAd" value=""> </textarea>
-              <button type="button" class="btn btn-primary submit">Proceed</button>
+              <button type="submit" class="btn btn-primary submit">Proceed</button>
             </form>
             <form action="" method="POST" autocomplete="off">
             <button type="button" class="btn btn-secondary my-continue" >Cancel Order</button>
