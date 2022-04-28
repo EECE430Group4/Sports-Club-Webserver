@@ -363,13 +363,13 @@
                 <label>Name:</label>
                 <input type="text" name="itemNameEdit" id="itemNameEdit" required/><br>
                 <label>Price:</label>
-                <input type="text" name="itemPriceEdit" id="itemPriceEdit" required/><br>
+                <input type="number" name="itemPriceEdit" id="itemPriceEdit" min="1" required/><br>
                 <label>Number of size S in Stock:</label>
-                <input type="text" name="itemsizeSEdit" id="itemsizeSEdit" required/><br>
+                <input type="number" name="itemsizeSEdit" id="itemsizeSEdit" min="0"required/><br>
                 <label>Number of size M in Stock:</label>
-                <input type="text" name="itemsizeMEdit" id="itemsizeMEdit" required/><br>
+                <input type="number" name="itemsizeMEdit" id="itemsizeMEdit" min="0" required/><br>
                 <label>Number of size L in Stock:</label>
-                <input type="text" name="itemsizeLEdit" id="itemsizeLEdit" required/><br>
+                <input type="number" name="itemsizeLEdit" id="itemsizeLEdit" min="0" required/><br>
                 <input type="hidden" name="additembut" value=1>
                 </form>
               </div>
@@ -397,13 +397,13 @@
                   <label>Name:</label>
                   <input type="text" name="itemNameAdd" id="itemNameAdd" required/><br>
                   <label>Price:</label>
-                  <input type="text" name="itemPriceAdd" id="itemPriceAdd" required/><br>
+                  <input type="number" name="itemPriceAdd" id="itemPriceAdd" min="1" required/><br>
                   <label>Number of size S in Stock:</label>
-                  <input type="text" name="itemsizeSAdd" id="itemsizeSAdd" required/><br>
+                  <input type="number" name="itemsizeSAdd" id="itemsizeSAdd" min="0" required/><br>
                   <label>Number of size M in Stock:</label>
-                  <input type="text" name="itemsizeMAdd" id="itemsizeMAdd" required/><br>
+                  <input type="number" name="itemsizeMAdd" id="itemsizeMAdd" min="0" required/><br>
                   <label>Number of size L in Stock:</label>
-                  <input type="text" name="itemsizeLAdd" id="itemsizeLAdd" required/><br>
+                  <input type="number" name="itemsizeLAdd" id="itemsizeLAdd" min="0" required/><br>
                   <input type="hidden" name="additembut" value=1>
                 </form>
               </div>
@@ -453,16 +453,23 @@
 
 
 
-    <!-- Footer -->
-    <footer class="page-footer font-small blue">
+      <!-- Footer -->
+      <div class="footer-footer">
+        <footer class="page-footer " class="navbar-fixed-footer">
       <!-- Copyright -->
-      <div class="footer-copyright text-center py-3">
+      <div
+        class="footer-copyright text-center py-3"
+        class="navbar-fixed-bottom"
+        style="background-color: black; color: white;"
+      >
         © 2020 Copyright:
-        <a href="/"> MDBootstrap.com</a>
+        <a> WebsiteName</a>
       </div>
       <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
+        </footer>
+       </div>
+      <!-- Footer -->
+      
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
