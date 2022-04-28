@@ -29,9 +29,8 @@ CREATE TABLE article (
   articletitle text NOT NULL,
   articleheadline text NOT NULL,
   articlebody text NOT NULL,
-  featured text NOT NULL
 );
-INSERT INTO article VALUES (1,'What A Lame Game!','The <team> beat <team> 4-3 in a thrilling match of football!','The <team> beat <team> 4-3 in a thrilling match of football against everyone', 'No' ),(2,'What AN AMAZING Game!','The <team> beat <team> 4-0 in a thrilling match of football!', 'The <team> beat <team> 4-3 in a thrilling match of AMAZING FOOTBALL against everyone','Yes'), (3,'What A FANTASTIC Game!','The <team> beat <team> 7-1 in a thrilling match of football!' ,'The <team> beat <team> 4-3 in a thrilling match of WONDERFUL FOOTBALL against everyone', 'Yes' ),(4,'What AN ASTONISHING Game!','The <team> beat <team> 5-1 in a thrilling match of football!', 'The <team> beat <team> 5-1 in a thrilling match of ASTONISHING FOOTBALL against everyone', 'Yes' ),(5,'What A Loss!','The <team> lost to <team> by 5-1 in a thrilling match of football!', 'The <team> beat <team> 5-1 in a sad match of football against everyone', 'Yes' )
+INSERT INTO article VALUES (1,'What A Lame Game!','The <team> beat <team> 4-3 in a thrilling match of football!','The <team> beat <team> 4-3 in a thrilling match of football against everyone'),(2,'What AN AMAZING Game!','The <team> beat <team> 4-0 in a thrilling match of football!', 'The <team> beat <team> 4-3 in a thrilling match of AMAZING FOOTBALL against everyone'), (3,'What A FANTASTIC Game!','The <team> beat <team> 7-1 in a thrilling match of football!' ,'The <team> beat <team> 4-3 in a thrilling match of WONDERFUL FOOTBALL against everyone'),(4,'What AN ASTONISHING Game!','The <team> beat <team> 5-1 in a thrilling match of football!', 'The <team> beat <team> 5-1 in a thrilling match of ASTONISHING FOOTBALL against everyone' ),(5,'What A Loss!','The <team> lost to <team> by 5-1 in a thrilling match of football!', 'The <team> beat <team> 5-1 in a sad match of football against everyone' )
 
 CREATE TABLE shop (
 	shopitemid	int PRIMARY KEY,
