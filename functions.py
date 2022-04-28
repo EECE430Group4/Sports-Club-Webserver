@@ -44,8 +44,8 @@ def register(name, username, password):
 def addArticle(title, body, headline):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("insert into article values({},'{}','{}','{}')".format(
-        len(getArticles())+1, title, body, headline))
+    cursor.execute("insert into article (articletitle,articleheadline,articlebody) values('{}','{}','{}')".format(
+        title, body, headline))
     conn.commit()
     cursor.close()
     conn.close()
@@ -213,6 +213,18 @@ def editTicket(ID, oppteam, tickettime, arena, price, stock):
     conn.commit()
     cursor.close()
     conn.close()
+
+def getCartItem(itemid):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    if int(itemid) < 0:
+        cursor.execute("select * from tickets WHERE ticketid='"+itemid+"'")
+        res = cursor.fetchall()
+    else:
+        cursor.execute("select * from shop WHERE shopitemid='"+itemid+"'")
+        res = cursor.fetchall()
+    return res
+
 
 
 def addGames(sport, club1, club2, homeScore, awayScore, date):

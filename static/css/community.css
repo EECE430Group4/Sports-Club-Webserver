@@ -71,3 +71,23 @@ body{
     
 }
 
+.feedback {
+    width: 400px;
+    background-color: #D3D3D3;
+    text-align: center;
+    padding: 20px;
+  }
+  
+.feedback input, textarea {
+    padding: 12px;  
+    margin: 6px 6px 6px 0;
+  }
+
+.rectangle2{
+    height: 500px;
+    width: 400px;
+    background-color: #D3D3D3;
+    opacity: 70%;
+    padding-right:5rem;
+    border-radius: 10px;
+}

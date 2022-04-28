@@ -68,6 +68,9 @@ body{
 
  }
 
+ .quantity{
+     width:50%;
+ }
 
 /*CART TESTING BLOCKS 
 .cart-div{

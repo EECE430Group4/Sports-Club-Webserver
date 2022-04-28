@@ -114,12 +114,13 @@
               {% if 'ADMIN' in role%}
               <div class="item_detail">item id: {{items[i+j][0]}}</div>
               {%endif%}
-              <select id="item-size">
-                <option value="small">S</option>
-                <option value="medium">M</option>
-                <option value="large">L</option>
-              </select>
-              <form action="/shop" method="POST" autocomplete="off">
+              
+                <select id="item-size" name="item-size">
+                  <option value="small">S</option>
+                  <option value="medium">M</option>
+                  <option value="large">L</option>
+                </select>
+                <form action="/shop" method="POST" autocomplete="off">
                 <input type="hidden" name="itemid" value="{{items[i+j][0]}}">
                 <input type="hidden" name="addcartbut" value=1>
                 <button id="addCart-button" type="submit">Add To Cart</button>
