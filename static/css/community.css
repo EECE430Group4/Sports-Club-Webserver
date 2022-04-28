@@ -3,6 +3,27 @@ header{
     
 
 }
+/*NAVIGATION BAR/HEADER*/
+.navbar{
+    box-shadow: 0 0.3rem 0.4rem 4px rgb(0 0 0 / 25%);
+    min-height:100%;
+  
+  }
+  .navbar-fixed-footer{
+     position:fixed;
+     margin-bottom:0; 
+  
+  }
+  .bringToFrontDiv{
+     background: rgba(219, 223, 230, 0.2);
+     border-radius: 0;
+  }
+  
+  .separator{
+     background-color: white;
+     height: 2px;
+     box-shadow: 0 0.3rem 0.4rem 0px rgb(0 0 0 / 25%);
+  }
 
 .fan, .vote{
     color: white;
