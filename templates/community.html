@@ -108,8 +108,25 @@
             </h2>
            
           <div class="col-md-4">
-            <h2 class="vote text-right"> Click to vote for MVP</h2>
-            <div class="rectangle"></div>
+            <h2 class="vote text-center">Submit Feedback</h2>
+            <div class="rectangle2">
+              <form class="feedback" action="https://formsubmit.co/430group4@gmail.com" method="POST">
+                <label for="fullName">Your Name</label> <br>
+                <input type="text" name="fullName"><br><br>
+                <label for="gender">Your Gender</label> <br>
+                <input type="radio" name="gender" value="male">Male<br>
+                <input type="radio" name="gender" value="female">Female<br><br>
+                <label for="email">Your E-mail</label> <br>
+                <input type="text" name="email"><br>
+                <br>
+                <label for="comments">Your Comments</label> <br>
+                <textarea name="comments"></textarea><br><br>
+                <button type="submit">Send</button>
+                <button type="reset">Clear</button>
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="http://localhost:5000/community">
+            </form>
+            </div>
           </div>
         
           </div>

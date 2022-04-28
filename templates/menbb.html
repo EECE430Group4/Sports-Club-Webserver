@@ -97,18 +97,28 @@
         }
       </script>
   
-     
-      {%if 'ADMIN' in role%}
-      <h2>EDIT TEAM</h2>
-          <div class="editTeams">
-              <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD PLAYER</button>
-                    
-              <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT PLAYER</button>
-              
-                    
-              <button id="edit-button" class="btn btn-xs" type="submit" data-toggle="modal" data-target="#deleteModal" style="color:black" >DELETE PLAYER</button>
-          </div>
-      {%endif%}
+  {% if 'ADMIN' in role%}
+  <div class="adminAll"> 
+    <div class="add-row">
+    <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+      <input type="hidden" name="addbut" value="5">
+      <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
+    <!-- </form> -->
+    </div>
+    <div class="delete-row">
+      <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+        <input type="hidden" name="deletebut" value="5">
+        <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
+      <!-- </form> -->
+    </div>
+    <div class="edit-row">
+        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+          <input type="hidden" name="editbut" value="5">
+          <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
+        <!-- </form> -->
+    </div>
+  </div>
+  {% endif %}
   
   
   

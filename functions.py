@@ -44,8 +44,8 @@ def register(name, username, password):
 def addArticle(title, body, headline):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    cursor.execute("insert into article values({},'{}','{}','{}')".format(
-        len(getArticles())+1, title, body, headline))
+    cursor.execute("insert into article (articletitle,articleheadline,articlebody) values('{}','{}','{}')".format(
+        title, body, headline))
     conn.commit()
     cursor.close()
     conn.close()
