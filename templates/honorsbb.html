@@ -106,15 +106,17 @@
               <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
             <!-- </form> -->
         </div>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for trophy by title...">
+
       </div>
       {% endif %}
 
       {% if 'ADMIN' in role%}
       <div class="honorsAllAdmin">
         <div class="row honorRowAdmin">
-            <table class="honorsTable">
+            <table id="myTable" class="honorsTable">
              <thead>
-                <tr>
+                <tr class="header">
                   <th scope="col">Honor Image</th>
                   <th scope="col">Honor Title</th>
                   <th scope="col">Year</th>
@@ -212,8 +214,13 @@
                 <h>Title</h>
                 <input type="text" name="titleEdit" id="txtEdit" value="">
                 <h>Year</h>
-                <input type="number" name="yearEdit" id="yearEdit" value="" ></p>
-                
+                <!--<input type="number" name="yearEdit" id="yearEdit" value="" ></p>-->
+                 <!-- <input type="number" name="year_add" max="2022" min="1910" >-->
+               <select name="yearEdit" id="yearEdit">
+                {%for i in range(today_year,1909,-1)%}
+                <option value={{i}}>{{i}}</option>
+                {% endfor %}
+               </select>
                 </form>
               </div>
               <div class="modal-footer">

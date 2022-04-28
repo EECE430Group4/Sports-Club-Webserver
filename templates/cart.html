@@ -72,7 +72,7 @@
       </nav>
       <!--END OF HEADER-->
 
-      <div class="my-2-container">
+      <div class="my-2-container" id="my-2-container">
         <div class="my-cart-container">
           <div class="my-header-cart">
             <h3 class="my-heading">Shopping Cart</h3> 
@@ -97,7 +97,7 @@
               <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
               <form action="/cart/quantity" method="POST" autocomplete="off">
                 <input type="hidden" name="quantityitemid" value={{shopitem[0]}}>
-                <input type="number" min="1" class="quantity" name="quantity"></input>
+                <input type="number" min="1" value="1" class="quantity" id="quantity" name="quantity"></input>
             </form>
             </div> 
               <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->

@@ -95,28 +95,28 @@
     </script>
 
    
-{% if 'ADMIN' in role%}
-<div class="adminAll"> 
-  <div class="add-row">
-  <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-    <input type="hidden" name="addbut" value="5">
-    <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
-  <!-- </form> -->
-  </div>
-  <div class="delete-row">
-    <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-      <input type="hidden" name="deletebut" value="5">
-      <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
-    <!-- </form> -->
-  </div>
-  <div class="edit-row">
+    {% if 'ADMIN' in role%}
+    <div class="adminAll"> 
+      <div class="add-row">
       <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-        <input type="hidden" name="editbut" value="5">
-        <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
+        <input type="hidden" name="addbut" value="5">
+        <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
       <!-- </form> -->
-  </div>
-</div>
-{% endif %}
+      </div>
+      <div class="delete-row">
+        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+          <input type="hidden" name="deletebut" value="5">
+          <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
+        <!-- </form> -->
+      </div>
+      <div class="edit-row">
+          <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+            <input type="hidden" name="editbut" value="5">
+            <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
+          <!-- </form> -->
+      </div>
+    </div>
+    {% endif %}
 
 
 

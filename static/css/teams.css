@@ -85,6 +85,8 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    /*font-family: 'Courier New', Courier, monospace;*/
+
   }
 
   h2 {
@@ -125,4 +127,14 @@
     margin-bottom:0;
     justify-content: flex-end;
     width:70%; 
+}
+.btn-xs{
+  width:12rem;
+  height:40px;  border-radius: 20px;
+  color:hsl(234,22%,18%);
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  background:white;
+  font-size: 16px;
 }

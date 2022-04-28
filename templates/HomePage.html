@@ -103,6 +103,7 @@
         </div>
       </div>
     </div>
+    
     <!--END OF FEATURED ARTICLES PANEL-->
 
     <!--UPCOMING GAMES CAROUSEL-->
@@ -157,27 +158,21 @@
 
     <div class="video-content">
     {% if 'ADMIN' in role%}
-    <div class="adminAll"> 
+   <!-- <div class="adminAll"> 
       <div class="add-row">
-    <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
       <input type="hidden" name="addbut" value="5">
       <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
-    <!-- </form> -->
       </div>
       <div class="delete-row">
-      <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
         <input type="hidden" name="deletebut" value="5">
         <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
-      <!-- </form> -->
       </div>
       <div class="edit-row">
-        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
           <input type="hidden" name="editbut" value="5">
           <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
-        <!-- </form> -->
       </div>
     </div>
-    {% endif %}
+    {% endif %}-->
     <div class="video-grid">
       <div class="video-row">
         <iframe
@@ -247,7 +242,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="editModalLabel">Edit Honor</h2>
+                    <h2 class="modal-title" id="editModalLabel">Edit Video</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

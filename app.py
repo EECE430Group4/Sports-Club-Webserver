@@ -3,7 +3,7 @@ import functions
 import sqlite3
 import datetime
 from datetime import date
-
+from copy import deepcopy
 #THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
 import os
 import urllib.request
@@ -16,7 +16,6 @@ app.secret_key = "uehwr3493423j4j239k@#323i213ji3123"
 
 
 # --------------------------- HOMEPAGE ---------------------------
-
 
 @app.route('/')
 def main():
@@ -32,6 +31,14 @@ def main():
         session['total'] = 0
     return render_template('HomePage.html', user=user, role=role)
 
+@app.route('/',methods=['POST'])
+def addVideo():
+
+    return (redirect(url_for('main')))
+def deleteVideo():
+    return (redirect(url_for('main')))
+def editVideo():
+    return (redirect(url_for('main')))
 # --------------------------- LOGIN + SIGNUP + LOGOUT ---------------------------
 
 
@@ -571,12 +578,12 @@ def getCart():
     ticketitems= []
    
     for item in cartitems:
-        print(item)
+        print(item) #FOR DEBUGGING PURPOSES
         if int(item[0]) < 0:
-            ticketitems.append(item)
+            ticketitems.append(item) 
         else:
             shopitems.append(item)
-
+    print(shopitems) #FOR DEBUGGING PURPOSES
     return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems)
 
 @app.route('/cart/RemoveTickets', methods=['POST'])
@@ -588,12 +595,12 @@ def RemoveTickets():
         user = None
         role = ""
     arr = session['cart']
+    arrnew = []
     for item in arr:
-        print(item)
-        if int(item[0]) < 0:
-            arr.remove(item)
-    session['cart'] = arr
-    return (redirect(url_for('getcart')))
+        if int(item) > 0:
+            arrnew.append(item)
+    session['cart'] = arrnew
+    return (redirect(url_for('getCart')))
 
 @app.route('/cart/RemoveItems', methods=['POST'])
 def RemoveItems():
@@ -604,12 +611,12 @@ def RemoveItems():
         user = None
         role = ""
     arr = session['cart']
+    arrnew = []
     for item in arr:
-        if int(item[0]) > 0:
-            arr.remove(item)
-    session['cart'] = arr
-    return (redirect(url_for('getcart')))
-
+        if int(item) < 0:
+            arrnew.append(item)
+    session['cart'] = arrnew
+    return (redirect(url_for('getCart')))
 @app.route('/cart/quantity', methods=['POST'])
 def getQuantity():
     if 'user' in session:
@@ -621,17 +628,19 @@ def getQuantity():
     arr = session['cart']
     itemid = request.form['quantityitemid']
     quantity = request.form['quantity']
+    print(quantity)
     price = 0
     for item in arr:
         if item[0] == itemid:
             price = item[4]
+            
     tot = session['total']
     tot = tot + (quantity * price)
     session['total'] = tot
 
     print(session['total'])
 
-    return (redirect(url_for('getcart')))
+    return (redirect(url_for('getCart')))
 
 # --------------------------- PROFILE ---------------------------
 

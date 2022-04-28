@@ -1,11 +1,21 @@
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value;
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
 
-function prefillFields() {
-    var trophies=JSON.parse(document.getElementById("editFormB").dataset.trophies_json);
-    var trophy = document.getElementById('my_select');
-    for(var k=0; k<trophies.length;k++){
-        if(trophies[k][0]==trophy){
-        document.getElementById('txtEdit').placeholder = trophies[k][1];
-        document.getElementById('yearEdit').placeholder = trophies[k][2];
-        }
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
     }
+  }
 }
