@@ -157,6 +157,7 @@
 
 
 
+
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -170,10 +171,16 @@
 
                 <form name="editPlayerForm" action="/womenbb/editPlayer" method="POST">
                   <br>
-                  <h>Choose a Player:</h>
-                  <p><input type="number" name="playerIdEdit" id="playerIdEdit" /></p>
+                  <h>Choose a Player by ID:</h>
+                  <br>
+                  <select name="playerIdEdit" id="playerIdEdit">
+                  {%for player in players%}
+                    <option value={{player[0]}}>{{player[0]}}</option>
+                    {% endfor %}
+                  </select>
+                  <br>
                   <h>Name:</h>
-                  <p><input type="text" name="playerNameEdit"></p>
+                  <p><input type="text" name="playerNameEdit"  id="test" placeholder=""></p>
                   <h>Age:</h>
                   <p><input type="number" name="playerAgeEdit"></p>
                   <h>Position:</h>
@@ -184,6 +191,22 @@
                   <p><input type="number" name="playerAssistsEdit"></p>
                   <button type="submit" class="btn btn-primary" onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)">
                     Submit</button>
+
+                    <script>
+                      function sendUserID(){
+                        var e = document.getElementById("playerIdEdit");
+                        let userid= e.options[e.selectedIndex].text;
+                        
+                        const request= new XMLHttpRequest()
+                        request.open('POST', `/womenbb/${JSON.stringify(userid)}`)
+                        request.send()
+
+                      }
+                      
+                      //document.getElementById('test').placeholder=  '{{players[id][1]}}'
+
+                    </script>
+
                  </form>
                
               </div>
@@ -238,7 +261,7 @@
         <img
           class="featurette-image img-fluid mx-auto image"
           alt="Player 1"
-          src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
+          src="{{url_for('static', filename='css/images/teams/jersey.PNG')}}"
           data-holder-rendered="true"
         />
         <div class="overlay">

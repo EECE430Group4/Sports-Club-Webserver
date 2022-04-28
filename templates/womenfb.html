@@ -170,8 +170,14 @@
 
                 <form name="editPlayerForm" action="/womenfb/editPlayer" method="POST">
                   <br>
-                  <h>Choose a Player:</h>
-                  <p><input type="number" name="playerIdEdit" id="playerIdEdit" /></p>
+                  <h>Choose a Player by ID:</h>
+                  <br>
+                  <select name="playerIdEdit">
+                  {%for player in players%}
+                    <option value={{player[0]}}>{{player[0]}}</option>
+                    {% endfor %}
+                  </select>
+                  <br>
                   <h>Name:</h>
                   <p><input type="text" name="playerNameEdit"></p>
                   <h>Age:</h>
@@ -238,7 +244,7 @@
         <img
           class="featurette-image img-fluid mx-auto image"
           alt="Player 1"
-          src="{{url_for('static', filename='css/images/teams/leftBBPlayer.jpeg')}}"
+          src="{{url_for('static', filename='css/images/teams/jersey.PNG')}}"
           data-holder-rendered="true"
         />
         <div class="overlay">

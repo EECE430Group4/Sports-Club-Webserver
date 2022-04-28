@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template, redirect, url_for, session, r
 import functions
 import sqlite3
 import datetime
+import json
 from datetime import date
 
 #THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
@@ -299,6 +300,13 @@ def editPlayer(team):
 
     return(redirect(url_for('main')))
 
+@app.route('/<team>/<string:userid>', methods=['POST'])
+def processUserID(userid, team):
+
+    userid= json.loads(userid)
+    id=userid
+    print(id)
+    return(redirect(url_for('getTeam', team=team, id=id)))
 # --------------------------- FIXTURES ---------------------------
 
 
