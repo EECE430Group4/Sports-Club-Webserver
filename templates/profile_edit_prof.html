@@ -1,35 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        .wrapper{
-    margin-left:2%;
-    width:40%;
-}
-html {
-  background: url("../static/css/images/bg.jpeg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 1%; /* Added */
-}
-.navbar-nav > .active > a { 
-    background-color: violet ; 
-}
-.nav-item > a:hover {
-  color: azure;
-}
-    </style>
   <head>
    
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}"/>
 
     
    
@@ -38,10 +15,10 @@ html {
 
     <title>Profile</title>
   </head>
-  <body style="background-color: transparent;">
+  <body>
    
-    <div>
-      <nav class="navbar navbar-inverse">
+    <div class="my-container">
+      <nav class="navbar navbar-inverse bringToFrontDiv">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">TeamName</a>
@@ -116,10 +93,7 @@ html {
         </div>
         
     </div>
-  </body>
-
-  
-  
+      
     <footer class="page-footer " class="navbar-fixed-footer">
      
       <div
@@ -132,7 +106,13 @@ html {
       </div>
      
     </footer>
+    </div>
+  </body>
+
   
+  
+    <footer class="page-footer " class="navbar-fixed-footer">
+   
   
 
 

@@ -29,7 +29,7 @@
   </head>
   <body style="background-color: transparent;">
     <!--<h1>Header Here</h1>-->
-    <nav class="navbar navbar-inverse ">
+    <nav class="navbar navbar-inverse bringToFrontDiv ">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="test.html">TeamName</a>
@@ -260,8 +260,38 @@
       </div>
     </div>
     <div class="container">
+      
       <div class="row">
         <div class="col-lg-8 mb-4">
+          {%if 'ADMIN' in role%}
+          <!--  <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD GAME</button>
+                  <br> <br>
+                  <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT GAME</button>
+                  <input type="hidden" name="fixture" value="1">
+                  <br> <br>
+                  <button id="edit-button" class="btn btn-xs" type="submit" data-toggle="modal" data-target="#deleteModal" style="color:black" >DELETE GAME</button>-->
+                  <div class="adminAll"> 
+                    <div class="add-row">
+                    <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+                      <input type="hidden" name="addbut" value="5">
+                      <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
+                    <!-- </form> -->
+                    </div>
+                    <div class="delete-row">
+                      <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+                        <input type="hidden" name="deletebut" value="5">
+                        <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
+                      <!-- </form> -->
+                    </div>
+                    <div class="edit-row">
+                        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+                          <input type="hidden" name="editbut" value="5">
+                          <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
+                        <!-- </form> -->
+                    </div>
+            
+                  </div>
+          {%endif%}
           <h2 style="text-align: center; color:azure;">Calender</h2>
           <table class="table" style="margin-top:2%; border-style:solid; border-color: rgb(255, 255, 255); color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0.2);">
             <thead>
@@ -342,14 +372,7 @@
               </tr>-->
             </tbody>
           </table>
-          {%if 'ADMIN' in role%}
-            <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal" style="color:black">ADD GAME</button>
-                  <br> <br>
-                  <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal" style="color:black">EDIT GAME</button>
-                  <input type="hidden" name="fixture" value="1">
-                  <br> <br>
-                  <button id="edit-button" class="btn btn-xs" type="submit" data-toggle="modal" data-target="#deleteModal" style="color:black" >DELETE GAME</button>
-          {%endif%}
+        
         </div>
         <div class="col-lg-4 mb-4">
           <h2 class="dropdown" style="color:azure; text-align:center;">
