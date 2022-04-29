@@ -49,12 +49,12 @@
           <li><a href="/community">Community</a></li>
           <li><a href="/honorsfb">Honors</a></li>
         </ul>
-        <form class="navbar-form navbar-right" action="/action_page.php">
+          <!-- <form class="navbar-form navbar-right" action="/action_page.php">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search" />
           </div>
           <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        </form>-->
         <ul class="nav navbar-nav navbar-right">
           <li>
             {%if user is none%}
@@ -83,7 +83,7 @@
     />
     <script>
       function allLetter(inputtxt1, inputtxt2) {
-        var letters = /^[A-Za-z]+$/;
+        var letters = /^[A-Za-z]+$+' '/;
         if (inputtxt1.value.match(letters) && inputtxt2.value.match(letters)) {
           return true;
         } else {
@@ -120,7 +120,7 @@
 
 
 
-    
+  
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -135,13 +135,18 @@
                 <h>Name:</h>
                 <p><input type="text" name="playerNameAdd" id="playerNameAdd" required /></p>
                 <h>Age:</h>
-                <p><input type="number" name="playerAgeAdd" id="playerAgeAdd" min="1" required /></p>
+                <p><input type="number" name="playerAgeAdd" id="playerAgeAdd" required min="18" max="65"/></p>
                 <h>Position:</h>
-                <p><input type="text" name="playerPositionAdd" id="playerPositionAdd" required /></p>
+                <select name="playerPositionAdd" id="playerPositionEAdd" required>
+                  <option value="Goal Keeper">Goal Keeper</option>
+                  <option value="Defense">Defense</option>
+                  <option value="Midfield">Midfield</option>
+                  <option value="Attack">Attack</option>
+                </select>
                 <h>Points:</h>
-                <p><input type="number" name="playerPointsAdd" id="playerPointsAdd" required /></p>
+                <p><input type="number" name="playerPointsAdd" id="playerPointsAdd" required min="0"/></p>
                 <h>Assists:</h>
-                <p><input type="number" name="playerAssistsAdd" id="playerAssistsAdd" required /></p>
+                <p><input type="number" name="playerAssistsAdd" id="playerAssistsAdd" required min="0"/></p>
                 <button type="submit" class= "btn btn-primary" onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)">
                   Submit
                 </button>
@@ -154,6 +159,7 @@
           </div>
       </div>
     </div>
+
 
 
 
@@ -172,24 +178,31 @@
                   <br>
                   <h>Choose a Player by ID:</h>
                   <br>
-                  <select name="playerIdEdit">
+                  <select name="playerIdEdit" id="playerIdEdit" required>
                   {%for player in players%}
                     <option value={{player[0]}}>{{player[0]}}</option>
                     {% endfor %}
                   </select>
                   <br>
                   <h>Name:</h>
-                  <p><input type="text" name="playerNameEdit" required></p>
+                  <p><input type="text" name="playerNameEdit"  id="test" placeholder="" required></p>
                   <h>Age:</h>
-                  <p><input type="number" name="playerAgeEdit" required></p>
+                  <p><input type="number" name="playerAgeEdit" required min="18" max="65"></p>
                   <h>Position:</h>
-                  <p><input type="text" name="playerPositionEdit" required></p>
+                  <select name="playerPositionEdit" id="playerPositionEdit" required>
+                    <option value="Wing">Wing</option>
+                    <option value="Center">Center</option>
+                    <option value="Point Guard">Point Guard</option>
+                  </select>
                   <h>Points:</h>
-                  <p><input type="number" name="playerPointsEdit" required></p>
+                  <p><input type="number" name="playerPointsEdit" required min="0"></p>
                   <h>Assists:</h>
-                  <p><input type="number" name="playerAssistsEdit" required></p>
+                  <p><input type="number" name="playerAssistsEdit" required min="0"></p>
                   <button type="submit" class="btn btn-primary" onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)">
                     Submit</button>
+
+               
+
                  </form>
                
               </div>
@@ -212,7 +225,11 @@
             <div class="modal-body">
               <form action="/womenfb/deletePlayer" method="POST">
                 <h>Player ID:</h>
-                <input type="number" name="playerIdDelete" id="playerIdDelete" required/>
+                <select name="playerIdDelete" id="playerIdDelete" required>
+                  {%for player in players%}
+                    <option value={{player[0]}}>{{player[0]}}</option>
+                    {% endfor %}
+                  </select>
                 <br> <br>
               <button type="submit" class= "btn btn-primary" >Submit</button>
               </form>

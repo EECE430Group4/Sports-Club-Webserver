@@ -128,7 +128,7 @@
                           <form action="/tickets" method="POST" autocomplete="off">
                             <input type="hidden" name="ticketid" value="{{ticket[0]}}">
                             <input type="hidden" name="addticketcartbut" value=2>
-                            <button id="addTicketCart-button" type="submit">Add To Cart</button>
+                            <button id="addTicketCart-button" class="btn-xs " type="submit">Add To Cart</button>
                           </form>
                           {% if 'ADMIN' in role%}
                           <h4>Ticket id: {{ticket[0]}}</h4>
