@@ -1,15 +1,15 @@
-from flask import Flask, jsonify, render_template, redirect, url_for, session, request, abort,flash
+from turtle import st
+from flask import Flask, jsonify, render_template, redirect, url_for, session, request, abort, flash
 import functions
 import sqlite3
 import datetime
 import json
 from datetime import date
 from copy import deepcopy
-#THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
+# THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
 import os
 import urllib.request
 from werkzeug.utils import secure_filename
-
 
 
 app = Flask(__name__)
@@ -32,12 +32,17 @@ def main():
         session['total'] = 0
     return render_template('HomePage.html', user=user, role=role)
 
-@app.route('/',methods=['POST'])
+
+@app.route('/', methods=['POST'])
 def addVideo():
 
     return (redirect(url_for('main')))
+
+
 def deleteVideo():
     return (redirect(url_for('main')))
+
+
 def editVideo():
     return (redirect(url_for('main')))
 # --------------------------- LOGIN + SIGNUP + LOGOUT ---------------------------
@@ -307,13 +312,14 @@ def editPlayer(team):
 
     return(redirect(url_for('main')))
 
-#@app.route('/<team>/<string:userid>', methods=['POST'])
-#def processUserID(userid, team):
-#
-#    userid= json.loads(userid)
-#    id=userid
-#    print(id)
-#    return(redirect(url_for('getTeam', team=team, id=id)))
+
+@app.route('/<team>/<string:userid>', methods=['POST'])
+def processUserID(userid, team):
+
+    userid = json.loads(userid)
+    id = userid
+    print(id)
+    return(redirect(url_for('getTeam', team=team, id=id)))
 # --------------------------- FIXTURES ---------------------------
 
 
@@ -325,8 +331,12 @@ def getFixtures():
     else:
         user = None
         role = ''
+    team = request.args.get('team')
+    if team is None:
+        team = 'womenbb'
+    standing = functions.getStanding(team)
     games = functions.getGames()
-    return render_template('fixtures.html', user=user, role=role, games=games)
+    return render_template('fixtures.html', user=user, role=role, games=games, standing=standing)
 
 
 @app.route('/addGame', methods=['POST'])
@@ -408,7 +418,7 @@ def addItemCart(itemid):
     if itemid not in dict:
         dict[itemid] = 1
     else:
-        dict[itemid]+=1
+        dict[itemid] += 1
     session['cart'] = dict
     print("in add item cart")
     print(session['cart'])
@@ -484,7 +494,9 @@ def getTicket():
             return redirect(url_for('addTicketCart', ticketid=request.form["ticketid"]))
     return render_template('tickets.html', user=user, role=role, tickets=tickets)
 
-#MILIA
+# MILIA
+
+
 @app.route('/tickets/addticketcart/<ticketid>')
 def addTicketCart(ticketid):
     if 'user' in session:
@@ -497,7 +509,7 @@ def addTicketCart(ticketid):
     if ticketid not in dict:
         dict[ticketid] = 1
     else:
-        dict[ticketid]+=1
+        dict[ticketid] += 1
     session['cart'] = dict
     print(session['cart'])
     return(redirect(url_for('getTicket')))
@@ -510,7 +522,7 @@ def addTicket():
         role = session['role']
     else:
         user = None
-        role=""
+        role = ""
 
     oppteam = request.form["oppTeamAdd"]
     tickettime = request.form["ticketTimeAdd"]
@@ -529,7 +541,7 @@ def deleteTicket():
         user = session['user']
     else:
         user = None
-        role=""
+        role = ""
 
     ticketid = request.form["ticketidRemove"]
 
@@ -557,6 +569,8 @@ def editTicket():
     return (redirect(url_for('getTicket')))
 
 # --------------------------- CART + CHECKOUT ---------------------------
+
+
 @app.route('/cart/checkout', methods=['GET', 'POST'])
 def getCheckout():
     if 'user' in session:
@@ -565,8 +579,9 @@ def getCheckout():
     else:
         user = None
         role = ""
-    total=session['total']
+    total = session['total']
     return render_template('checkout.html', user=user, role=role, total=total)
+
 
 @app.route('/cart', methods=['GET', 'POST'])
 def getCart():
@@ -576,7 +591,7 @@ def getCart():
     else:
         user = None
         role = ""
-    cartitems= []
+    cartitems = []
     dict = session['cart']
     print(dict)
     for item in dict:
@@ -584,20 +599,21 @@ def getCart():
         amount = (dict[str(cartitem[0][0])],)
         cartitems.append(cartitem[0]+amount)
     print(cartitems)
-    shopitems= []
-    ticketitems= []
+    shopitems = []
+    ticketitems = []
     total = 0
     for item in cartitems:
         if int(item[0]) < 0:
-            ticketitems.append(item) 
+            ticketitems.append(item)
             total = total + int(item[4])*int(item[5])
         else:
             shopitems.append(item)
-            total = total + int(item[2])*int(item[4])   
+            total = total + int(item[2])*int(item[4])
     session['total'] = total
 
-    print(ticketitems,shopitems)
-    return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems,total=total,cartitems=cartitems)
+    print(ticketitems, shopitems)
+    return render_template('cart.html', user=user, role=role, ticketitems=ticketitems, shopitems=shopitems, total=total, cartitems=cartitems)
+
 
 @app.route('/cart/RemoveAll', methods=['POST'])
 def RemoveAll():
@@ -609,7 +625,8 @@ def RemoveAll():
         role = ""
     session['cart'] = {}
     return (redirect(url_for('getCart')))
-    
+
+
 @app.route('/cart/quantity', methods=['POST'])
 def getQuantity():
     if 'user' in session:
@@ -626,7 +643,7 @@ def getQuantity():
     for item in arr:
         if item[0] == itemid:
             price = item[4]
-            
+
     tot = session['total']
     tot = tot + (quantity * price)
     session['total'] = tot
@@ -638,7 +655,7 @@ def getQuantity():
 
 @app.route('/cart/update', methods=['POST'])
 def updateCart():
-    cartitems= []
+    cartitems = []
     dict = session['cart']
     print(dict)
     for item in dict:
@@ -646,15 +663,15 @@ def updateCart():
         amount = (dict[str(cartitem[0][0])],)
         cartitems.append(cartitem[0]+amount)
     print(cartitems)
-    shopitems= []
-    ticketitems= []
+    shopitems = []
+    ticketitems = []
     strs = []
     for item in cartitems:
         if int(item[0]) < 0:
-            ticketitems.append(item) 
+            ticketitems.append(item)
         else:
             shopitems.append(item)
-        strs.append((item[0],str(item[0])+"quantity"))
+        strs.append((item[0], str(item[0])+"quantity"))
     for x in strs:
         if x[1] in request.form:
             dict[str(x[0])] = request.form[x[1]]
@@ -792,40 +809,46 @@ def getHonorsBB():
     today_year = date.today().year
     return render_template('honorsbb.html', user=user, role=role, trophies=trophies, today_year=today_year)
 
-#-------- UPLOAD ----------
+
+# -------- UPLOAD ----------
 UPLOAD_FOLDER = "static/uploads"
-#THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
+# THE BELOW WAS ADDED BY MEL FOR IMAGE UPLOAD
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+
 def allowed_file(filename):
-	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
-	if 'file' not in request.files:
-		flash('No file part')
-		return redirect(request.url)
-	file = request.files['file']
-	if file.filename == '':
-		flash('No image selected for uploading')
-		return redirect(request.url)
-	if file and allowed_file(file.filename):
-		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_image filename: ' + filename)
-		flash('Image successfully uploaded and displayed below')
-		return render_template('honorsbb.html', filename=filename)
-	else:
-		flash('Allowed image types are -> png, jpg, jpeg, gif')
-		return redirect(request.url)
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #print('upload_image filename: ' + filename)
+        flash('Image successfully uploaded and displayed below')
+        return render_template('honorsbb.html', filename=filename)
+    else:
+        flash('Allowed image types are -> png, jpg, jpeg, gif')
+        return redirect(request.url)
+
 
 @app.route('/display/<filename>')
 def display_image(filename):
-	#print('display_image filename: ' + filename)
-	return redirect(url_for('static', filename='uploads/' + filename), code=301)
-    
+    #print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
+
 @app.route('/honorsbb/addTrophyB', methods=['POST'])
 def addTrophyB():
     if 'user' in session:

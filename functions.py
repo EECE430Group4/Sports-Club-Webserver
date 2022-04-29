@@ -214,6 +214,7 @@ def editTicket(ID, oppteam, tickettime, arena, price, stock):
     cursor.close()
     conn.close()
 
+
 def getCartItem(itemid):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
@@ -224,7 +225,6 @@ def getCartItem(itemid):
         cursor.execute("select * from shop WHERE shopitemid='"+itemid+"'")
         res = cursor.fetchall()
     return res
-
 
 
 def addGames(sport, club1, club2, homeScore, awayScore, date):
@@ -560,3 +560,17 @@ def changePassword(user,  password):
     cursor.close()
     conn.close()
     return 0
+
+
+def getStanding(team):
+    conn = sqlite3.connect('database/430Group4.db')
+    cursor = conn.cursor()
+    SQL = "select team, pos from standing where sport='"+team+"' order by pos asc"
+    cursor.execute(SQL)
+    res = cursor.fetchall()
+    standing = []
+    for row in res:
+        standing.append(row)
+    cursor.close()
+    conn.close()
+    return standing
