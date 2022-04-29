@@ -124,7 +124,7 @@ def getItem():
     return items
 
 
-def addItem(name, Sstock, Mstock, Lstock, price):
+def addItem(name, stock, price):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
     cursor.execute(
@@ -133,8 +133,8 @@ def addItem(name, Sstock, Mstock, Lstock, price):
     lastId = res[0][0]
     newId = str(int(lastId)+1)
 
-    cursor.execute("INSERT INTO shop (shopitemid, sizeSstock, sizeMstock, sizeLstock, itemprice, itemName) VALUES ('" +
-                   newId+"', '"+Sstock+"', '"+Mstock+"','"+Lstock+"', '"+price+"', '"+name+"')")
+    cursor.execute("INSERT INTO shop (shopitemid, stock, itemprice, itemName) VALUES ('" +
+                   newId+"', '"+stock+"', '"+price+"', '"+name+"')")
     conn.commit()
     cursor.close()
     conn.close()
@@ -149,11 +149,11 @@ def deleteItem(itemid):
     conn.close()
 
 
-def editItem(ID, name, price, small, medium, large):
+def editItem(ID, name, price, stock):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = "UPDATE shop set itemName='"+name+"',itemprice='"+price+"', sizeSstock='" + \
-        small+"',sizeMstock='"+medium+"',sizeLstock='"+large+"' WHERE shopitemid="+ID
+    SQL = "UPDATE shop set itemName='"+name+"',itemprice='"+price+"', stock='" + \
+        stock+"' WHERE shopitemid="+ID
     cursor.execute(SQL)
     conn.commit()
     cursor.close()

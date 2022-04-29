@@ -435,11 +435,9 @@ def addItem():
 
     name = request.form["itemNameAdd"]
     price = request.form["itemPriceAdd"]
-    Sstock = request.form["itemsizeSAdd"]
-    Mstock = request.form["itemsizeMAdd"]
-    Lstock = request.form["itemsizeLAdd"]
+    stock = request.form["itemStockAdd"]
 
-    functions.addItem(name, Sstock, Mstock, Lstock, price)
+    functions.addItem(name, stock, price)
 
     return(redirect(url_for('getShop')))
 
@@ -469,10 +467,9 @@ def editItem():
     name = request.form['itemNameEdit']
 
     price = request.form['itemPriceEdit']
-    small = request.form['itemsizeSEdit']
-    medium = request.form['itemsizeMEdit']
-    large = request.form['itemsizeLEdit']
-    functions.editItem(ID, name, price, small, medium, large)
+    stock = request.form['itemStockEdit']
+   
+    functions.editItem(ID, name, price, stock)
     return (redirect(url_for('getShop')))
 
 # --------------------------- TICKETS ---------------------------
