@@ -63,7 +63,7 @@ def login():
         elif ret == 'FAN' or ret == 'PLAYER' or ret == 'ADMIN':
             session['user'] = user
             session['role'] = ret
-            session['cart'] = []
+            session['cart'] = {}
         return redirect(url_for('main'))
     return render_template('login.html')
 

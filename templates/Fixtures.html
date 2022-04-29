@@ -427,13 +427,32 @@
                 <br>
                 <h>Sport:</h>
                 <p><input type="text" name="sportEdit"></p>
+                <h>Club1:</h>
+              <p><select name="club1Edit">
+                <option value="Cougars">Cougars</option>
+              </select></p>
+              <h>Club2:</h>
+              <p><select name="club2Edit" id="club2Edit">
+                <option value="Lions">Lions</option>
+                <option value="Tigers">Tigers</option>
+                <option value="Mosquitos">Mosquitos</option>
+                <option value="Panthers">Panthers</option>
+                <option value="Dogs">Dogs</option>
+                <option value="Bears">Bears</option>
+                <option value="WildCats">WildCats</option>
+                <option value="Giants">Giants</option>
+                <option value="Rats">Rats</option>
+                <option value="Phoenix">Phoenix</option>
+                <option value="Rabbits">Rabbits</option>
+              </select></p>
+              <!--
                 <h>Home Club:</h>
                 <p><input type="text" name="club1Edit"></p>
                 <h>Away Club:</h>
-                <p><input type="text" name="club2Edit"></p>
-                <h>Home Team Goals/Points:</h>
+                <p><input type="text" name="club2Edit"></p>-->
+                <h>Club1 Goals/Points:</h>
                 <p><input type="number" name="homeScoreEdit" min="0" oninput="validity.valid||(value='');"></p>
-                <h>Away Team Goals/Points:</h>
+                <h>Club2 Goals/Points:</h>
                 <p><input type="number" name="awayScoreEdit" min="0" oninput="validity.valid||(value='');"></p>
                 <h>Date:</h>
                 <p><input type="date" name="dateEdit"></p>
@@ -460,10 +479,24 @@
               <form action="/addGame" method="POST">
               <h>Sport:</h>
               <p><input type="text" name="sportAdd"></p>
-              <h>Home Club:</h>
-              <p><input type="text" name="club1Add"></p>
-              <h>Away Club:</h>
-              <p><input type="text" name="club2Add"></p>
+              <h>Club1:</h>
+              <p><select name="club1Add">
+                <option value="Cougars">Cougars</option>
+              </select></p>
+              <h>Club2:</h>
+              <p><select name="club2Add" id="club2Add">
+                <option value="Lions">Lions</option>
+                <option value="Tigers">Tigers</option>
+                <option value="Mosquitos">Mosquitos</option>
+                <option value="Panthers">Panthers</option>
+                <option value="Dogs">Dogs</option>
+                <option value="Bears">Bears</option>
+                <option value="WildCats">WildCats</option>
+                <option value="Giants">Giants</option>
+                <option value="Rats">Rats</option>
+                <option value="Phoenix">Phoenix</option>
+                <option value="Rabbits">Rabbits</option>
+              </select></p>
               <h>Home Team Goals/Points:</h>
               <p><input type="number" name="homeScoreAdd" min="0" oninput="validity.valid||(value='');"></p>
               <h>Away Team Goals/Points:</h>
