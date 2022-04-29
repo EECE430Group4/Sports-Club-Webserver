@@ -468,7 +468,7 @@ def editItem():
 
     price = request.form['itemPriceEdit']
     stock = request.form['itemStockEdit']
-   
+
     functions.editItem(ID, name, price, stock)
     return (redirect(url_for('getShop')))
 
@@ -602,7 +602,7 @@ def getCart():
     for item in cartitems:
         if int(item[0]) < 0:
             ticketitems.append(item)
-            total = total + int(item[4])*int(item[5])
+            total = total + int(item[4])*int(item[6])
         else:
             shopitems.append(item)
             total = total + int(item[2])*int(item[4])

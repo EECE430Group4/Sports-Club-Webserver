@@ -20,13 +20,12 @@
       rel="stylesheet"
       type="text/css"
     />
-
   </head>
   <body>
     <nav class="navbar navbar-inverse bringToFrontDiv">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="test.html">TeamName</a>
+          <a class="navbar-brand" href="/">Cougars</a>
         </div>
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
@@ -70,222 +69,356 @@
       </div>
     </nav>
 
-        <!-- HEADER DONE -->
+    <!-- HEADER DONE -->
 
-        <h1> <strong>MEN'S FOOTBALL TEAM</strong></h1>
+    <h1><strong>MEN'S FOOTBALL TEAM</strong></h1>
 
-        <hr class="featurette-divider" />
-    
-        <img
-          src="{{url_for('static', filename='css/images/teams/lebanonXI.jpg')}}"
-          alt="Women's BasketBall Team"
-          width="100%"
-          height="100%"
-          class="img-fluid"
-        />
-    
-        <script>
-          function allLetter(inputtxt1, inputtxt2) {
-            var letters = /^[A-Za-z]+$+' '/;
-            if (inputtxt1.value.match(letters) && inputtxt2.value.match(letters)) {
-              return true;
-            } else {
-              alert("player name and position cannot contain numbers");
-              event.returnValue = false;
-              return false;
-            }
-          }
-        </script>
-    
-       
+    <hr class="featurette-divider" />
+
+    <img
+      src="{{url_for('static', filename='css/images/teams/lebanonXI.jpg')}}"
+      alt="Women's BasketBall Team"
+      width="100%"
+      height="100%"
+      class="img-fluid"
+    />
+
+    <script>
+      function allLetter(inputtxt1, inputtxt2) {
+        var letters = /^[A-Za-z]+$+' '/;
+        if (inputtxt1.value.match(letters) && inputtxt2.value.match(letters)) {
+          return true;
+        } else {
+          alert("player name and position cannot contain numbers");
+          event.returnValue = false;
+          return false;
+        }
+      }
+    </script>
+
     {% if 'ADMIN' in role%}
-    <div class="adminAll"> 
+    <div class="adminAll">
       <div class="add-row">
-      <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-        <input type="hidden" name="addbut" value="5">
-        <button id="add-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#addModal">ADD</button>
-      <!-- </form> -->
+        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+        <input type="hidden" name="addbut" value="5" />
+        <button
+          id="add-button"
+          type="button"
+          class="btn btn-xs"
+          data-toggle="modal"
+          data-target="#addModal"
+        >
+          ADD
+        </button>
+        <!-- </form> -->
       </div>
       <div class="delete-row">
         <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-          <input type="hidden" name="deletebut" value="5">
-          <button id="delete-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#deleteModal">DELETE</button>
+        <input type="hidden" name="deletebut" value="5" />
+        <button
+          id="delete-button"
+          type="button"
+          class="btn btn-xs"
+          data-toggle="modal"
+          data-target="#deleteModal"
+        >
+          DELETE
+        </button>
         <!-- </form> -->
       </div>
       <div class="edit-row">
-          <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
-            <input type="hidden" name="editbut" value="5">
-            <button id="edit-button" type="button" class="btn btn-xs" data-toggle="modal" data-target="#editModal">EDIT</button>
-          <!-- </form> -->
+        <!--<form action="/honorsfb" method="POST" autocomplete="off">-->
+        <input type="hidden" name="editbut" value="5" />
+        <button
+          id="edit-button"
+          type="button"
+          class="btn btn-xs"
+          data-toggle="modal"
+          data-target="#editModal"
+        >
+          EDIT
+        </button>
+        <!-- </form> -->
       </div>
     </div>
     {% endif %}
-    
-    
-    
-   
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+
+    <div
+      class="modal fade"
+      id="addModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h2 class="modal-title" id="addModalLabel">Add Player</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                <form name="addPlayerForm" action="/menfb/addPlayer" method="POST">
-                <h>Name:</h>
-                <p><input type="text" name="playerNameAdd" id="playerNameAdd" required /></p>
-                <h>Age:</h>
-                <p><input type="number" name="playerAgeAdd" id="playerAgeAdd" required min="18" max="65"/></p>
-                <h>Position:</h>
-                <select name="playerPositionAdd" id="playerPositionEAdd" required>
-                  <option value="Goal Keeper">Goal Keeper</option>
-                  <option value="Defense">Defense</option>
-                  <option value="Midfield">Midfield</option>
-                  <option value="Attack">Attack</option>
-                </select>
-                <h>Points:</h>
-                <p><input type="number" name="playerPointsAdd" id="playerPointsAdd" required min="0"/></p>
-                <h>Assists:</h>
-                <p><input type="number" name="playerAssistsAdd" id="playerAssistsAdd" required min="0"/></p>
-                <button type="submit" class= "btn btn-primary" onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)">
-                  Submit
-                </button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  
-              </div>
-          </div>
-      </div>
-    </div>
-
-
-
-
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h2 class="modal-title" id="editModalLabel">Edit Player</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-
-                <form name="editPlayerForm" action="/menfb/editPlayer" method="POST">
-                  <br>
-                  <h>Choose a Player by ID:</h>
-                  <br>
-                  <select name="playerIdEdit" id="playerIdEdit" required>
-                  {%for player in players%}
-                    <option value={{player[0]}}>{{player[0]}}</option>
-                    {% endfor %}
-                  </select>
-                  <br>
-                  <h>Name:</h>
-                  <p><input type="text" name="playerNameEdit"  id="test" placeholder="" required></p>
-                  <h>Age:</h>
-                  <p><input type="number" name="playerAgeEdit" required min="18" max="65"></p>
-                  <h>Position:</h>
-                  <select name="playerPositionEdit" id="playerPositionEdit" required>
-                    <option value="Wing">Wing</option>
-                    <option value="Center">Center</option>
-                    <option value="Point Guard">Point Guard</option>
-                  </select>
-                  <h>Points:</h>
-                  <p><input type="number" name="playerPointsEdit" required min="0"></p>
-                  <h>Assists:</h>
-                  <p><input type="number" name="playerAssistsEdit" required min="0"></p>
-                  <button type="submit" class="btn btn-primary" onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)">
-                    Submit</button>
-
-               
-
-                 </form>
-               
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-          </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="addModalLabel">Delete Player</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-              <form action="/menfb/deletePlayer" method="POST">
-                <h>Player ID:</h>
-                <select name="playerIdDelete" id="playerIdDelete" required>
-                  {%for player in players%}
-                    <option value={{player[0]}}>{{player[0]}}</option>
-                    {% endfor %}
-                  </select>
-                <br> <br>
-              <button type="submit" class= "btn btn-primary" >Submit</button>
-              </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                
-            </div>
-        </div>
-    </div>
-    </div>
-    
-        <h2>FULL ROSTER</h2>
-    
-        <hr class="featurette-divider" style="opacity: 0%" />
-    
-      
-      <!--ROW 1 IMAGES-->
-      
-         <!--FOR RAZ, REPEATING RENDER-->
-        
-        {%set len=players|length%}
-        {%for j in range (0,len,4)%}
-        <div class="row">
-          {%for i in range(0,4)%}
-          {%if (len > (i+j))%}
-          <div class="col-md-1"></div>
-          <div class="col-md-2 container">
-            <img
-              class="featurette-image img-fluid mx-auto image"
-              alt="Player 1"
-              src="{{url_for('static', filename='css/images/teams/jersey.PNG')}}"
-              data-holder-rendered="true"
-            />
-            <div class="overlay">
-              <label>{{players[i+j][1]}}</label>
-              <label id="playerid">{{players[i+j][0]}}</label><br />
-              <label>Age: {{players[i+j][2]}}</label><br />
-              <label>Position: {{players[i+j][4]}}</label><br />
-              <label>Points: {{players[i+j][5]}}</label><br />
-              <label>Assists: {{players[i+j][6]}}</label>
-    
-            </div>
+          <div class="modal-header">
+            <h2 class="modal-title" id="addModalLabel">Add Player</h2>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          {%endif%}
-          {%endfor%}
+          <div class="modal-body">
+            <form name="addPlayerForm" action="/menfb/addPlayer" method="POST">
+              <h>Name:</h>
+              <p>
+                <input
+                  type="text"
+                  name="playerNameAdd"
+                  id="playerNameAdd"
+                  required
+                />
+              </p>
+              <h>Age:</h>
+              <p>
+                <input
+                  type="number"
+                  name="playerAgeAdd"
+                  id="playerAgeAdd"
+                  required
+                  min="18"
+                  max="65"
+                />
+              </p>
+              <h>Position:</h>
+              <select name="playerPositionAdd" id="playerPositionEAdd" required>
+                <option value="Goal Keeper">Goal Keeper</option>
+                <option value="Defense">Defense</option>
+                <option value="Midfield">Midfield</option>
+                <option value="Attack">Attack</option>
+              </select>
+              <h>Points:</h>
+              <p>
+                <input
+                  type="number"
+                  name="playerPointsAdd"
+                  id="playerPointsAdd"
+                  required
+                  min="0"
+                />
+              </p>
+              <h>Assists:</h>
+              <p>
+                <input
+                  type="number"
+                  name="playerAssistsAdd"
+                  id="playerAssistsAdd"
+                  required
+                  min="0"
+                />
+              </p>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
-          {%endfor%}
+      </div>
+    </div>
 
-        <!-- FOOTER -->
-        <div class="footer">
-          <p>copyright information</p>
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="editModalLabel">Edit Player</h2>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form
+              name="editPlayerForm"
+              action="/menfb/editPlayer"
+              method="POST"
+            >
+              <br />
+              <h>Choose a Player by ID:</h>
+              <br />
+              <select name="playerIdEdit" id="playerIdEdit" required>
+                {%for player in players%}
+                <option value="{{player[0]}}">{{player[0]}}</option>
+                {% endfor %}
+              </select>
+              <br />
+              <h>Name:</h>
+              <p>
+                <input
+                  type="text"
+                  name="playerNameEdit"
+                  id="test"
+                  placeholder=""
+                  required
+                />
+              </p>
+              <h>Age:</h>
+              <p>
+                <input
+                  type="number"
+                  name="playerAgeEdit"
+                  required
+                  min="18"
+                  max="65"
+                />
+              </p>
+              <h>Position:</h>
+              <select
+                name="playerPositionEdit"
+                id="playerPositionEdit"
+                required
+              >
+                <option value="Wing">Wing</option>
+                <option value="Center">Center</option>
+                <option value="Point Guard">Point Guard</option>
+              </select>
+              <h>Points:</h>
+              <p>
+                <input type="number" name="playerPointsEdit" required min="0" />
+              </p>
+              <h>Assists:</h>
+              <p>
+                <input
+                  type="number"
+                  name="playerAssistsEdit"
+                  required
+                  min="0"
+                />
+              </p>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="addModalLabel">Delete Player</h2>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/menfb/deletePlayer" method="POST">
+              <h>Player ID:</h>
+              <select name="playerIdDelete" id="playerIdDelete" required>
+                {%for player in players%}
+                <option value="{{player[0]}}">{{player[0]}}</option>
+                {% endfor %}
+              </select>
+              <br />
+              <br />
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>FULL ROSTER</h2>
+
+    <hr class="featurette-divider" style="opacity: 0%" />
+
+    <!--ROW 1 IMAGES-->
+
+    <!--FOR RAZ, REPEATING RENDER-->
+
+    {%set len=players|length%} {%for j in range (0,len,4)%}
+    <div class="row">
+      {%for i in range(0,4)%} {%if (len > (i+j))%}
+      <div class="col-md-1"></div>
+      <div class="col-md-2 container">
+        <img
+          class="featurette-image img-fluid mx-auto image"
+          alt="Player 1"
+          src="{{url_for('static', filename='css/images/teams/jersey.PNG')}}"
+          data-holder-rendered="true"
+        />
+        <div class="overlay">
+          <label>{{players[i+j][1]}}</label>
+          <label id="playerid">{{players[i+j][0]}}</label><br />
+          <label>Age: {{players[i+j][2]}}</label><br />
+          <label>Position: {{players[i+j][4]}}</label><br />
+          <label>Points: {{players[i+j][5]}}</label><br />
+          <label>Assists: {{players[i+j][6]}}</label>
+        </div>
+      </div>
+      {%endif%} {%endfor%}
+    </div>
+    {%endfor%}
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>copyright information</p>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

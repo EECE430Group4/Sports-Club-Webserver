@@ -27,10 +27,10 @@
       <nav class="navbar navbar-inverse bringToFrontDiv">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">TeamName</a>
+            <a class="navbar-brand" href="/">Cougars</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#"
                 >Teams <span class="caret"></span
@@ -45,7 +45,7 @@
             <li><a href="/fixtures">Fixtures</a></li>
             <li><a href="/news">News</a></li>
             <li><a href="/tickets">Tickets</a></li>
-            <li><a href="/shop">Shop</a></li>
+            <li class="active"><a href="/shop">Shop</a></li>
             <li><a href="/community">Community</a></li>
             <li><a href="/honorsfb">Honors</a></li>
           </ul>
@@ -59,7 +59,7 @@
             <li>
               {%if user is none%}
               <a href="/login">
-                <span class="glyphicon glyphicon-user"></span>
+                <span class="glyphicon glyphicon-user"> Profile</span>
               </a>
               {%else%}
               <a href="/profile">
@@ -101,7 +101,6 @@
               <div class="my-mods">
                 <button class="my-button2" type="submit">UPDATE ITEM COUNT</button>    
               </form>
-                <div class="my-remove"><u>Remove</u></div>
               
               </div>
            
@@ -135,14 +134,15 @@
               <!--FOR MILIA: we can delete this and use a drop down list if that's easier to implement-->
               <form action="/cart/update" method="POST" autocomplete="off">
                 <input type="hidden" name="quantityitemid" value={{ticketitem[0]}}>
-                <input type="number" min="1" value={{ticketitem[5]}} class="quantity" name="{{ticketitem[0]}}quantity"></input>
-            </form>
+                <input type="number" min="1" value={{ticketitem[6]}} class="quantity" name="{{ticketitem[0]}}quantity"></input>
+            
             </div> 
               <!--FOR MILIA: fill price with functionality to calculate price based on quantity-->
               <div class="my-money">
                 <div class="my-money-one">{{ticketitem[4]}} $Price/unit</div>
                 <div class="my-mods">
-                  <div class="my-remove">Remove</div>
+                  <button class="my-button2" type="submit">UPDATE ITEM COUNT</button>
+                </form>
                 </div>
               </div>
           </div>

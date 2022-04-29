@@ -22,7 +22,7 @@
     <nav class="navbar navbar-inverse bringToFrontDiv">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">TeamName</a>
+            <a class="navbar-brand" href="/">Cougars</a>
           </div>
           <ul class="nav navbar-nav">
             <li ><a href="/">Home</a></li>
@@ -183,16 +183,18 @@
                 <div class="modal-body">
                   <form action="/honorsfb/editTrophyF" id="editFormF" method="POST">
                   <h>ID of Honor</h>     
-                    <select name="trophy_id">
+                    <select name="trophy_id" required>
+                      <option value="" selected disabled hidden>Select a Trophy By Id</option>
                       {%for trophy in trophies%}
                       <option value={{trophy[0]}}>{{trophy[0]}}</option>
                       {% endfor %}
                   </select>
                   <br>
                   <h>Title</h>
-                  <input type="text" name="titleEdit">
+                  <input type="text" name="titleEdit" required>
                   <h>Year</h>
-                  <select name="yearEdit" id="yearEdit">
+                  <select name="yearEdit" id="yearEdit" required>
+                    <option value="" selected disabled hidden>Select a Year</option>
                     {%for i in range(today_year,1909,-1)%}
                     <option value={{i}}>{{i}}</option>
                     {% endfor %}
@@ -222,9 +224,10 @@
                 <div class="modal-body">
                   <form action="/honorsfb/addTrophyF" id="addFormF" method="POST">
                   <h>Title</h>
-                  <input type="text" name="title_add">
+                  <input type="text" name="title_add" required>
                   <h>Year</h>
-                  <select name="year_add" id="yearAdd">
+                  <select name="year_add" id="yearAdd" required>
+                    <option value="" selected disabled hidden>Select a Year</option>
                     {%for i in range(today_year,1909,-1)%}
                     <option value={{i}}>{{i}}</option>
                     {% endfor %}
@@ -253,7 +256,8 @@
                 <div class="modal-body">
                   <form action="/honorsfb/deleteTrophyF" id="deleteF"method="POST">
                   <h>ID of Honor</h>     
-                    <select name="trophy_id_delete">
+                    <select name="trophy_id_delete" required>
+                      <option value="" selected disabled hidden>Select a Trophy By Id</option>
                       {%for trophy in trophies%}
                       <option value={{trophy[0]}}>{{trophy[0]}}</option>
                       {% endfor %}
