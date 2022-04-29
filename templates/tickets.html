@@ -191,9 +191,9 @@
               <label>Arena:</label>
               <input type="text" name="arenaEdit" id="arenaEdit" required/><br>
               <label>Price:</label>
-              <input type="text" name="ticketPriceEdit" id="ticketPriceEdit" required/><br>
+              <input type="number" name="ticketPriceEdit" id="ticketPriceEdit" min="1" required/><br>
               <label>Number of tickets in stock:</label>
-              <input type="text" name="ticketStockEdit" id="ticketStockEdit" required/><br>
+              <input type="number" name="ticketStockEdit" id="ticketStockEdit" min="0"required/><br>
               <input type="hidden" name="additembut" value=1>
               </form>
             </div>
@@ -227,9 +227,9 @@
                     <label>Arena:</label>
                     <input type="text" name="arenaAdd" id="arenaAdd" required/><br>
                     <label>Price:</label>
-                    <input type="text" name="ticketPriceAdd" id="ticketPriceAdd" required/><br>
+                    <input type="number" name="ticketPriceAdd" id="ticketPriceAdd" min="1" required/><br>
                     <label>Number in stock:</label>
-                    <input type="text" name="ticketStockAdd" id="ticketStockAdd" required/><br>
+                    <input type="number" name="ticketStockAdd" id="ticketStockAdd" min="0" required/><br>
                     <input type="hidden" name="addticketbut" value=1>
                   
                   </form>
