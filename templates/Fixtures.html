@@ -54,12 +54,12 @@
             <li><a href="/community">Community</a></li>
             <li><a href="/honorsfb">Honors</a></li>
           </ul>
-          <form class="navbar-form navbar-right" action="/action_page.php">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" />
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
+             <!-- <form class="navbar-form navbar-right" action="/action_page.php">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" />
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>-->
           <ul class="nav navbar-nav navbar-right">
             <li>
               {%if user is none%}
@@ -108,8 +108,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-4">
-                <div class="card">
-                    <h3 class="card-title">Latest Game</h3>
+                <div class="card" style="border-style: solid;border-color: rgb(255, 255, 255); color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0.1);">
+                    <h3 class="card-title" style="color: azure; text-align: center;">Latest Game</h3>
                     <div class="card-body">
                         <img class="img" src="{{url_for('static', filename='css/images/fixtures/logo1a_r1.jpg')}}" alt="[sample image here]" style="text-align:left; margin-left:20%; margin-right:23%;">
                         <img class="img" src="{{url_for('static', filename='css/images/fixtures/logo1a_r2.jpg')}}" alt="[sample image here]" style="text-align:right; margin-right:20%;">

@@ -36,8 +36,9 @@ html {
   border-style: solid; 
   border-radius: 1em;
   border-color: rgb(255, 255, 255); 
-  background-color:rgb(255, 255, 255);
-  color: hsl(216, 25%, 38%);
+  color: white;
+  background: rgba(219, 223, 230, 0.2);
+
 }
 .card-title{
   color: hsl(216, 25%, 38%);
