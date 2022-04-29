@@ -94,3 +94,38 @@ CREATE TABLE honors (
 );
   
 INSERT INTO honors VALUES (1,'League 1',2020,'football'), (2,'League 2', 2019,'basketball'), (3,'League 3',2018,'football'), (4,'League 4',2018,'football'), (5,'League 5',2001,'football'), (6,'League 6', 1990,'football');
+
+
+create table standing (
+	sport TEXT not null,
+	team TEXT NOT NULL,
+	pos INTEGER not null
+);
+
+insert into standing values ('womenbb','Panthers',5);
+insert into standing values ('womenbb','Cougars',1);
+insert into standing values ('womenbb','Tigers',3);
+insert into standing values ('womenbb','Lions',2);
+insert into standing values ('womenbb','Bears',7);
+insert into standing values ('womenbb','Giants',9);
+insert into standing values ('womenbb','Mosquitos',4);
+insert into standing values ('womenbb','Dogs',6);
+insert into standing values ('womenbb','WildCats',8);
+insert into standing values ('womenbb','Rats',10);
+insert into standing values ('womenbb','Rabbits',12);
+insert into standing values ('womenbb','Pheonix',11);
+
+----
+
+insert into standing values ('womenfb','Panthers',12);
+insert into standing values ('womenfb','Cougars',1);
+insert into standing values ('womenfb','Tigers',3);
+insert into standing values ('womenfb','Lions',2);
+insert into standing values ('womenfb','Bears',4);
+insert into standing values ('womenfb','Giants',5);
+insert into standing values ('womenfb','Mosquitos',7);
+insert into standing values ('womenfb','Dogs',6);
+insert into standing values ('womenfb','WildCats',8);
+insert into standing values ('womenfb','Rats',9);
+insert into standing values ('womenfb','Rabbits',11);
+insert into standing values ('womenfb','Pheonix',10);
