@@ -80,20 +80,20 @@
           <div class="shipping-form-div">
             <form action="/shop" method="post">
               <label>Name</label>
-              <input type="text" name="address-name" id="nameAd" value=""> 
+              <input type="text" name="address-name" id="nameAd" value="" required> 
               <label>Email</label>
-              <input type="text" name="address-mail" id="mailAd" value="">  <!--ADD RESTRICTIONS HERE LATER-->
+              <input type="text" name="address-mail" id="mailAd" value="" required>  <!--ADD RESTRICTIONS HERE LATER-->
               <label>Phone Number</label>
-              <input type="text" name="address-phone" id="phoneAd" value="">  <!--ADD RESTRICTIONS HERE LATER-->
+              <input type="text" name="address-phone" id="phoneAd" value="" required>  <!--ADD RESTRICTIONS HERE LATER-->
               <label>Floor</label>
-              <input type="number" name="address-floor" id="floorAd" value=""> 
+              <input type="number" name="address-floor" id="floorAd" value="" required> 
               <label>Landmark</label>
-              <input type="text" name="address-landmark" id="landmarkAd" value=""> 
+              <input type="text" name="address-landmark" id="landmarkAd" value="" required> 
               <label>Address</label>
-              <textarea type="text" name="address-address" id="adAd" value=""> </textarea>
-              <button type="submit" class="btn btn-primary submit">Proceed</button>
+              <textarea type="text" name="address-address" id="adAd" value="" required> </textarea>
+              <button id="delete-button" type="button" data-toggle="modal" data-target="#thanksModal">CHECKOUT</button>
             </form>
-            <form action="" method="POST" autocomplete="off">
+            <form action="/cart" method="get" autocomplete="off">
             <button type="button" class="btn btn-secondary my-continue" >Cancel Order</button>
             </form>
           </div>
@@ -103,6 +103,21 @@
           
         </div>
 
+        <div class="modal fade" id="thanksModal" tabindex="-1" role="dialog" aria-labelledby="thanksModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  
+                  <div class="modal-body">
+                    <h2 class="modal-title" id="deleteModalLabel">Thank you for your purchase!</h2>
+                    <form action="/" method="POST">                    
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-secondary">Close</button>    
+                    </form> 
+                  </div>
+              </div>
+          </div>
+        </div>
 
 
 

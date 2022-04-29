@@ -82,7 +82,7 @@
     />
     <script>
       function allLetter(inputtxt1, inputtxt2) {
-        var letters = /^[A-Za-z]+$+' '/;
+        var letters = /^[A-Za-z]+$/;
         if (inputtxt1.value.match(letters) && inputtxt2.value.match(letters)) {
           return true;
         } else {
@@ -217,7 +217,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                onclick="allLetter(document.addPlayerForm.playerNameAdd,document.addPlayerForm.playerPositionAdd)"
+                onclick="allLetter(document.addPlayerForm.playerNameAdd)"
               >
                 Submit
               </button>
@@ -318,7 +318,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                onclick="allLetter(document.editPlayerForm.playerNameEdit,document.editPlayerForm.playerPositionEdit)"
+                onclick="allLetter(document.editPlayerForm.playerNameEdit)"
               >
                 Submit
               </button>

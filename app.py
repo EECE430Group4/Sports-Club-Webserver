@@ -334,9 +334,10 @@ def getFixtures():
     team = request.args.get('team')
     if team is None:
         team = 'womenbb'
+    today = date.today()
     standing = functions.getStanding(team)
     games = functions.getGames()
-    return render_template('fixtures.html', user=user, role=role, games=games, standing=standing)
+    return render_template('fixtures.html', user=user, role=role, games=games, standing=standing, today=today)
 
 
 @app.route('/addGame', methods=['POST'])
