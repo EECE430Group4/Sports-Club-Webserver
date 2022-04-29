@@ -230,7 +230,7 @@ def getCartItem(itemid):
 def addGames(sport, club1, club2, homeScore, awayScore, date):
     conn = sqlite3.connect('database/430Group4.db')
     cursor = conn.cursor()
-    SQL = '''insert into games values ('{}','{}',{},{},'{}','{}')'''.format(
+    SQL = '''insert into games (sport, club1, homescore, awayscore, club2, gamedate) values ('{}','{}',{},{},'{}','{}')'''.format(
         sport, club1, homeScore, awayScore, club2, date)
     cursor.execute(SQL)
     conn.commit()
