@@ -32,7 +32,7 @@
     <nav class="navbar navbar-inverse bringToFrontDiv ">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="test.html">TeamName</a>
+            <a class="navbar-brand" href="/">TeamName</a>
           </div>
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
@@ -380,10 +380,10 @@
               style="color:azure;">Standing In League <span class="caret"></span
             ></a>
             <ul class="dropdown-menu" style="margin-left: 44%;">
-              <li><a href="#">Women's Football</a></li>
-              <li><a href="#">Men's Football</a></li>
-              <li><a href="#">Women's Basketball</a></li>
-              <li><a href="#">Men's Basketball</a></li>
+              <li><a href="/fixtures?team=womenfb">Women's Football</a></li>
+              <li><a href="/fixtures?team=menfb">Men's Football</a></li>
+              <li><a href="/fixtures?team=womenbb">Women's Basketball</a></li>
+              <li><a href="/fixtures?team=menbb">Men's Basketball</a></li>
             </ul>
           </h2>
           <!--<h2 style="text-align: center; color:azure;">Standing In League</h2>-->
@@ -395,54 +395,12 @@
               </tr>
             </thead>
             <tbody>
+              {% for team in standing%}
               <tr>
-                <td>1</td>
-                <td>[team]</td>
+                <td>{{loop.index}}</td>
+                <td>{{team[0]}}</td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>[team]</td>
-              </tr>
-              <tr>
-                <td>12</td>
-                <td>[team]</td>
-              </tr>
+              {%endfor%}
             </tbody>
           </table>
         </div>
