@@ -426,7 +426,12 @@
                 </select>
                 <br>
                 <h>Sport:</h>
-                <p><input type="text" name="sportEdit"></p>
+                <p><select name="sportEdit">
+                  <option value="Womens Basketball">Women's Basketball</option>
+                  <option value="Mens Basketball">Men's Basketball</option>
+                  <option value="Womens Football">Women's Football</option>
+                  <option value="Womens Basketball">Men's Foottball</option>
+                </select></p>
                 <h>Club1:</h>
               <p><select name="club1Edit">
                 <option value="Cougars">Cougars</option>
@@ -478,7 +483,12 @@
             <div class="modal-body">
               <form action="/addGame" method="POST">
               <h>Sport:</h>
-              <p><input type="text" name="sportAdd"></p>
+              <p><select name="sportAdd">
+                <option value="Womens Basketball">Women's Basketball</option>
+                <option value="Mens Basketball">Men's Basketball</option>
+                <option value="Womens Football">Women's Football</option>
+                <option value="Womens Basketball">Men's Foottball</option>
+              </select></p>
               <h>Club1:</h>
               <p><select name="club1Add">
                 <option value="Cougars">Cougars</option>
@@ -497,9 +507,9 @@
                 <option value="Phoenix">Phoenix</option>
                 <option value="Rabbits">Rabbits</option>
               </select></p>
-              <h>Home Team Goals/Points:</h>
+              <h>Club1 Team Goals/Points:</h>
               <p><input type="number" name="homeScoreAdd" min="0" oninput="validity.valid||(value='');"></p>
-              <h>Away Team Goals/Points:</h>
+              <h>Club2 Team Goals/Points:</h>
               <p><input type="number" name="awayScoreAdd" min="0" oninput="validity.valid||(value='');"></p>
               <h>Date:</h>
               <p><input type="date" name="dateAdd"></p>
@@ -517,7 +527,7 @@
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h2 class="modal-title" id="addModalLabel">Delete Game</h2>
+              <h2 class="modal-title" id="deleteModalLabel">Delete Game</h2>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
