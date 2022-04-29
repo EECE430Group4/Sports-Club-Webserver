@@ -307,13 +307,13 @@ def editPlayer(team):
 
     return(redirect(url_for('main')))
 
-@app.route('/<team>/<string:userid>', methods=['POST'])
-def processUserID(userid, team):
-
-    userid= json.loads(userid)
-    id=userid
-    print(id)
-    return(redirect(url_for('getTeam', team=team, id=id)))
+#@app.route('/<team>/<string:userid>', methods=['POST'])
+#def processUserID(userid, team):
+#
+#    userid= json.loads(userid)
+#    id=userid
+#    print(id)
+#    return(redirect(url_for('getTeam', team=team, id=id)))
 # --------------------------- FIXTURES ---------------------------
 
 
